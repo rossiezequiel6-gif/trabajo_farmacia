@@ -24,18 +24,21 @@ Partial Class medicamentos
     Private Sub InitializeComponent()
         GroupBox1 = New GroupBox()
         Label1 = New Label()
-        txtfiltro = New TextBox()
-        btnrefrescar = New Button()
-        btnbuscar = New Button()
+        txtbuscar = New TextBox()
         dgvmedicamento = New DataGridView()
         GroupBox2 = New GroupBox()
+        Button4 = New Button()
+        Button3 = New Button()
+        Button2 = New Button()
+        Button1 = New Button()
         GroupBox3 = New GroupBox()
         nudpedido = New NumericUpDown()
         nudstockmax = New NumericUpDown()
         nudstockmin = New NumericUpDown()
-        Label12 = New Label()
         Label11 = New Label()
         Label10 = New Label()
+        Label12 = New Label()
+        cbreceta = New CheckBox()
         cbterapeutica = New ComboBox()
         cbpresentacion = New ComboBox()
         cbdroga = New ComboBox()
@@ -43,8 +46,7 @@ Partial Class medicamentos
         btnlimpiar = New Button()
         btneliminar = New Button()
         btnmodificar = New Button()
-        btnguardar = New Button()
-        cbreceta = New CheckBox()
+        btnagregar = New Button()
         txtnombre = New TextBox()
         txtcodigo = New TextBox()
         txtid = New TextBox()
@@ -55,10 +57,6 @@ Partial Class medicamentos
         Label4 = New Label()
         Label3 = New Label()
         Label2 = New Label()
-        Button1 = New Button()
-        Button2 = New Button()
-        Button3 = New Button()
-        Button4 = New Button()
         GroupBox1.SuspendLayout()
         CType(dgvmedicamento, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox2.SuspendLayout()
@@ -72,9 +70,7 @@ Partial Class medicamentos
         ' 
         GroupBox1.BackColor = Color.DarkSeaGreen
         GroupBox1.Controls.Add(Label1)
-        GroupBox1.Controls.Add(txtfiltro)
-        GroupBox1.Controls.Add(btnrefrescar)
-        GroupBox1.Controls.Add(btnbuscar)
+        GroupBox1.Controls.Add(txtbuscar)
         GroupBox1.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         GroupBox1.Location = New Point(33, 24)
         GroupBox1.Name = "GroupBox1"
@@ -93,34 +89,12 @@ Partial Class medicamentos
         Label1.TabIndex = 1
         Label1.Text = "Medicamentos:"
         ' 
-        ' txtfiltro
+        ' txtbuscar
         ' 
-        txtfiltro.Location = New Point(190, 41)
-        txtfiltro.Name = "txtfiltro"
-        txtfiltro.Size = New Size(382, 30)
-        txtfiltro.TabIndex = 2
-        ' 
-        ' btnrefrescar
-        ' 
-        btnrefrescar.BackColor = Color.PaleGreen
-        btnrefrescar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnrefrescar.Location = New Point(727, 27)
-        btnrefrescar.Name = "btnrefrescar"
-        btnrefrescar.Size = New Size(125, 55)
-        btnrefrescar.TabIndex = 4
-        btnrefrescar.Text = "REFRESCAR"
-        btnrefrescar.UseVisualStyleBackColor = False
-        ' 
-        ' btnbuscar
-        ' 
-        btnbuscar.BackColor = SystemColors.ActiveCaption
-        btnbuscar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnbuscar.Location = New Point(596, 27)
-        btnbuscar.Name = "btnbuscar"
-        btnbuscar.Size = New Size(125, 55)
-        btnbuscar.TabIndex = 3
-        btnbuscar.Text = "BUSCAR"
-        btnbuscar.UseVisualStyleBackColor = False
+        txtbuscar.Location = New Point(190, 41)
+        txtbuscar.Name = "txtbuscar"
+        txtbuscar.Size = New Size(382, 30)
+        txtbuscar.TabIndex = 2
         ' 
         ' dgvmedicamento
         ' 
@@ -150,7 +124,7 @@ Partial Class medicamentos
         GroupBox2.Controls.Add(btnlimpiar)
         GroupBox2.Controls.Add(btneliminar)
         GroupBox2.Controls.Add(btnmodificar)
-        GroupBox2.Controls.Add(btnguardar)
+        GroupBox2.Controls.Add(btnagregar)
         GroupBox2.Controls.Add(txtnombre)
         GroupBox2.Controls.Add(txtcodigo)
         GroupBox2.Controls.Add(txtid)
@@ -168,6 +142,50 @@ Partial Class medicamentos
         GroupBox2.TabIndex = 2
         GroupBox2.TabStop = False
         GroupBox2.Text = "Datos de Medicamentos"
+        ' 
+        ' Button4
+        ' 
+        Button4.BackColor = Color.OliveDrab
+        Button4.Font = New Font("Segoe UI Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Button4.Location = New Point(425, 340)
+        Button4.Name = "Button4"
+        Button4.Size = New Size(36, 44)
+        Button4.TabIndex = 35
+        Button4.Text = "+"
+        Button4.UseVisualStyleBackColor = False
+        ' 
+        ' Button3
+        ' 
+        Button3.BackColor = Color.OliveDrab
+        Button3.Font = New Font("Segoe UI Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Button3.Location = New Point(425, 289)
+        Button3.Name = "Button3"
+        Button3.Size = New Size(36, 44)
+        Button3.TabIndex = 34
+        Button3.Text = "+"
+        Button3.UseVisualStyleBackColor = False
+        ' 
+        ' Button2
+        ' 
+        Button2.BackColor = Color.OliveDrab
+        Button2.Font = New Font("Segoe UI Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Button2.Location = New Point(425, 236)
+        Button2.Name = "Button2"
+        Button2.Size = New Size(36, 44)
+        Button2.TabIndex = 33
+        Button2.Text = "+"
+        Button2.UseVisualStyleBackColor = False
+        ' 
+        ' Button1
+        ' 
+        Button1.BackColor = Color.OliveDrab
+        Button1.Font = New Font("Segoe UI Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Button1.Location = New Point(425, 182)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(36, 44)
+        Button1.TabIndex = 32
+        Button1.Text = "+"
+        Button1.UseVisualStyleBackColor = False
         ' 
         ' GroupBox3
         ' 
@@ -206,16 +224,6 @@ Partial Class medicamentos
         nudstockmin.Size = New Size(70, 30)
         nudstockmin.TabIndex = 19
         ' 
-        ' Label12
-        ' 
-        Label12.AutoSize = True
-        Label12.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label12.Location = New Point(9, 169)
-        Label12.Name = "Label12"
-        Label12.Size = New Size(150, 20)
-        Label12.TabIndex = 10
-        Label12.Text = "PUNTO DE PEDIDO: "
-        ' 
         ' Label11
         ' 
         Label11.AutoSize = True
@@ -235,6 +243,27 @@ Partial Class medicamentos
         Label10.Size = New Size(94, 20)
         Label10.TabIndex = 8
         Label10.Text = "STOCK MIN:"
+        ' 
+        ' Label12
+        ' 
+        Label12.AutoSize = True
+        Label12.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label12.Location = New Point(9, 169)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(150, 20)
+        Label12.TabIndex = 10
+        Label12.Text = "PUNTO DE PEDIDO: "
+        ' 
+        ' cbreceta
+        ' 
+        cbreceta.AutoSize = True
+        cbreceta.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cbreceta.Location = New Point(61, 227)
+        cbreceta.Name = "cbreceta"
+        cbreceta.Size = New Size(160, 24)
+        cbreceta.TabIndex = 22
+        cbreceta.Text = "REQUIERE RECETA"
+        cbreceta.UseVisualStyleBackColor = True
         ' 
         ' cbterapeutica
         ' 
@@ -298,26 +327,15 @@ Partial Class medicamentos
         btnmodificar.Text = "MODIFICAR"
         btnmodificar.UseVisualStyleBackColor = False
         ' 
-        ' btnguardar
+        ' btnagregar
         ' 
-        btnguardar.BackColor = SystemColors.ActiveCaption
-        btnguardar.Location = New Point(1017, 25)
-        btnguardar.Name = "btnguardar"
-        btnguardar.Size = New Size(117, 83)
-        btnguardar.TabIndex = 23
-        btnguardar.Text = "GUARDAR"
-        btnguardar.UseVisualStyleBackColor = False
-        ' 
-        ' cbreceta
-        ' 
-        cbreceta.AutoSize = True
-        cbreceta.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        cbreceta.Location = New Point(61, 227)
-        cbreceta.Name = "cbreceta"
-        cbreceta.Size = New Size(160, 24)
-        cbreceta.TabIndex = 22
-        cbreceta.Text = "REQUIERE RECETA"
-        cbreceta.UseVisualStyleBackColor = True
+        btnagregar.BackColor = SystemColors.ActiveCaption
+        btnagregar.Location = New Point(1017, 25)
+        btnagregar.Name = "btnagregar"
+        btnagregar.Size = New Size(117, 83)
+        btnagregar.TabIndex = 23
+        btnagregar.Text = "AGREGAR"
+        btnagregar.UseVisualStyleBackColor = False
         ' 
         ' txtnombre
         ' 
@@ -411,50 +429,6 @@ Partial Class medicamentos
         Label2.TabIndex = 0
         Label2.Text = "ID:"
         ' 
-        ' Button1
-        ' 
-        Button1.BackColor = Color.OliveDrab
-        Button1.Font = New Font("Segoe UI Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Button1.Location = New Point(425, 182)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(36, 44)
-        Button1.TabIndex = 32
-        Button1.Text = "+"
-        Button1.UseVisualStyleBackColor = False
-        ' 
-        ' Button2
-        ' 
-        Button2.BackColor = Color.OliveDrab
-        Button2.Font = New Font("Segoe UI Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Button2.Location = New Point(425, 236)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(36, 44)
-        Button2.TabIndex = 33
-        Button2.Text = "+"
-        Button2.UseVisualStyleBackColor = False
-        ' 
-        ' Button3
-        ' 
-        Button3.BackColor = Color.OliveDrab
-        Button3.Font = New Font("Segoe UI Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Button3.Location = New Point(425, 289)
-        Button3.Name = "Button3"
-        Button3.Size = New Size(36, 44)
-        Button3.TabIndex = 34
-        Button3.Text = "+"
-        Button3.UseVisualStyleBackColor = False
-        ' 
-        ' Button4
-        ' 
-        Button4.BackColor = Color.OliveDrab
-        Button4.Font = New Font("Segoe UI Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Button4.Location = New Point(425, 340)
-        Button4.Name = "Button4"
-        Button4.Size = New Size(36, 44)
-        Button4.TabIndex = 35
-        Button4.Text = "+"
-        Button4.UseVisualStyleBackColor = False
-        ' 
         ' medicamentos
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -481,9 +455,7 @@ Partial Class medicamentos
 
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtfiltro As TextBox
-    Friend WithEvents btnrefrescar As Button
-    Friend WithEvents btnbuscar As Button
+    Friend WithEvents txtbuscar As TextBox
     Friend WithEvents dgvmedicamento As DataGridView
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Label11 As Label
@@ -502,7 +474,7 @@ Partial Class medicamentos
     Friend WithEvents btnlimpiar As Button
     Friend WithEvents btneliminar As Button
     Friend WithEvents btnmodificar As Button
-    Friend WithEvents btnguardar As Button
+    Friend WithEvents btnagregar As Button
     Friend WithEvents cbreceta As CheckBox
     Friend WithEvents nudpedido As NumericUpDown
     Friend WithEvents nudstockmax As NumericUpDown
