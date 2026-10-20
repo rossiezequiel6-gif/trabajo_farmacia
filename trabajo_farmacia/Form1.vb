@@ -20,7 +20,52 @@ Public Class Form1
         End Try
     End Sub
 
+    ' Abre un formulario dentro del panel derecho. El menú no se toca.
+    Sub AbrirFormulario(formHijo As Form, Optional titulo As String = "")
+        ' Cierro lo que haya abierto, para que no se acumulen
+        For i As Integer = pnlcontenedor.Controls.Count - 1 To 0 Step -1
+            pnlcontenedor.Controls(i).Dispose()
+        Next
+
+        formHijo.TopLevel = False                        ' deja de ser una ventana independiente
+        formHijo.FormBorderStyle = FormBorderStyle.None  ' sin borde ni barra de título
+        formHijo.Dock = DockStyle.Fill                   ' ocupa todo el panel
+        pnlcontenedor.Controls.Add(formHijo)             ' lo meto en el panel
+        formHijo.Show()
+        lbltitulo.Text = titulo
+    End Sub
+
+    Sub MarcarActivo(btn As Button)
+        For Each b As Button In New Button() {btnmedicamentos, btnproveedores, btncompras}
+            b.BackColor = Estilos.ColorMenu
+        Next
+        btn.BackColor = Estilos.ColorActivo
+    End Sub
+
+
     Private Sub btnmedicamentos_Click(sender As Object, e As EventArgs) Handles btnmedicamentos.Click
-        medicamentos.Show()
+        AbrirFormulario(New medicamentos(), "Medicamentos")
+        MarcarActivo(btnmedicamentos)
+    End Sub
+
+    Private Sub btnproveedores_Click(sender As Object, e As EventArgs) Handles btnproveedores.Click
+        AbrirFormulario(New fromproveedores(), "Proveedores")
+        MarcarActivo(btnproveedores)
+    End Sub
+
+    Private Sub btncompras_Click(sender As Object, e As EventArgs) Handles btncompras.Click
+        AbrirFormulario(New fromcompras(), "Compras")
+        MarcarActivo(btncompras)
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        pnlmenu.BackColor = Estilos.ColorMenu
+        Estilos.EstilizarBotonMenu(btnmedicamentos, pnlmenu.Width)
+        Estilos.EstilizarBotonMenu(btnproveedores, pnlmenu.Width)
+        Estilos.EstilizarBotonMenu(btncompras, pnlmenu.Width)
+    End Sub
+
+    Private Sub pnlcontenedor_Paint(sender As Object, e As PaintEventArgs)
+
     End Sub
 End Class

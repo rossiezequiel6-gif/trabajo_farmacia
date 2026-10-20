@@ -148,9 +148,27 @@ Public Class medicamentos
     End Sub
 
     Private Sub medicamentos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         Cargarmedicamentos()
         cargarcombos()
         limpiarform()
+
+        Estilos.EstilizarGrilla(dgvmedicamento) 'llamo al estilo 
+
+        Me.BackColor = Color.FromArgb(244, 247, 246)
+        Estilos.EstilizarCampos(Me)
+
+        'estiliza los group box 
+        EstilizarGroupBox(GroupBox2)
+        EstilizarGroupBox(GroupBox1)
+        EstilizarGroupBox(GroupBox3)
+
+        'estiliza los botones 
+        EstilizarBoton(btnagregar, ColorMenu)
+        EstilizarBoton(btneliminar, Color.FromArgb(210, 85, 95))
+        EstilizarBoton(btnmodificar, ColorActivo)
+        EstilizarBoton(btnlimpiar, Color.FromArgb(90, 160, 145))
+
     End Sub
 
     Private Sub dgvmedicamento_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvmedicamento.CellClick
