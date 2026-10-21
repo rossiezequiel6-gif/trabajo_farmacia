@@ -57,6 +57,10 @@ Partial Class medicamentos
         Label4 = New Label()
         Label3 = New Label()
         Label2 = New Label()
+        pbmedicamentos = New PictureBox()
+        btnbuscar = New Button()
+        btnguardar_ima = New Button()
+        btnquitar_ima = New Button()
         GroupBox1.SuspendLayout()
         CType(dgvmedicamento, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox2.SuspendLayout()
@@ -64,6 +68,7 @@ Partial Class medicamentos
         CType(nudpedido, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudstockmax, ComponentModel.ISupportInitialize).BeginInit()
         CType(nudstockmin, ComponentModel.ISupportInitialize).BeginInit()
+        CType(pbmedicamentos, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' GroupBox1
@@ -72,11 +77,11 @@ Partial Class medicamentos
         GroupBox1.Controls.Add(Label1)
         GroupBox1.Controls.Add(txtbuscar)
         GroupBox1.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox1.Location = New Point(29, 18)
+        GroupBox1.Location = New Point(10, 18)
         GroupBox1.Margin = New Padding(3, 2, 3, 2)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Padding = New Padding(3, 2, 3, 2)
-        GroupBox1.Size = New Size(989, 70)
+        GroupBox1.Size = New Size(901, 70)
         GroupBox1.TabIndex = 0
         GroupBox1.TabStop = False
         GroupBox1.Text = "Busqueda"
@@ -109,7 +114,7 @@ Partial Class medicamentos
         dgvmedicamento.ReadOnly = True
         dgvmedicamento.RowHeadersWidth = 51
         dgvmedicamento.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvmedicamento.Size = New Size(1026, 275)
+        dgvmedicamento.Size = New Size(901, 275)
         dgvmedicamento.TabIndex = 1
         ' 
         ' GroupBox2
@@ -144,7 +149,7 @@ Partial Class medicamentos
         GroupBox2.Margin = New Padding(3, 2, 3, 2)
         GroupBox2.Name = "GroupBox2"
         GroupBox2.Padding = New Padding(3, 2, 3, 2)
-        GroupBox2.Size = New Size(1026, 326)
+        GroupBox2.Size = New Size(911, 326)
         GroupBox2.TabIndex = 2
         GroupBox2.TabStop = False
         GroupBox2.Text = "Datos de Medicamentos"
@@ -320,7 +325,7 @@ Partial Class medicamentos
         ' btnlimpiar
         ' 
         btnlimpiar.BackColor = Color.PaleGreen
-        btnlimpiar.Location = New Point(890, 223)
+        btnlimpiar.Location = New Point(799, 229)
         btnlimpiar.Margin = New Padding(3, 2, 3, 2)
         btnlimpiar.Name = "btnlimpiar"
         btnlimpiar.Size = New Size(102, 68)
@@ -331,7 +336,7 @@ Partial Class medicamentos
         ' btneliminar
         ' 
         btneliminar.BackColor = Color.Crimson
-        btneliminar.Location = New Point(890, 86)
+        btneliminar.Location = New Point(799, 87)
         btneliminar.Margin = New Padding(3, 2, 3, 2)
         btneliminar.Name = "btneliminar"
         btneliminar.Size = New Size(102, 65)
@@ -342,7 +347,7 @@ Partial Class medicamentos
         ' btnmodificar
         ' 
         btnmodificar.BackColor = SystemColors.ActiveCaption
-        btnmodificar.Location = New Point(890, 155)
+        btnmodificar.Location = New Point(799, 162)
         btnmodificar.Margin = New Padding(3, 2, 3, 2)
         btnmodificar.Name = "btnmodificar"
         btnmodificar.Size = New Size(102, 63)
@@ -355,7 +360,7 @@ Partial Class medicamentos
         btnagregar.BackColor = SystemColors.ActiveCaption
         btnagregar.FlatStyle = FlatStyle.Flat
         btnagregar.ForeColor = Color.White
-        btnagregar.Location = New Point(890, 19)
+        btnagregar.Location = New Point(799, 14)
         btnagregar.Margin = New Padding(3, 2, 3, 2)
         btnagregar.Name = "btnagregar"
         btnagregar.Size = New Size(102, 62)
@@ -458,12 +463,54 @@ Partial Class medicamentos
         Label2.TabIndex = 0
         Label2.Text = "ID:"
         ' 
+        ' pbmedicamentos
+        ' 
+        pbmedicamentos.Anchor = AnchorStyles.None
+        pbmedicamentos.BorderStyle = BorderStyle.FixedSingle
+        pbmedicamentos.Location = New Point(1076, 177)
+        pbmedicamentos.Name = "pbmedicamentos"
+        pbmedicamentos.Size = New Size(180, 186)
+        pbmedicamentos.SizeMode = PictureBoxSizeMode.Zoom
+        pbmedicamentos.TabIndex = 3
+        pbmedicamentos.TabStop = False
+        ' 
+        ' btnbuscar
+        ' 
+        btnbuscar.Location = New Point(996, 387)
+        btnbuscar.Name = "btnbuscar"
+        btnbuscar.Size = New Size(103, 40)
+        btnbuscar.TabIndex = 4
+        btnbuscar.Text = "Buscar Imagen "
+        btnbuscar.UseVisualStyleBackColor = True
+        ' 
+        ' btnguardar_ima
+        ' 
+        btnguardar_ima.Location = New Point(996, 446)
+        btnguardar_ima.Name = "btnguardar_ima"
+        btnguardar_ima.Size = New Size(103, 40)
+        btnguardar_ima.TabIndex = 5
+        btnguardar_ima.Text = "Guardar Imagen"
+        btnguardar_ima.UseVisualStyleBackColor = True
+        ' 
+        ' btnquitar_ima
+        ' 
+        btnquitar_ima.Location = New Point(996, 515)
+        btnquitar_ima.Name = "btnquitar_ima"
+        btnquitar_ima.Size = New Size(103, 40)
+        btnquitar_ima.TabIndex = 6
+        btnquitar_ima.Text = "Quitar Imagen"
+        btnquitar_ima.UseVisualStyleBackColor = True
+        ' 
         ' medicamentos
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ButtonHighlight
-        ClientSize = New Size(1046, 562)
+        ClientSize = New Size(1370, 749)
+        Controls.Add(btnquitar_ima)
+        Controls.Add(btnguardar_ima)
+        Controls.Add(btnbuscar)
+        Controls.Add(pbmedicamentos)
         Controls.Add(GroupBox2)
         Controls.Add(dgvmedicamento)
         Controls.Add(GroupBox1)
@@ -480,6 +527,7 @@ Partial Class medicamentos
         CType(nudpedido, ComponentModel.ISupportInitialize).EndInit()
         CType(nudstockmax, ComponentModel.ISupportInitialize).EndInit()
         CType(nudstockmin, ComponentModel.ISupportInitialize).EndInit()
+        CType(pbmedicamentos, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -518,4 +566,8 @@ Partial Class medicamentos
     Friend WithEvents Button3 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents pbmedicamentos As PictureBox
+    Friend WithEvents btnbuscar As Button
+    Friend WithEvents btnguardar_ima As Button
+    Friend WithEvents btnquitar_ima As Button
 End Class

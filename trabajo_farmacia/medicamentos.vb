@@ -1,5 +1,70 @@
-﻿Imports MySqlConnector
+﻿Imports System.Drawing.Imaging
+Imports System.IO
+Imports MySqlConnector
 Public Class medicamentos
+
+    'funcion para convertir una imagen en un arreglo de bytes
+    Private Function ImagenaBytes(img As Image) As Byte()
+        'valido si la imagen es nula no hago
+        If img Is Nothing Then Return Nothing
+
+        'memory stream es un flujo de datos en memoria
+        Using memoria As New MemoryStream()
+            ' guardo la imagen en el memory stream
+            img.Save(memoria, ImageFormat.Jpeg)
+            'retorno la imagen en bytes
+            Return memoria.ToArray()
+        End Using
+    End Function
+
+
+
+    Private Sub CargarImagen(idMedicamento As Integer)
+
+        Try
+            Using cn As New MySqlConnection(CADENA)
+                cn.Open()
+
+                Dim sql As String =
+                "SELECT imagen FROM medicamento " &
+                "WHERE id_medicamento = @id;"
+
+                Using cmd As New MySqlCommand(sql, cn)
+
+                    cmd.Parameters.AddWithValue("@id", idMedicamento)
+
+                    Dim valor = cmd.ExecuteScalar()
+
+                    'Verifico si el medicamento tiene imagen
+                    If valor Is Nothing OrElse valor Is DBNull.Value Then
+                        pbmedicamentos.Image = Nothing
+                        Exit Sub
+                    End If
+
+                    'Convierto los bytes en imagen
+                    Dim datos() As Byte = DirectCast(valor, Byte())
+
+                    Using memoria As New MemoryStream(datos)
+                        Using temporal As Image = Image.FromStream(memoria)
+
+                            If pbmedicamentos.Image IsNot Nothing Then
+                                pbmedicamentos.Image.Dispose()
+                            End If
+
+                            pbmedicamentos.Image = New Bitmap(temporal)
+
+                        End Using
+                    End Using
+
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error al cargar la imagen: " & ex.Message)
+        End Try
+
+    End Sub
+
 
     Sub Cargarmedicamentos()
         'creo subrutina para cargar grilla
@@ -169,6 +234,11 @@ Public Class medicamentos
         EstilizarBoton(btnmodificar, ColorActivo)
         EstilizarBoton(btnlimpiar, Color.FromArgb(90, 160, 145))
 
+        EstilizarBoton(btnbuscar, ColorMenu)
+        EstilizarBoton(btnguardar_ima, Color.FromArgb(0, 150, 136))
+        EstilizarBoton(btnquitar_ima, Color.FromArgb(220, 80, 100))
+
+
     End Sub
 
     Private Sub dgvmedicamento_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvmedicamento.CellClick
@@ -201,6 +271,10 @@ Public Class medicamentos
                     cbreceta.Checked = False
                 End If
             End If
+
+            'Cargar la imagen del medicamento seleccionado
+            CargarImagen(CInt(txtid.Text))
+
         End If
 
 
@@ -460,5 +534,114 @@ Public Class medicamentos
         Else
             buscarmedicamentos(txtbuscar.Text.Trim())
         End If
+    End Sub
+
+    Private Sub btnbuscar_Click(sender As Object, e As EventArgs) Handles btnbuscar.Click
+        Using dlg As New OpenFileDialog()
+            dlg.Filter = "Imágenes|*.jpg;*.jpeg;*.png;*.bmp"
+
+            If dlg.ShowDialog() = DialogResult.OK Then
+                Using temporal As Image = Image.FromFile(dlg.FileName)
+                    If pbmedicamentos.Image IsNot Nothing Then
+                        pbmedicamentos.Image.Dispose()
+                    End If
+
+                    pbmedicamentos.Image = New Bitmap(temporal)
+                End Using
+            End If
+        End Using
+    End Sub
+
+    Private Sub btnguardar_ima_Click(sender As Object, e As EventArgs) Handles btnguardar_ima.Click
+        'Verifico que haya un medicamento seleccionado
+        If txtid.Text = "" Then
+            MessageBox.Show("Seleccioná un medicamento primero")
+            Exit Sub
+        End If
+
+        'Verifico que haya una imagen
+        If pbmedicamentos.Image Is Nothing Then
+            MessageBox.Show("Primero seleccioná una imagen")
+            Exit Sub
+        End If
+
+        Dim datos() As Byte = ImagenaBytes(pbmedicamentos.Image)
+
+        'Limito el tamaño a 1 MB
+        If datos.Length > 1000000 Then
+            MessageBox.Show("La imagen no puede superar 1 MB")
+            Exit Sub
+        End If
+
+        Try
+            Using cn As New MySqlConnection(CADENA)
+                cn.Open()
+
+                Dim sql As String =
+                "UPDATE medicamento SET imagen = @imagen " &
+                "WHERE id_medicamento = @id;"
+
+                Using cmd As New MySqlCommand(sql, cn)
+
+                    cmd.Parameters.Add("@imagen", MySqlDbType.LongBlob).Value = datos
+                    cmd.Parameters.AddWithValue("@id", CInt(txtid.Text))
+
+                    If cmd.ExecuteNonQuery() > 0 Then
+                        MessageBox.Show("Imagen guardada correctamente")
+                    Else
+                        MessageBox.Show("No se encontró el medicamento")
+                    End If
+
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error al guardar la imagen: " & ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub btnquitar_ima_Click(sender As Object, e As EventArgs) Handles btnquitar_ima.Click
+        'Verifico que haya un medicamento seleccionado
+        If txtid.Text = "" Then
+            MessageBox.Show("Seleccioná un medicamento primero")
+            Exit Sub
+        End If
+
+        'Confirmo la eliminación
+        If MessageBox.Show("¿Querés quitar la imagen de este medicamento?",
+                       "Confirmar",
+                       MessageBoxButtons.YesNo,
+                       MessageBoxIcon.Question) = DialogResult.No Then
+            Exit Sub
+        End If
+
+        Try
+            Using cn As New MySqlConnection(CADENA)
+                cn.Open()
+
+                Dim sql As String =
+                "UPDATE medicamento SET imagen = NULL " &
+                "WHERE id_medicamento = @id;"
+
+                Using cmd As New MySqlCommand(sql, cn)
+                    cmd.Parameters.AddWithValue("@id", CInt(txtid.Text))
+                    cmd.ExecuteNonQuery()
+                End Using
+
+            End Using
+
+            'Limpio el PictureBox
+            If pbmedicamentos.Image IsNot Nothing Then
+                pbmedicamentos.Image.Dispose()
+                pbmedicamentos.Image = Nothing
+            End If
+
+            MessageBox.Show("Imagen quitada correctamente")
+
+        Catch ex As Exception
+            MessageBox.Show("Error al quitar la imagen: " & ex.Message)
+        End Try
+
     End Sub
 End Class
