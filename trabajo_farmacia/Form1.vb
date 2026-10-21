@@ -65,7 +65,6 @@ Public Class Form1
         Estilos.EstilizarBotonMenu(btncompras, pnlmenu.Width)
     End Sub
 
-    Private Sub pnlcontenedor_Paint(sender As Object, e As PaintEventArgs)
 
-    End Sub
+
 End Class

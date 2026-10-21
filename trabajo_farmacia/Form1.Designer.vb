@@ -38,10 +38,9 @@ Partial Class Form1
         ' 
         btnconectar.BackColor = Color.SeaGreen
         btnconectar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnconectar.Location = New Point(27, 81)
-        btnconectar.Margin = New Padding(3, 2, 3, 2)
+        btnconectar.Location = New Point(31, 108)
         btnconectar.Name = "btnconectar"
-        btnconectar.Size = New Size(137, 46)
+        btnconectar.Size = New Size(157, 61)
         btnconectar.TabIndex = 1
         btnconectar.Text = "CONECTAR CON LA BASE DE DATOS"
         btnconectar.UseVisualStyleBackColor = False
@@ -50,10 +49,9 @@ Partial Class Form1
         ' 
         btnmedicamentos.BackColor = Color.SeaGreen
         btnmedicamentos.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnmedicamentos.Location = New Point(27, 153)
-        btnmedicamentos.Margin = New Padding(3, 2, 3, 2)
+        btnmedicamentos.Location = New Point(31, 204)
         btnmedicamentos.Name = "btnmedicamentos"
-        btnmedicamentos.Size = New Size(137, 46)
+        btnmedicamentos.Size = New Size(157, 61)
         btnmedicamentos.TabIndex = 2
         btnmedicamentos.Text = "MEDICAMENTOS"
         btnmedicamentos.UseVisualStyleBackColor = False
@@ -62,10 +60,9 @@ Partial Class Form1
         ' 
         btnproveedores.BackColor = Color.SeaGreen
         btnproveedores.Font = New Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnproveedores.Location = New Point(27, 223)
-        btnproveedores.Margin = New Padding(3, 2, 3, 2)
+        btnproveedores.Location = New Point(31, 297)
         btnproveedores.Name = "btnproveedores"
-        btnproveedores.Size = New Size(137, 46)
+        btnproveedores.Size = New Size(157, 61)
         btnproveedores.TabIndex = 3
         btnproveedores.Text = "PROVEEDORES"
         btnproveedores.UseVisualStyleBackColor = False
@@ -74,9 +71,10 @@ Partial Class Form1
         ' 
         btncompras.BackColor = Color.SeaGreen
         btncompras.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btncompras.Location = New Point(27, 299)
+        btncompras.Location = New Point(31, 399)
+        btncompras.Margin = New Padding(3, 4, 3, 4)
         btncompras.Name = "btncompras"
-        btncompras.Size = New Size(137, 43)
+        btncompras.Size = New Size(157, 57)
         btncompras.TabIndex = 4
         btncompras.Text = "COMPRAS"
         btncompras.UseVisualStyleBackColor = False
@@ -91,50 +89,55 @@ Partial Class Form1
         pnlmenu.Dock = DockStyle.Left
         pnlmenu.ImeMode = ImeMode.NoControl
         pnlmenu.Location = New Point(0, 0)
+        pnlmenu.Margin = New Padding(3, 4, 3, 4)
         pnlmenu.Name = "pnlmenu"
-        pnlmenu.Size = New Size(200, 542)
+        pnlmenu.Size = New Size(229, 723)
         pnlmenu.TabIndex = 5
         ' 
         ' pnltitulo
         ' 
+        pnltitulo.BackColor = SystemColors.ActiveBorder
         pnltitulo.Controls.Add(lbltitulo)
         pnltitulo.Dock = DockStyle.Top
-        pnltitulo.Location = New Point(200, 0)
+        pnltitulo.Location = New Point(229, 0)
+        pnltitulo.Margin = New Padding(3, 4, 3, 4)
         pnltitulo.Name = "pnltitulo"
-        pnltitulo.Padding = New Padding(20, 0, 0, 0)
-        pnltitulo.Size = New Size(815, 60)
+        pnltitulo.Padding = New Padding(23, 0, 0, 0)
+        pnltitulo.Size = New Size(931, 80)
         pnltitulo.TabIndex = 6
         ' 
         ' lbltitulo
         ' 
+        lbltitulo.BackColor = SystemColors.ActiveBorder
         lbltitulo.Dock = DockStyle.Fill
         lbltitulo.Enabled = False
         lbltitulo.Font = New Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lbltitulo.Location = New Point(20, 0)
+        lbltitulo.Location = New Point(23, 0)
         lbltitulo.Name = "lbltitulo"
-        lbltitulo.Size = New Size(795, 60)
+        lbltitulo.Size = New Size(908, 80)
         lbltitulo.TabIndex = 0
         lbltitulo.Text = "Inicio"
         lbltitulo.TextAlign = ContentAlignment.MiddleLeft
         ' 
         ' pnlcontenedor
         ' 
+        pnlcontenedor.BackColor = SystemColors.ActiveBorder
         pnlcontenedor.Dock = DockStyle.Fill
-        pnlcontenedor.Location = New Point(200, 60)
+        pnlcontenedor.Location = New Point(229, 80)
+        pnlcontenedor.Margin = New Padding(3, 4, 3, 4)
         pnlcontenedor.Name = "pnlcontenedor"
-        pnlcontenedor.Size = New Size(815, 482)
+        pnlcontenedor.Size = New Size(931, 643)
         pnlcontenedor.TabIndex = 7
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ButtonHighlight
-        ClientSize = New Size(1015, 542)
+        ClientSize = New Size(1160, 723)
         Controls.Add(pnlcontenedor)
         Controls.Add(pnltitulo)
         Controls.Add(pnlmenu)
-        Margin = New Padding(3, 2, 3, 2)
         Name = "Form1"
         Text = "Form_principal"
         pnlmenu.ResumeLayout(False)
@@ -147,7 +150,7 @@ Partial Class Form1
     Friend WithEvents btncompras As Button
     Friend WithEvents pnlmenu As Panel
     Friend WithEvents pnltitulo As Panel
-    Friend WithEvents pnlcontenedor As Panel
     Friend WithEvents lbltitulo As Label
+    Friend WithEvents pnlcontenedor As Panel
 
 End Class
