@@ -111,111 +111,111 @@ Public Class medicamentos
             MessageBox.Show("Error al cargar las editoriales: " & ex.Message)
         End Try
     End Sub
-    Private Sub cargarcombos()
-        'cargo combo de laboratorios
-        Try
-            Using cn As New MySqlConnection(CADENA)
-                cn.Open()
-                Dim consulta As String = "SELECT id_laboratorio, nombre FROM laboratorio ORDER BY id_laboratorio"
-                Using cmd As New MySqlCommand(consulta, cn)
-                    Dim tabla As New DataTable
-                    Using lector As MySqlDataReader = cmd.ExecuteReader
-                        tabla.Load(lector)
-                    End Using
-                    cblaboratorio.DataSource = tabla
-                    cblaboratorio.DisplayMember = "nombre"
-                    cblaboratorio.ValueMember = "id_laboratorio"
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error al cargar el combo de laboratorios: " & ex.Message)
-        End Try
+    'Private Sub cargarcombos()
+    '    'cargo combo de laboratorios
+    '    Try
+    '        Using cn As New MySqlConnection(CADENA)
+    '            cn.Open()
+    '            Dim consulta As String = "SELECT id_laboratorio, nombre FROM laboratorio ORDER BY id_laboratorio"
+    '            Using cmd As New MySqlCommand(consulta, cn)
+    '                Dim tabla As New DataTable
+    '                Using lector As MySqlDataReader = cmd.ExecuteReader
+    '                    tabla.Load(lector)
+    '                End Using
+    '                cblaboratorio.DataSource = tabla
+    '                cblaboratorio.DisplayMember = "nombre"
+    '                cblaboratorio.ValueMember = "id_laboratorio"
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error al cargar el combo de laboratorios: " & ex.Message)
+    '    End Try
 
-        'cargo combo de drogas
-        Try
-            Using cn As New MySqlConnection(CADENA)
-                cn.Open()
-                Dim consulta As String = "SELECT id_droga, nombre FROM droga ORDER BY id_droga"
-                Using cmd As New MySqlCommand(consulta, cn)
-                    Dim tabla As New DataTable
-                    Using lector As MySqlDataReader = cmd.ExecuteReader
-                        tabla.Load(lector)
-                    End Using
-                    'cargo el combo de drogas
-                    cbdroga.DataSource = tabla
-                    cbdroga.DisplayMember = "nombre"
-                    cbdroga.ValueMember = "id_droga"
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error al cargar el combo de drogas: " & ex.Message)
-        End Try
+    '    'cargo combo de drogas
+    '    Try
+    '        Using cn As New MySqlConnection(CADENA)
+    '            cn.Open()
+    '            Dim consulta As String = "SELECT id_droga, nombre FROM droga ORDER BY id_droga"
+    '            Using cmd As New MySqlCommand(consulta, cn)
+    '                Dim tabla As New DataTable
+    '                Using lector As MySqlDataReader = cmd.ExecuteReader
+    '                    tabla.Load(lector)
+    '                End Using
+    '                'cargo el combo de drogas
+    '                cbdroga.DataSource = tabla
+    '                cbdroga.DisplayMember = "nombre"
+    '                cbdroga.ValueMember = "id_droga"
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error al cargar el combo de drogas: " & ex.Message)
+    '    End Try
 
-        'cargo combo de acciones terapeuticas
-        Try
-            Using cn As New MySqlConnection(CADENA)
-                cn.Open()
-                Dim consulta As String = "SELECT id_accion, nombre FROM accion_terapeutica ORDER BY id_accion"
-                Using cmd As New MySqlCommand(consulta, cn)
-                    Dim tabla As New DataTable
-                    Using lector As MySqlDataReader = cmd.ExecuteReader
-                        tabla.Load(lector)
-                    End Using
-                    'cargo el combo de acciones terapeuticas
-                    cbterapeutica.DataSource = tabla
-                    cbterapeutica.DisplayMember = "nombre"
-                    cbterapeutica.ValueMember = "id_accion"
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error al cargar el combo de acciones terapeuticas: " & ex.Message)
-        End Try
+    '    'cargo combo de acciones terapeuticas
+    '    Try
+    '        Using cn As New MySqlConnection(CADENA)
+    '            cn.Open()
+    '            Dim consulta As String = "SELECT id_accion, nombre FROM accion_terapeutica ORDER BY id_accion"
+    '            Using cmd As New MySqlCommand(consulta, cn)
+    '                Dim tabla As New DataTable
+    '                Using lector As MySqlDataReader = cmd.ExecuteReader
+    '                    tabla.Load(lector)
+    '                End Using
+    '                'cargo el combo de acciones terapeuticas
+    '                cbterapeutica.DataSource = tabla
+    '                cbterapeutica.DisplayMember = "nombre"
+    '                cbterapeutica.ValueMember = "id_accion"
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error al cargar el combo de acciones terapeuticas: " & ex.Message)
+    '    End Try
 
-        'cargo combo de presentaciones
-        Try
-            Using cn As New MySqlConnection(CADENA)
-                cn.Open()
-                Dim consulta As String = "SELECT id_presentacion, descripcion FROM presentacion ORDER BY id_presentacion"
-                Using cmd As New MySqlCommand(consulta, cn)
-                    Dim tabla As New DataTable
-                    Using lector As MySqlDataReader = cmd.ExecuteReader
-                        tabla.Load(lector)
-                    End Using
-                    'cargo el combo de presentaciones
-                    cbpresentacion.DataSource = tabla
-                    cbpresentacion.DisplayMember = "descripcion"
-                    cbpresentacion.ValueMember = "id_presentacion"
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error al cargar el combo de presentaciones: " & ex.Message)
-        End Try
+    '    'cargo combo de presentaciones
+    '    Try
+    '        Using cn As New MySqlConnection(CADENA)
+    '            cn.Open()
+    '            Dim consulta As String = "SELECT id_presentacion, descripcion FROM presentacion ORDER BY id_presentacion"
+    '            Using cmd As New MySqlCommand(consulta, cn)
+    '                Dim tabla As New DataTable
+    '                Using lector As MySqlDataReader = cmd.ExecuteReader
+    '                    tabla.Load(lector)
+    '                End Using
+    '                'cargo el combo de presentaciones
+    '                cbpresentacion.DataSource = tabla
+    '                cbpresentacion.DisplayMember = "descripcion"
+    '                cbpresentacion.ValueMember = "id_presentacion"
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error al cargar el combo de presentaciones: " & ex.Message)
+    '    End Try
 
-        'cargo combo de acciones terapeuticas
-        Try
-            Using cn As New MySqlConnection(CADENA)
-                cn.Open()
-                Dim consulta As String = "SELECT id_accion, nombre FROM accion_terapeutica ORDER BY nombre"
-                Using cmd As New MySqlCommand(consulta, cn)
-                    Dim tabla As New DataTable
-                    Using lector As MySqlDataReader = cmd.ExecuteReader
-                        tabla.Load(lector)
-                    End Using
-                    'cargo el combo de acciones terapeuticas
-                    cbterapeutica.DataSource = tabla
-                    cbterapeutica.DisplayMember = "nombre"
-                    cbterapeutica.ValueMember = "id_accion"
-                End Using
-            End Using
-        Catch ex As Exception
+    '    'cargo combo de acciones terapeuticas
+    '    Try
+    '        Using cn As New MySqlConnection(CADENA)
+    '            cn.Open()
+    '            Dim consulta As String = "SELECT id_accion, nombre FROM accion_terapeutica ORDER BY nombre"
+    '            Using cmd As New MySqlCommand(consulta, cn)
+    '                Dim tabla As New DataTable
+    '                Using lector As MySqlDataReader = cmd.ExecuteReader
+    '                    tabla.Load(lector)
+    '                End Using
+    '                'cargo el combo de acciones terapeuticas
+    '                cbterapeutica.DataSource = tabla
+    '                cbterapeutica.DisplayMember = "nombre"
+    '                cbterapeutica.ValueMember = "id_accion"
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
 
-        End Try
-    End Sub
+    '    End Try
+    'End Sub
 
     Private Sub medicamentos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Cargarmedicamentos()
-        cargarcombos()
+
         limpiarform()
 
         Estilos.EstilizarGrilla(dgvmedicamento) 'llamo al estilo 
@@ -238,6 +238,34 @@ Public Class medicamentos
         EstilizarBoton(btnguardar_ima, Color.FromArgb(0, 150, 136))
         EstilizarBoton(btnquitar_ima, Color.FromArgb(220, 80, 100))
 
+        EstilizarBoton(btnagregarlab, ColorMenu)
+        EstilizarBoton(btneliminarlab, Color.FromArgb(210, 85, 95))
+        EstilizarBoton(btnmodificarlab, ColorActivo)
+
+        EstilizarBoton(btnagregarpres, ColorMenu)
+        EstilizarBoton(btneliminarpres, Color.FromArgb(210, 85, 95))
+        EstilizarBoton(btnmodificarpres, ColorActivo)
+
+        EstilizarBoton(btnagregaraccion, ColorMenu)
+        EstilizarBoton(btneliminaraccion, Color.FromArgb(210, 85, 95))
+        EstilizarBoton(btnmodificaraccion, ColorActivo)
+
+        EstilizarBoton(btnagregardroga, ColorMenu)
+        EstilizarBoton(btneliminardroga, Color.FromArgb(210, 85, 95))
+        EstilizarBoton(btnmodificardroga, ColorActivo)
+
+        'cargar los combos
+        moduloauxiliares.cargarcombolab(cblaboratorio)
+        moduloauxiliares.cargarcombolab(cbabmlab)
+
+        moduloauxiliares.cargarcomboaccion(cbterapeutica)
+        moduloauxiliares.cargarcomboaccion(cbabmaccion)
+
+        moduloauxiliares.cargarComboPresentacion(cbabmpres)
+        moduloauxiliares.cargarComboPresentacion(cbpresentacion)
+
+        moduloauxiliares.cargarComboDroga(cbabmdroga)
+        moduloauxiliares.cargarComboDroga(cbdroga)
 
     End Sub
 
@@ -643,5 +671,258 @@ Public Class medicamentos
             MessageBox.Show("Error al quitar la imagen: " & ex.Message)
         End Try
 
+    End Sub
+    Private Sub mostrarpanelauxiliar(pnlmostrar As Panel)
+        'hacer visible el panel padre
+        pnlcontenedorabm.Visible = True
+
+        'ocultar los paneles hijos
+        pnllaboratorio.Visible = False
+        pnlpresentacion.Visible = False
+        pnlabmaccion.Visible = False
+        pnlabmdroga.Visible = False
+
+        'mostrar el panel que el usuario quiera ocupar
+        pnlmostrar.Visible = True
+        pnlmostrar.BringToFront()
+    End Sub
+    Private Sub btnmaslaboratorio_Click(sender As Object, e As EventArgs) Handles btnmaslaboratorio.Click
+        'abrir el abm de laboratorios
+        mostrarpanelauxiliar(pnllaboratorio)
+        txtabmlab.Clear()
+        txtabmlab.Focus()
+    End Sub
+
+
+    Private Sub btnmaspres_Click(sender As Object, e As EventArgs) Handles btnmaspres.Click
+        'abrir el abm de presentaciones
+        mostrarpanelauxiliar(pnlpresentacion)
+
+        txtabmpresentacion.Clear()
+        txtabmpresentacion.Focus()
+    End Sub
+
+    Private Sub btnmasaccion_Click(sender As Object, e As EventArgs) Handles btnmasaccion.Click
+        'abrir el abm de acciones terapeuticas
+        mostrarpanelauxiliar(pnlabmaccion)
+
+        txtabmaccion.Clear()
+        txtabmaccion.Focus()
+
+    End Sub
+
+    Private Sub btnmasdroga_Click(sender As Object, e As EventArgs) Handles btnmasdroga.Click
+        'abrir el abm de drogas
+        mostrarpanelauxiliar(pnlabmdroga)
+
+        txtabmdroga.Clear()
+        txtabmdroga.Focus()
+    End Sub
+
+    Private Sub btnagregarlab_Click(sender As Object, e As EventArgs) Handles btnagregarlab.Click
+        'verifico que este cargado el txt del abmlab
+        If txtabmlab.Text.Trim() = "" Then
+            MessageBox.Show("Por favor, ingrese el nombre del laboratorio.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+            'llamo a la funcion que guarda el laboratorio en la base de datos
+            If moduloauxiliares.guardarlaboratorio(txtabmlab.Text.Trim()) Then
+                MessageBox.Show("Laboratorio agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                moduloauxiliares.cargarcombolab(cblaboratorio)
+                moduloauxiliares.cargarcombolab(cbabmlab)
+                txtabmlab.Clear()
+            Else
+                MessageBox.Show("Error al agregar el laboratorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
+        End If
+    End Sub
+
+    Private Sub btnagregaraccion_Click(sender As Object, e As EventArgs) Handles btnagregaraccion.Click
+        'verifico que el txt este cargado
+        If txtabmaccion.Text.Trim() = "" Then
+            MessageBox.Show("Por favor, ingrese el nombre de la acción terapéutica.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+            'llamo a la funcion que guarda la accion terapeutica en la base de datos
+            If moduloauxiliares.guardaraccion(txtabmaccion.Text.Trim()) Then
+                MessageBox.Show("Acción terapéutica agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                moduloauxiliares.cargarcomboaccion(cbterapeutica)
+                moduloauxiliares.cargarcomboaccion(cbabmaccion)
+                txtabmaccion.Clear()
+            Else
+                MessageBox.Show("Error al agregar la acción terapéutica.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+    End Sub
+
+    Private Sub btnagregardroga_Click(sender As Object, e As EventArgs) Handles btnagregardroga.Click
+        'verifico que el txt este cargado
+        If txtabmdroga.Text.Trim() = "" Then
+            MessageBox.Show("Por favor, ingrese el nombre de la droga.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+            'llamo a la funcion que guarda la droga en la base de datos
+            If moduloauxiliares.guardarDroga(txtabmdroga.Text.Trim()) Then
+                MessageBox.Show("Droga agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                moduloauxiliares.cargarComboDroga(cbdroga)
+                moduloauxiliares.cargarComboDroga(cbabmdroga)
+                txtabmdroga.Clear()
+            Else
+                MessageBox.Show("Error al agregar la droga.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+    End Sub
+
+    Private Sub btnagregarpres_Click(sender As Object, e As EventArgs) Handles btnagregarpres.Click
+        'verifico que el txt este cargado
+        If txtabmpresentacion.Text.Trim() = "" Then
+            MessageBox.Show("Por favor, ingrese el nombre de la presentación.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+            'llamo a la funcion que guarda la presentacion en la base de datos
+            If moduloauxiliares.guardarPresentacion(txtabmpresentacion.Text.Trim()) Then
+                MessageBox.Show("Presentación agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                moduloauxiliares.cargarComboPresentacion(cbpresentacion)
+                moduloauxiliares.cargarComboPresentacion(cbabmpres)
+                txtabmpresentacion.Clear()
+            Else
+                MessageBox.Show("Error al agregar la presentación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+    End Sub
+
+    Private Sub btnmodificaraccion_Click(sender As Object, e As EventArgs) Handles btnmodificaraccion.Click
+        'verifico el el txt este cargado y que haya seleccionado un item del combo
+        If cbabmpres.SelectedValue Is Nothing OrElse txtabmaccion.Text.Trim() = "" Then
+            MessageBox.Show("Por favor, seleccione una acción terapéutica y asegúrese de que el nombre no esté vacío.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+            'llamo a la funcion que modifica la accion terapeutica en la base de datos
+            Dim id As Integer = Convert.ToInt32(cbabmaccion.SelectedValue)
+            If moduloauxiliares.modificaraccion(id, txtabmaccion.Text.Trim()) Then
+                MessageBox.Show("Presentación modificada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                moduloauxiliares.cargarComboPresentacion(cbabmaccion)
+                moduloauxiliares.cargarComboPresentacion(cbterapeutica)
+                txtabmaccion.Clear()
+            End If
+        End If
+    End Sub
+
+    Private Sub btnmodificardroga_Click(sender As Object, e As EventArgs) Handles btnmodificardroga.Click
+        'verifico que el txt este cargado y que haya seleccionado un item del combo
+        If cbabmdroga.SelectedValue Is Nothing OrElse txtabmdroga.Text.Trim() = "" Then
+            MessageBox.Show("Por favor, seleccione una droga y asegúrese de que el nombre no esté vacío.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+            'llamo a la funcion que modifica la droga en la base de datos
+            Dim id As Integer = Convert.ToInt32(cbabmdroga.SelectedValue)
+            If moduloauxiliares.modificarDroga(id, txtabmdroga.Text.Trim()) Then
+                MessageBox.Show("Droga modificada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                moduloauxiliares.cargarComboDroga(cbabmdroga)
+                moduloauxiliares.cargarComboDroga(cbdroga)
+                txtabmdroga.Clear()
+            End If
+        End If
+    End Sub
+
+    Private Sub btnmodificarlab_Click(sender As Object, e As EventArgs) Handles btnmodificarlab.Click
+        'verifico que el txt este cargado y que haya seleccionado un item del combo
+        If cbabmlab.SelectedValue Is Nothing OrElse txtabmlab.Text.Trim() = "" Then
+            MessageBox.Show("Por favor, seleccione un laboratorio y asegúrese de que el nombre no esté vacío.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+            'llamo a la funcion que modifica el laboratorio en la base de datos
+            Dim id As Integer = Convert.ToInt32(cbabmlab.SelectedValue)
+            If moduloauxiliares.modificarlaboratorio(id, txtabmlab.Text.Trim()) Then
+                MessageBox.Show("Laboratorio modificado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                moduloauxiliares.cargarcombolab(cbabmlab)
+                moduloauxiliares.cargarcombolab(cblaboratorio)
+                txtabmlab.Clear()
+            End If
+        End If
+    End Sub
+
+    Private Sub btnmodificarpres_Click(sender As Object, e As EventArgs) Handles btnmodificarpres.Click
+        'verifico que el txt este cargado y que haya seleccionado un item del combo
+        If cbabmpres.SelectedValue Is Nothing OrElse txtabmpresentacion.Text.Trim() = "" Then
+            MessageBox.Show("Por favor, seleccione una presentación y asegúrese de que el nombre no esté vacío.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+            'llamo a la funcion que modifica la presentacion en la base de datos
+            Dim id As Integer = Convert.ToInt32(cbabmpres.SelectedValue)
+            If moduloauxiliares.modificarPresentacion(id, txtabmpresentacion.Text.Trim()) Then
+                MessageBox.Show("Presentación modificada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                moduloauxiliares.cargarComboPresentacion(cbabmpres)
+                moduloauxiliares.cargarComboPresentacion(cbpresentacion)
+                txtabmpresentacion.Clear()
+            End If
+        End If
+    End Sub
+
+    Private Sub btneliminaraccion_Click(sender As Object, e As EventArgs) Handles btneliminaraccion.Click
+        'verifico que haya seleccionado un item del combo
+        If cbabmaccion.SelectedValue Is Nothing Then Exit Sub
+        'llamo a la funcion que elimina la accion terapeutica en la base de datos
+        Dim id As Integer = Convert.ToInt32(cbabmaccion.SelectedValue)
+        If moduloauxiliares.eliminaraccion(id) Then
+            MessageBox.Show("Acción terapéutica eliminada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            moduloauxiliares.cargarcomboaccion(cbabmaccion)
+            moduloauxiliares.cargarcomboaccion(cbterapeutica)
+            txtabmaccion.Clear()
+        End If
+    End Sub
+
+    Private Sub btneliminardroga_Click(sender As Object, e As EventArgs) Handles btneliminardroga.Click
+        'verifico que haya seleccionado un item del combo
+        If cbabmdroga.SelectedValue Is Nothing Then Exit Sub
+        'llamo a la funcion que elimina la droga en la base de datos
+        Dim id As Integer = Convert.ToInt32(cbabmdroga.SelectedValue)
+        If moduloauxiliares.eliminarDroga(id) Then
+            MessageBox.Show("Droga eliminada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            moduloauxiliares.cargarComboDroga(cbabmdroga)
+            moduloauxiliares.cargarComboDroga(cbdroga)
+            txtabmdroga.Clear()
+        End If
+    End Sub
+
+    Private Sub btneliminarlab_Click(sender As Object, e As EventArgs) Handles btneliminarlab.Click
+        'verifico que haya seleccionado un item del combo
+        If cbabmlab.SelectedValue Is Nothing Then Exit Sub
+        'llamo a la funcion que elimina el laboratorio en la base de datos
+        Dim id As Integer = Convert.ToInt32(cbabmlab.SelectedValue)
+        If moduloauxiliares.eliminarlaboratorio(id) Then
+            MessageBox.Show("Laboratorio eliminado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            moduloauxiliares.cargarcombolab(cbabmlab)
+            moduloauxiliares.cargarcombolab(cblaboratorio)
+            txtabmlab.Clear()
+        End If
+    End Sub
+
+    Private Sub btneliminarpres_Click(sender As Object, e As EventArgs) Handles btneliminarpres.Click
+        'verifico que haya seleccionado un item del combo
+        If cbabmpres.SelectedValue Is Nothing Then Exit Sub
+        'llamo a la funcion que elimina la presentacion en la base de datos
+        Dim id As Integer = Convert.ToInt32(cbabmpres.SelectedValue)
+        If moduloauxiliares.eliminarPresentacion(id) Then
+            MessageBox.Show("Presentación eliminada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            moduloauxiliares.cargarComboPresentacion(cbabmpres)
+            moduloauxiliares.cargarComboPresentacion(cbpresentacion)
+            txtabmpresentacion.Clear()
+        End If
+    End Sub
+
+    Private Sub btncerrarlab_Click(sender As Object, e As EventArgs) Handles btncerrarlab.Click
+        'cierro el panel de laboratorio
+        pnlcontenedorabm.Visible = False
+        pnllaboratorio.Visible = False
+    End Sub
+
+    Private Sub btncerrarpres_Click(sender As Object, e As EventArgs) Handles btncerrarpres.Click
+        'cierro el panel de presentación
+        pnlpresentacion.Visible = False
+        pnlcontenedorabm.Visible = False
+    End Sub
+    Private Sub btncerrardroga_Click(sender As Object, e As EventArgs) Handles btncerrardroga.Click
+        'cierro el panel de droga
+        pnlcontenedorabm.Visible = False
+        pnlabmdroga.Visible = False
+    End Sub
+    Private Sub btncerraraccion_Click(sender As Object, e As EventArgs) Handles btncerraraccion.Click
+        'cierro el panel de acción
+        pnlcontenedorabm.Visible = False
+        pnlabmaccion.Visible = False
     End Sub
 End Class
