@@ -36,7 +36,8 @@
 
     Sub EstilizarCampos(contenedor As Control)
         For Each c As Control In contenedor.Controls
-            If TypeOf c Is TextBox OrElse TypeOf c Is ComboBox OrElse TypeOf c Is NumericUpDown Then
+
+            If TypeOf c Is TextBox OrElse TypeOf c Is ComboBox OrElse TypeOf c Is NumericUpDown OrElse TypeOf c Is DateTimePicker Then
                 c.BackColor = Color.White
                 c.ForeColor = Color.FromArgb(33, 37, 41)
                 c.Font = New Font("Segoe UI", 10)
@@ -49,7 +50,7 @@
                 End If
             End If
 
-            If c.HasChildren Then EstilizarCampos(c)   ' entra también a los GroupBox y paneles
+            If c.HasChildren Then EstilizarCampos(c)
         Next
     End Sub
 

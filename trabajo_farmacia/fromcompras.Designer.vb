@@ -39,8 +39,25 @@ Partial Class fromcompras
         txtfactura = New TextBox()
         txtidcompras = New TextBox()
         Label6 = New Label()
+        pnlotes = New Panel()
+        dgvdetalle = New DataGridView()
+        Label11 = New Label()
+        Label4 = New Label()
+        Label10 = New Label()
+        Label9 = New Label()
+        Label8 = New Label()
+        btnagregaritem = New Button()
+        nudprecio = New NumericUpDown()
+        nudcantidad = New NumericUpDown()
+        dtpvencimiento = New DateTimePicker()
+        txtcodigolote = New TextBox()
+        cbmedicamentos = New ComboBox()
         CType(dgvcompras, ComponentModel.ISupportInitialize).BeginInit()
         gbcompras.SuspendLayout()
+        pnlotes.SuspendLayout()
+        CType(dgvdetalle, ComponentModel.ISupportInitialize).BeginInit()
+        CType(nudprecio, ComponentModel.ISupportInitialize).BeginInit()
+        CType(nudcantidad, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' dgvcompras
@@ -116,7 +133,7 @@ Partial Class fromcompras
         ' 
         ' txtlote
         ' 
-        txtlote.Location = New Point(133, 147)
+        txtlote.Location = New Point(149, 147)
         txtlote.Name = "txtlote"
         txtlote.Size = New Size(206, 23)
         txtlote.TabIndex = 19
@@ -159,7 +176,7 @@ Partial Class fromcompras
         ' 
         ' dtpfecha
         ' 
-        dtpfecha.Location = New Point(133, 52)
+        dtpfecha.Location = New Point(151, 52)
         dtpfecha.Name = "dtpfecha"
         dtpfecha.Size = New Size(225, 23)
         dtpfecha.TabIndex = 7
@@ -167,7 +184,7 @@ Partial Class fromcompras
         ' cbusuario
         ' 
         cbusuario.FormattingEnabled = True
-        cbusuario.Location = New Point(133, 176)
+        cbusuario.Location = New Point(149, 176)
         cbusuario.Name = "cbusuario"
         cbusuario.Size = New Size(206, 23)
         cbusuario.TabIndex = 14
@@ -175,21 +192,21 @@ Partial Class fromcompras
         ' cbproveedor
         ' 
         cbproveedor.FormattingEnabled = True
-        cbproveedor.Location = New Point(133, 116)
+        cbproveedor.Location = New Point(149, 116)
         cbproveedor.Name = "cbproveedor"
         cbproveedor.Size = New Size(206, 23)
         cbproveedor.TabIndex = 13
         ' 
         ' txtfactura
         ' 
-        txtfactura.Location = New Point(133, 87)
+        txtfactura.Location = New Point(150, 87)
         txtfactura.Name = "txtfactura"
         txtfactura.Size = New Size(206, 23)
         txtfactura.TabIndex = 10
         ' 
         ' txtidcompras
         ' 
-        txtidcompras.Location = New Point(133, 23)
+        txtidcompras.Location = New Point(152, 23)
         txtidcompras.Name = "txtidcompras"
         txtidcompras.ReadOnly = True
         txtidcompras.Size = New Size(100, 23)
@@ -204,12 +221,132 @@ Partial Class fromcompras
         Label6.TabIndex = 7
         Label6.Text = "Usuario:"
         ' 
+        ' pnlotes
+        ' 
+        pnlotes.Controls.Add(dgvdetalle)
+        pnlotes.Controls.Add(Label11)
+        pnlotes.Controls.Add(Label4)
+        pnlotes.Controls.Add(Label10)
+        pnlotes.Controls.Add(Label9)
+        pnlotes.Controls.Add(Label8)
+        pnlotes.Controls.Add(btnagregaritem)
+        pnlotes.Controls.Add(nudprecio)
+        pnlotes.Controls.Add(nudcantidad)
+        pnlotes.Controls.Add(dtpvencimiento)
+        pnlotes.Controls.Add(txtcodigolote)
+        pnlotes.Controls.Add(cbmedicamentos)
+        pnlotes.Location = New Point(636, 37)
+        pnlotes.Name = "pnlotes"
+        pnlotes.Size = New Size(685, 401)
+        pnlotes.TabIndex = 7
+        ' 
+        ' dgvdetalle
+        ' 
+        dgvdetalle.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvdetalle.Location = New Point(6, 121)
+        dgvdetalle.Name = "dgvdetalle"
+        dgvdetalle.Size = New Size(676, 208)
+        dgvdetalle.TabIndex = 11
+        ' 
+        ' Label11
+        ' 
+        Label11.AutoSize = True
+        Label11.Location = New Point(550, 13)
+        Label11.Name = "Label11"
+        Label11.Size = New Size(40, 15)
+        Label11.TabIndex = 10
+        Label11.Text = "Precio"
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Location = New Point(477, 12)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(55, 15)
+        Label4.TabIndex = 9
+        Label4.Text = "Cantidad"
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Location = New Point(250, 13)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(73, 15)
+        Label10.TabIndex = 8
+        Label10.Text = "Vencimiento"
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Location = New Point(134, 12)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(46, 15)
+        Label9.TabIndex = 7
+        Label9.Text = "Codigo"
+        ' 
+        ' Label8
+        ' 
+        Label8.AutoSize = True
+        Label8.Location = New Point(21, 12)
+        Label8.Name = "Label8"
+        Label8.Size = New Size(81, 15)
+        Label8.TabIndex = 6
+        Label8.Text = "Medicamento"
+        ' 
+        ' btnagregaritem
+        ' 
+        btnagregaritem.Location = New Point(529, 74)
+        btnagregaritem.Name = "btnagregaritem"
+        btnagregaritem.Size = New Size(100, 41)
+        btnagregaritem.TabIndex = 5
+        btnagregaritem.Text = "Agregar Item "
+        btnagregaritem.UseVisualStyleBackColor = True
+        ' 
+        ' nudprecio
+        ' 
+        nudprecio.Location = New Point(550, 32)
+        nudprecio.Name = "nudprecio"
+        nudprecio.Size = New Size(49, 23)
+        nudprecio.TabIndex = 4
+        ' 
+        ' nudcantidad
+        ' 
+        nudcantidad.Location = New Point(477, 32)
+        nudcantidad.Name = "nudcantidad"
+        nudcantidad.Size = New Size(60, 23)
+        nudcantidad.TabIndex = 3
+        ' 
+        ' dtpvencimiento
+        ' 
+        dtpvencimiento.Location = New Point(245, 32)
+        dtpvencimiento.Name = "dtpvencimiento"
+        dtpvencimiento.Size = New Size(220, 23)
+        dtpvencimiento.TabIndex = 2
+        ' 
+        ' txtcodigolote
+        ' 
+        txtcodigolote.Location = New Point(130, 32)
+        txtcodigolote.Name = "txtcodigolote"
+        txtcodigolote.Size = New Size(100, 23)
+        txtcodigolote.TabIndex = 1
+        ' 
+        ' cbmedicamentos
+        ' 
+        cbmedicamentos.DropDownStyle = ComboBoxStyle.DropDownList
+        cbmedicamentos.FormattingEnabled = True
+        cbmedicamentos.Location = New Point(17, 32)
+        cbmedicamentos.Name = "cbmedicamentos"
+        cbmedicamentos.Size = New Size(100, 23)
+        cbmedicamentos.TabIndex = 0
+        ' 
         ' fromcompras
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
+        AutoScroll = True
         BackColor = SystemColors.ButtonHighlight
-        ClientSize = New Size(933, 479)
+        ClientSize = New Size(1370, 546)
+        Controls.Add(pnlotes)
         Controls.Add(gbcompras)
         Controls.Add(dgvcompras)
         Name = "fromcompras"
@@ -217,6 +354,11 @@ Partial Class fromcompras
         CType(dgvcompras, ComponentModel.ISupportInitialize).EndInit()
         gbcompras.ResumeLayout(False)
         gbcompras.PerformLayout()
+        pnlotes.ResumeLayout(False)
+        pnlotes.PerformLayout()
+        CType(dgvdetalle, ComponentModel.ISupportInitialize).EndInit()
+        CType(nudprecio, ComponentModel.ISupportInitialize).EndInit()
+        CType(nudcantidad, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -238,4 +380,16 @@ Partial Class fromcompras
     Friend WithEvents btnlimpiar As Button
     Friend WithEvents txtlote As TextBox
     Friend WithEvents Label7 As Label
+    Friend WithEvents pnlotes As Panel
+    Friend WithEvents btnagregaritem As Button
+    Friend WithEvents nudprecio As NumericUpDown
+    Friend WithEvents nudcantidad As NumericUpDown
+    Friend WithEvents dtpvencimiento As DateTimePicker
+    Friend WithEvents txtcodigolote As TextBox
+    Friend WithEvents cbmedicamentos As ComboBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents dgvdetalle As DataGridView
+    Friend WithEvents Label11 As Label
 End Class
