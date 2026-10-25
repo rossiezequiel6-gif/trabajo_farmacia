@@ -63,9 +63,6 @@ Partial Class medicamentos
         btnquitar_ima = New Button()
         Panel1 = New Panel()
         pnlcontenedorabm = New Panel()
-        pnllaboratorio = New Panel()
-        pnlpresentacion = New Panel()
-        pnlabmaccion = New Panel()
         pnlabmdroga = New Panel()
         cbabmdroga = New ComboBox()
         btncerrardroga = New Button()
@@ -74,6 +71,7 @@ Partial Class medicamentos
         btnagregardroga = New Button()
         txtabmdroga = New TextBox()
         Label15 = New Label()
+        pnlabmaccion = New Panel()
         cbabmaccion = New ComboBox()
         btncerraraccion = New Button()
         btnmodificaraccion = New Button()
@@ -81,6 +79,7 @@ Partial Class medicamentos
         btnagregaraccion = New Button()
         txtabmaccion = New TextBox()
         Label14 = New Label()
+        pnlpresentacion = New Panel()
         cbabmpres = New ComboBox()
         btncerrarpres = New Button()
         btnmodificarpres = New Button()
@@ -88,6 +87,7 @@ Partial Class medicamentos
         btnagregarpres = New Button()
         txtabmpresentacion = New TextBox()
         Label13 = New Label()
+        pnllaboratorio = New Panel()
         cbabmlab = New ComboBox()
         btncerrarlab = New Button()
         btnmodificarlab = New Button()
@@ -105,10 +105,10 @@ Partial Class medicamentos
         CType(pbmedicamentos, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
         pnlcontenedorabm.SuspendLayout()
-        pnllaboratorio.SuspendLayout()
-        pnlpresentacion.SuspendLayout()
-        pnlabmaccion.SuspendLayout()
         pnlabmdroga.SuspendLayout()
+        pnlabmaccion.SuspendLayout()
+        pnlpresentacion.SuspendLayout()
+        pnllaboratorio.SuspendLayout()
         SuspendLayout()
         ' 
         ' GroupBox1
@@ -546,54 +546,6 @@ Partial Class medicamentos
         pnlcontenedorabm.TabIndex = 8
         pnlcontenedorabm.Visible = False
         ' 
-        ' pnllaboratorio
-        ' 
-        pnllaboratorio.Controls.Add(cbabmlab)
-        pnllaboratorio.Controls.Add(btncerrarlab)
-        pnllaboratorio.Controls.Add(btnmodificarlab)
-        pnllaboratorio.Controls.Add(btneliminarlab)
-        pnllaboratorio.Controls.Add(btnagregarlab)
-        pnllaboratorio.Controls.Add(txtabmlab)
-        pnllaboratorio.Controls.Add(Label8)
-        pnllaboratorio.Dock = DockStyle.Fill
-        pnllaboratorio.Location = New Point(0, 0)
-        pnllaboratorio.Name = "pnllaboratorio"
-        pnllaboratorio.Size = New Size(331, 459)
-        pnllaboratorio.TabIndex = 0
-        pnllaboratorio.Visible = False
-        ' 
-        ' pnlpresentacion
-        ' 
-        pnlpresentacion.Controls.Add(cbabmpres)
-        pnlpresentacion.Controls.Add(btncerrarpres)
-        pnlpresentacion.Controls.Add(btnmodificarpres)
-        pnlpresentacion.Controls.Add(btneliminarpres)
-        pnlpresentacion.Controls.Add(btnagregarpres)
-        pnlpresentacion.Controls.Add(txtabmpresentacion)
-        pnlpresentacion.Controls.Add(Label13)
-        pnlpresentacion.Dock = DockStyle.Fill
-        pnlpresentacion.Location = New Point(0, 0)
-        pnlpresentacion.Name = "pnlpresentacion"
-        pnlpresentacion.Size = New Size(331, 459)
-        pnlpresentacion.TabIndex = 36
-        pnlpresentacion.Visible = False
-        ' 
-        ' pnlabmaccion
-        ' 
-        pnlabmaccion.Controls.Add(cbabmaccion)
-        pnlabmaccion.Controls.Add(btncerraraccion)
-        pnlabmaccion.Controls.Add(btnmodificaraccion)
-        pnlabmaccion.Controls.Add(btneliminaraccion)
-        pnlabmaccion.Controls.Add(btnagregaraccion)
-        pnlabmaccion.Controls.Add(txtabmaccion)
-        pnlabmaccion.Controls.Add(Label14)
-        pnlabmaccion.Dock = DockStyle.Fill
-        pnlabmaccion.Location = New Point(0, 0)
-        pnlabmaccion.Name = "pnlabmaccion"
-        pnlabmaccion.Size = New Size(331, 459)
-        pnlabmaccion.TabIndex = 36
-        pnlabmaccion.Visible = False
-        ' 
         ' pnlabmdroga
         ' 
         pnlabmdroga.Controls.Add(cbabmdroga)
@@ -673,6 +625,22 @@ Partial Class medicamentos
         Label15.TabIndex = 45
         Label15.Text = "DROGA"
         ' 
+        ' pnlabmaccion
+        ' 
+        pnlabmaccion.Controls.Add(cbabmaccion)
+        pnlabmaccion.Controls.Add(btncerraraccion)
+        pnlabmaccion.Controls.Add(btnmodificaraccion)
+        pnlabmaccion.Controls.Add(btneliminaraccion)
+        pnlabmaccion.Controls.Add(btnagregaraccion)
+        pnlabmaccion.Controls.Add(txtabmaccion)
+        pnlabmaccion.Controls.Add(Label14)
+        pnlabmaccion.Dock = DockStyle.Fill
+        pnlabmaccion.Location = New Point(0, 0)
+        pnlabmaccion.Name = "pnlabmaccion"
+        pnlabmaccion.Size = New Size(331, 459)
+        pnlabmaccion.TabIndex = 36
+        pnlabmaccion.Visible = False
+        ' 
         ' cbabmaccion
         ' 
         cbabmaccion.FormattingEnabled = True
@@ -736,6 +704,22 @@ Partial Class medicamentos
         Label14.TabIndex = 38
         Label14.Text = "ACCIÓN TERAPÉUTICA"
         ' 
+        ' pnlpresentacion
+        ' 
+        pnlpresentacion.Controls.Add(cbabmpres)
+        pnlpresentacion.Controls.Add(btncerrarpres)
+        pnlpresentacion.Controls.Add(btnmodificarpres)
+        pnlpresentacion.Controls.Add(btneliminarpres)
+        pnlpresentacion.Controls.Add(btnagregarpres)
+        pnlpresentacion.Controls.Add(txtabmpresentacion)
+        pnlpresentacion.Controls.Add(Label13)
+        pnlpresentacion.Dock = DockStyle.Fill
+        pnlpresentacion.Location = New Point(0, 0)
+        pnlpresentacion.Name = "pnlpresentacion"
+        pnlpresentacion.Size = New Size(331, 459)
+        pnlpresentacion.TabIndex = 36
+        pnlpresentacion.Visible = False
+        ' 
         ' cbabmpres
         ' 
         cbabmpres.FormattingEnabled = True
@@ -798,6 +782,22 @@ Partial Class medicamentos
         Label13.Size = New Size(135, 23)
         Label13.TabIndex = 31
         Label13.Text = "PRESENTACIÓN"
+        ' 
+        ' pnllaboratorio
+        ' 
+        pnllaboratorio.Controls.Add(cbabmlab)
+        pnllaboratorio.Controls.Add(btncerrarlab)
+        pnllaboratorio.Controls.Add(btnmodificarlab)
+        pnllaboratorio.Controls.Add(btneliminarlab)
+        pnllaboratorio.Controls.Add(btnagregarlab)
+        pnllaboratorio.Controls.Add(txtabmlab)
+        pnllaboratorio.Controls.Add(Label8)
+        pnllaboratorio.Dock = DockStyle.Fill
+        pnllaboratorio.Location = New Point(0, 0)
+        pnllaboratorio.Name = "pnllaboratorio"
+        pnllaboratorio.Size = New Size(331, 459)
+        pnllaboratorio.TabIndex = 0
+        pnllaboratorio.Visible = False
         ' 
         ' cbabmlab
         ' 
@@ -888,14 +888,14 @@ Partial Class medicamentos
         CType(pbmedicamentos, ComponentModel.ISupportInitialize).EndInit()
         Panel1.ResumeLayout(False)
         pnlcontenedorabm.ResumeLayout(False)
-        pnllaboratorio.ResumeLayout(False)
-        pnllaboratorio.PerformLayout()
-        pnlpresentacion.ResumeLayout(False)
-        pnlpresentacion.PerformLayout()
-        pnlabmaccion.ResumeLayout(False)
-        pnlabmaccion.PerformLayout()
         pnlabmdroga.ResumeLayout(False)
         pnlabmdroga.PerformLayout()
+        pnlabmaccion.ResumeLayout(False)
+        pnlabmaccion.PerformLayout()
+        pnlpresentacion.ResumeLayout(False)
+        pnlpresentacion.PerformLayout()
+        pnllaboratorio.ResumeLayout(False)
+        pnllaboratorio.PerformLayout()
         ResumeLayout(False)
     End Sub
 

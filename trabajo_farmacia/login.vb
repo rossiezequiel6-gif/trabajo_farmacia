@@ -45,6 +45,12 @@ Public Class login
                             Exit Sub
                         End If
 
+                        Dim iduser As Integer = Convert.ToInt32(rd("id_usuario"))
+                        Dim nombreuser As String = rd("nombre_usuario").ToString()
+                        Dim roluser As String = rd("roles").ToString()
+
+                        Modulosesion.iniciarsesion(iduser, nombreuser, roluser)
+
                         ' 2\. Cargar variables de sesión
                         sesion.idUsuario = Convert.ToInt32(rd("id_usuario"))
                         sesion.nombreUsuario = rd("nombre_usuario").ToString()

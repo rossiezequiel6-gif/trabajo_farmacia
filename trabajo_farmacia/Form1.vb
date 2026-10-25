@@ -63,8 +63,28 @@ Public Class Form1
         Estilos.EstilizarBotonMenu(btnmedicamentos, pnlmenu.Width)
         Estilos.EstilizarBotonMenu(btnproveedores, pnlmenu.Width)
         Estilos.EstilizarBotonMenu(btncompras, pnlmenu.Width)
+
+        configurarmenusegunrol()
+
+        'pantalla completa
+        Me.WindowState = FormWindowState.Maximized
     End Sub
 
+    Private Sub configurarmenusegunrol()
+        'si no es admin desabilitamos el boton USUARIOS
+        If Modulosesion.esadmin Then
+            btnformusuarios.Visible = True
+            Estilos.EstilizarBotonMenu(btnformusuarios, pnlmenu.Width)
+        Else
+            btnformusuarios.Visible = False
+        End If
+    End Sub
 
-
+    Private Sub btnformusuarios_Click(sender As Object, e As EventArgs) Handles btnformusuarios.Click
+        If Not Modulosesion.esadmin Then
+            MessageBox.Show("No tenés permisos para acceder a la gestión de usuarios.", "Acceso Restringido", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            Exit Sub
+        End If
+        AbrirFormulario(New Formusuarios(), "Usuarios")
+    End Sub
 End Class
