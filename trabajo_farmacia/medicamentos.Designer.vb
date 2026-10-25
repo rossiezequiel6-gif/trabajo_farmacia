@@ -672,6 +672,8 @@ Partial Class medicamentos
         pnlabmaccion.Margin = New Padding(3, 2, 3, 2)
         pnlabmaccion.Name = "pnlabmaccion"
         pnlabmaccion.Size = New Size(290, 344)
+        pnlabmaccion.Name = "pnlabmaccion"
+        pnlabmaccion.Size = New Size(331, 459)
         pnlabmaccion.TabIndex = 36
         pnlabmaccion.Visible = False
         ' 
@@ -758,6 +760,8 @@ Partial Class medicamentos
         pnlpresentacion.Margin = New Padding(3, 2, 3, 2)
         pnlpresentacion.Name = "pnlpresentacion"
         pnlpresentacion.Size = New Size(290, 344)
+        pnlpresentacion.Name = "pnlpresentacion"
+        pnlpresentacion.Size = New Size(331, 459)
         pnlpresentacion.TabIndex = 36
         pnlpresentacion.Visible = False
         ' 
@@ -844,6 +848,8 @@ Partial Class medicamentos
         pnllaboratorio.Margin = New Padding(3, 2, 3, 2)
         pnllaboratorio.Name = "pnllaboratorio"
         pnllaboratorio.Size = New Size(290, 344)
+        pnllaboratorio.Name = "pnllaboratorio"
+        pnllaboratorio.Size = New Size(331, 459)
         pnllaboratorio.TabIndex = 0
         pnllaboratorio.Visible = False
         ' 

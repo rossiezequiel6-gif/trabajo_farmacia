@@ -27,6 +27,7 @@ Partial Class Form1
         btnproveedores = New Button()
         btncompras = New Button()
         pnlmenu = New Panel()
+        btnformusuarios = New Button()
         pnltitulo = New Panel()
         lbltitulo = New Label()
         pnlcontenedor = New Panel()
@@ -82,6 +83,7 @@ Partial Class Form1
         ' pnlmenu
         ' 
         pnlmenu.BackColor = Color.MediumAquamarine
+        pnlmenu.Controls.Add(btnformusuarios)
         pnlmenu.Controls.Add(btncompras)
         pnlmenu.Controls.Add(btnconectar)
         pnlmenu.Controls.Add(btnproveedores)
@@ -93,6 +95,18 @@ Partial Class Form1
         pnlmenu.Name = "pnlmenu"
         pnlmenu.Size = New Size(229, 723)
         pnlmenu.TabIndex = 5
+        ' 
+        ' btnformusuarios
+        ' 
+        btnformusuarios.BackColor = Color.SeaGreen
+        btnformusuarios.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnformusuarios.Location = New Point(31, 493)
+        btnformusuarios.Margin = New Padding(3, 4, 3, 4)
+        btnformusuarios.Name = "btnformusuarios"
+        btnformusuarios.Size = New Size(157, 57)
+        btnformusuarios.TabIndex = 5
+        btnformusuarios.Text = "USUARIOS"
+        btnformusuarios.UseVisualStyleBackColor = False
         ' 
         ' pnltitulo
         ' 
@@ -152,5 +166,6 @@ Partial Class Form1
     Friend WithEvents pnltitulo As Panel
     Friend WithEvents lbltitulo As Label
     Friend WithEvents pnlcontenedor As Panel
+    Friend WithEvents btnformusuarios As Button
 
 End Class
