@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing.Imaging
+Imports System.Drawing.Printing
 Imports System.IO
 Imports MySqlConnector
 Public Class medicamentos
@@ -924,5 +925,159 @@ Public Class medicamentos
         'cierro el panel de acción
         pnlcontenedorabm.Visible = False
         pnlabmaccion.Visible = False
+    End Sub
+
+    Private Sub btnficha_Click(sender As Object, e As EventArgs) Handles btnficha.Click
+        Using vistaPrevia As New PrintPreviewDialog()
+
+            vistaPrevia.Document = PrintDocument1
+            vistaPrevia.WindowState = FormWindowState.Maximized
+            vistaPrevia.ShowDialog()
+
+        End Using
+
+    End Sub
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        Dim g = e.Graphics
+
+        ' Fuentes
+        Using titulo As New Font("Segoe UI", 22, FontStyle.Bold),
+          subtitulo As New Font("Segoe UI", 10, FontStyle.Regular),
+          seccion As New Font("Segoe UI", 12, FontStyle.Bold),
+          texto As New Font("Segoe UI", 10, FontStyle.Regular),
+          etiqueta As New Font("Segoe UI", 9, FontStyle.Bold)
+
+            ' Colores
+            Dim verde As Color = Color.FromArgb(22, 140, 136)
+            Dim gris As Color = Color.FromArgb(90, 100, 110)
+            Dim fondo As Color = Color.FromArgb(240, 247, 246)
+
+            Using pincelVerde As New SolidBrush(verde),
+              pincelGris As New SolidBrush(gris),
+              pincelFondo As New SolidBrush(fondo),
+              pincelNegro As New SolidBrush(Color.Black),
+              lapizGris As New Pen(Color.LightGray, 1)
+
+                Dim x As Integer = 65
+                Dim ancho As Integer = 700
+
+                ' ENCABEZADO
+                g.DrawString("FARMACIA", titulo, pincelVerde, x, 45)
+                g.DrawString("Sistema de gestión de medicamentos",
+                         subtitulo, pincelGris, x, 83)
+
+                g.DrawString("FICHA DE MEDICAMENTO",
+                         seccion, pincelNegro, 390, 52)
+
+                g.DrawString("Fecha: " & DateTime.Now.ToString("dd/MM/yyyy"),
+                         texto, pincelGris, 390, 78)
+
+                g.DrawLine(New Pen(verde, 3), x, 115, x + ancho, 115)
+
+                ' DATOS GENERALES
+                g.DrawString("DATOS DEL MEDICAMENTO",
+                         seccion, pincelVerde, x, 135)
+
+                ' Imagen del medicamento
+                Dim rectImagen As New Rectangle(555, 175, 155, 155)
+                g.DrawRectangle(lapizGris, rectImagen)
+
+                If pbmedicamentos.Image IsNot Nothing Then
+                    g.DrawImage(pbmedicamentos.Image, rectImagen)
+                Else
+                    g.DrawString("Sin imagen", texto, pincelGris,
+                             rectImagen.X + 35, rectImagen.Y + 65)
+                End If
+
+                ' Datos alineados verticalmente a la izquierda
+                Dim y As Integer = 180
+                Dim salto As Integer = 32
+
+                g.DrawString("Código: " & txtcodigo.Text,
+                         texto, pincelNegro, x, y)
+                y += salto
+
+                g.DrawString("ID: " & txtid.Text,
+                         texto, pincelNegro, x, y)
+                y += salto
+
+                g.DrawString("Nombre: " & txtnombre.Text,
+                         texto, pincelNegro, x, y)
+                y += salto
+
+                g.DrawString("Droga: " & cbdroga.Text,
+                         texto, pincelNegro, x, y)
+                y += salto
+
+                g.DrawString("Laboratorio: " & cblaboratorio.Text,
+                         texto, pincelNegro, x, y)
+                y += salto
+
+                g.DrawString("Presentación: " & cbpresentacion.Text,
+                         texto, pincelNegro, x, y)
+                y += salto
+
+                g.DrawString("Uso terapéutico: " & cbterapeutica.Text,
+                         texto, pincelNegro, x, y)
+
+                ' CONTROL DE STOCK
+                Dim yStock As Integer = 430
+
+                g.DrawString("CONTROL DE STOCK",
+                         seccion, pincelVerde, x, yStock)
+
+                yStock += 35
+
+                Dim anchoCaja As Integer = 215
+                Dim altoCaja As Integer = 75
+                Dim separacion As Integer = 15
+
+                Dim stockMin As New Rectangle(x, yStock, anchoCaja, altoCaja)
+                Dim stockMax As New Rectangle(x + anchoCaja + separacion,
+                                          yStock, anchoCaja, altoCaja)
+                Dim puntoPedido As New Rectangle(
+                x + (anchoCaja + separacion) * 2, yStock,
+                anchoCaja, altoCaja)
+
+                g.FillRectangle(pincelFondo, stockMin)
+                g.FillRectangle(pincelFondo, stockMax)
+                g.FillRectangle(pincelFondo, puntoPedido)
+
+                g.DrawRectangle(lapizGris, stockMin)
+                g.DrawRectangle(lapizGris, stockMax)
+                g.DrawRectangle(lapizGris, puntoPedido)
+
+                g.DrawString("STOCK MÍNIMO", etiqueta,
+                         pincelGris, stockMin.X + 12, stockMin.Y + 10)
+                g.DrawString(nudstockmin.Value.ToString(),
+                         titulo, pincelNegro, stockMin.X + 12, stockMin.Y + 30)
+
+                g.DrawString("STOCK MÁXIMO", etiqueta,
+                         pincelGris, stockMax.X + 12, stockMax.Y + 10)
+                g.DrawString(nudstockmax.Value.ToString(),
+                         titulo, pincelNegro, stockMax.X + 12, stockMax.Y + 30)
+
+                g.DrawString("PUNTO DE PEDIDO", etiqueta,
+                         pincelGris, puntoPedido.X + 12, puntoPedido.Y + 10)
+                g.DrawString(nudpedido.Value.ToString(),
+                         titulo, pincelNegro, puntoPedido.X + 12, puntoPedido.Y + 30)
+
+                ' PIE DE PÁGINA
+                Dim yPie As Integer = 650
+
+                g.DrawLine(lapizGris, x, yPie, x + ancho, yPie)
+
+                g.DrawString("Documento informativo de control interno",
+                         subtitulo, pincelGris, x, yPie + 12)
+
+                g.DrawString("Farmacia | Ficha de medicamento",
+                         subtitulo, pincelGris, x + 420, yPie + 12)
+
+            End Using
+        End Using
+
+        e.HasMorePages = False
+
     End Sub
 End Class

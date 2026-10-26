@@ -22,11 +22,13 @@ Partial Class medicamentos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(medicamentos))
         GroupBox1 = New GroupBox()
         Label1 = New Label()
         txtbuscar = New TextBox()
         dgvmedicamento = New DataGridView()
         GroupBox2 = New GroupBox()
+        btnficha = New Button()
         btnmasdroga = New Button()
         btnmasaccion = New Button()
         btnmaspres = New Button()
@@ -95,6 +97,8 @@ Partial Class medicamentos
         btnagregarlab = New Button()
         txtabmlab = New TextBox()
         Label8 = New Label()
+        PrintPreviewDialog1 = New PrintPreviewDialog()
+        PrintDocument1 = New Printing.PrintDocument()
         GroupBox1.SuspendLayout()
         CType(dgvmedicamento, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox2.SuspendLayout()
@@ -161,6 +165,7 @@ Partial Class medicamentos
         ' 
         GroupBox2.BackColor = Color.DarkSeaGreen
         GroupBox2.BackgroundImageLayout = ImageLayout.None
+        GroupBox2.Controls.Add(btnficha)
         GroupBox2.Controls.Add(btnmasdroga)
         GroupBox2.Controls.Add(btnmasaccion)
         GroupBox2.Controls.Add(btnmaspres)
@@ -193,6 +198,15 @@ Partial Class medicamentos
         GroupBox2.TabIndex = 2
         GroupBox2.TabStop = False
         GroupBox2.Text = "Datos de Medicamentos"
+        ' 
+        ' btnficha
+        ' 
+        btnficha.Location = New Point(890, 291)
+        btnficha.Name = "btnficha"
+        btnficha.Size = New Size(102, 50)
+        btnficha.TabIndex = 36
+        btnficha.Text = "Imprimir Ficha"
+        btnficha.UseVisualStyleBackColor = True
         ' 
         ' btnmasdroga
         ' 
@@ -672,8 +686,6 @@ Partial Class medicamentos
         pnlabmaccion.Margin = New Padding(3, 2, 3, 2)
         pnlabmaccion.Name = "pnlabmaccion"
         pnlabmaccion.Size = New Size(290, 344)
-        pnlabmaccion.Name = "pnlabmaccion"
-        pnlabmaccion.Size = New Size(331, 459)
         pnlabmaccion.TabIndex = 36
         pnlabmaccion.Visible = False
         ' 
@@ -760,8 +772,6 @@ Partial Class medicamentos
         pnlpresentacion.Margin = New Padding(3, 2, 3, 2)
         pnlpresentacion.Name = "pnlpresentacion"
         pnlpresentacion.Size = New Size(290, 344)
-        pnlpresentacion.Name = "pnlpresentacion"
-        pnlpresentacion.Size = New Size(331, 459)
         pnlpresentacion.TabIndex = 36
         pnlpresentacion.Visible = False
         ' 
@@ -848,8 +858,6 @@ Partial Class medicamentos
         pnllaboratorio.Margin = New Padding(3, 2, 3, 2)
         pnllaboratorio.Name = "pnllaboratorio"
         pnllaboratorio.Size = New Size(290, 344)
-        pnllaboratorio.Name = "pnllaboratorio"
-        pnllaboratorio.Size = New Size(331, 459)
         pnllaboratorio.TabIndex = 0
         pnllaboratorio.Visible = False
         ' 
@@ -922,13 +930,26 @@ Partial Class medicamentos
         Label8.TabIndex = 0
         Label8.Text = "LABORATORIO"
         ' 
+        ' PrintPreviewDialog1
+        ' 
+        PrintPreviewDialog1.AutoScrollMargin = New Size(0, 0)
+        PrintPreviewDialog1.AutoScrollMinSize = New Size(0, 0)
+        PrintPreviewDialog1.ClientSize = New Size(400, 300)
+        PrintPreviewDialog1.Enabled = True
+        PrintPreviewDialog1.Icon = CType(resources.GetObject("PrintPreviewDialog1.Icon"), Icon)
+        PrintPreviewDialog1.Name = "PrintPreviewDialog1"
+        PrintPreviewDialog1.Visible = False
+        ' 
+        ' PrintDocument1
+        ' 
+        ' 
         ' medicamentos
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         AutoScroll = True
         BackColor = SystemColors.InactiveCaption
-        ClientSize = New Size(1199, 562)
+        ClientSize = New Size(1370, 647)
         Controls.Add(pnlcontenedorabm)
         Controls.Add(Panel1)
         Controls.Add(GroupBox2)
@@ -1034,4 +1055,7 @@ Partial Class medicamentos
     Friend WithEvents btnagregardroga As Button
     Friend WithEvents txtabmdroga As TextBox
     Friend WithEvents Label15 As Label
+    Friend WithEvents btnficha As Button
+    Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
+    Friend WithEvents PrintDocument1 As Printing.PrintDocument
 End Class

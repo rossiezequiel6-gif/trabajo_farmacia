@@ -68,6 +68,9 @@ Public Class Form1
 
         'pantalla completa
         Me.WindowState = FormWindowState.Maximized
+
+        btncompras.Visible = Permisos.PuedeRegistrarCompras()
+        btnformusuarios.Visible = Permisos.EsAdmin()
     End Sub
 
     Private Sub configurarmenusegunrol()

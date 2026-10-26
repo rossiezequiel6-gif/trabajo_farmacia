@@ -117,30 +117,118 @@ Public Class fromcompras
         txtlote.Text = ""
     End Sub
 
+    'validar los datos para cargar lote
+    Function validarLote() As Boolean
+        If cbmedicamentos.SelectedIndex = -1 Then
+            MessageBox.Show("Elegí un medicamento")
+            Return False
+        End If
+
+        Dim codigo As Integer
+        If Not Integer.TryParse(txtcodigolote.Text.Trim, codigo) Then
+            MessageBox.Show("El código de lote tiene que ser un número")
+            Return False
+        End If
+
+        If dtpvencimiento.Value.Date <= Date.Today Then
+            MessageBox.Show("El vencimiento tiene que ser posterior a hoy")
+            Return False
+        End If
+
+        If nudprecio.Value <= 0 Then
+            MessageBox.Show("Ingresá el precio unitario")
+            Return False
+        End If
+
+        Return True
+    End Function
+
+
+    ' Deja marcada una compra en la grilla de arriba y carga sus ítems abajo
+    Sub SeleccionarCompra(id As Integer)
+        ' Busco en la grilla la fila de esa compra y la marco
+        For Each fila As DataGridViewRow In dgvcompras.Rows
+            If CInt(fila.Cells("id_compra").Value) = id Then
+                dgvcompras.ClearSelection()
+                fila.Selected = True
+                dgvcompras.CurrentCell = fila.Cells("numero_factura")
+                Exit For
+            End If
+        Next
+
+        idSeleccionado = id          ' ahora Agregar ítem sabe a qué compra pertenece
+        idLoteSeleccionado = 0       ' ningún ítem elegido todavía
+        txtidcompras.Text = id.ToString()
+        CargarDetalle(id)            ' muestra los lotes de esa compra en la grilla de abajo
+    End Sub
+
+
+    Sub InsertarItem(cn As MySqlConnection, tx As MySqlTransaction, idCompra As Long)
+        Dim idLote As Long
+
+        ' 1) El lote, con su código y su vencimiento
+        Dim sqlLote As String = "INSERT INTO lote (codigo, fecha_vencimiento, cantidad_actual, id_medicamento)" &
+                            " VALUES (@codigo, @venc, @cant, @med)"
+        Using cmd As New MySqlCommand(sqlLote, cn, tx)
+            cmd.Parameters.AddWithValue("@codigo", CInt(txtcodigolote.Text.Trim))
+            cmd.Parameters.AddWithValue("@venc", dtpvencimiento.Value.Date)
+            cmd.Parameters.AddWithValue("@cant", CInt(nudcantidad.Value))
+            cmd.Parameters.AddWithValue("@med", CInt(cbmedicamentos.SelectedValue))
+            cmd.ExecuteNonQuery()
+            idLote = cmd.LastInsertedId
+        End Using
+
+        ' 2) El detalle que une la compra con ese lote
+        Dim sqlDet As String = "INSERT INTO detalle_compra (cantidad, precio_unit, id_compra, id_lote)" &
+                           " VALUES (@cant, @precio, @compra, @lote)"
+        Using cmd As New MySqlCommand(sqlDet, cn, tx)
+            cmd.Parameters.AddWithValue("@cant", CInt(nudcantidad.Value))
+            cmd.Parameters.AddWithValue("@precio", nudprecio.Value)
+            cmd.Parameters.AddWithValue("@compra", idCompra)
+            cmd.Parameters.AddWithValue("@lote", idLote)
+            cmd.ExecuteNonQuery()
+        End Using
+    End Sub
+
+    Sub LimpiarItem()
+        cbmedicamentos.SelectedIndex = -1
+        txtcodigolote.Text = ""
+        dtpvencimiento.Value = Date.Today
+        nudcantidad.Value = 1
+        nudprecio.Value = 0
+    End Sub
+
+
     ' Muestra en la grilla de abajo (dgvdetalle) los ítems de UNA compra
+
     Sub CargarDetalle(idCompra As Integer)
         Try
             Using cn As New MySqlConnection(CADENA)
                 cn.Open()
 
-                ' Para esa compra busco cada lote, con su medicamento, vencimiento, cantidad y precio
-                Dim consulta As String = "SELECT l.codigo AS lote, m.nombre AS medicamento," &
-                                     " l.fecha_vencimiento, d.cantidad, d.precio_unit" &
-                                     " FROM detalle_compra AS d" &
-                                     " INNER JOIN lote AS l ON d.id_lote = l.id_lote" &
-                                     " INNER JOIN medicamento AS m ON l.id_medicamento = m.id_medicamento" &
-                                     " WHERE d.id_compra = @id" &
-                                     " ORDER BY l.codigo"
+                Dim consulta As String =
+                "SELECT l.id_lote, l.codigo AS Lote, " &
+                "m.nombre AS medicamento, l.fecha_vencimiento, " &
+                "d.cantidad, d.precio_unit " &
+                "FROM detalle_compra AS d " &
+                "INNER JOIN lote AS l ON d.id_lote = l.id_lote " &
+                "INNER JOIN medicamento AS m ON l.id_medicamento = m.id_medicamento " &
+                "WHERE d.id_compra = @id " &
+                "ORDER BY l.codigo"
 
                 Using cmd As New MySqlCommand(consulta, cn)
-                    cmd.Parameters.AddWithValue("@id", idCompra)   ' el id de la compra elegida
+                    cmd.Parameters.AddWithValue("@id", idCompra)
 
-                    Dim tabla As New DataTable                      ' tabla en memoria
+                    Dim tabla As New DataTable
+
                     Using lector As MySqlDataReader = cmd.ExecuteReader()
-                        tabla.Load(lector)                          ' paso el resultado a la tabla
+                        tabla.Load(lector)
                     End Using
 
-                    dgvdetalle.DataSource = tabla                   ' lo muestro en la grilla
+                    dgvdetalle.DataSource = tabla
+
+                    ' Ocultar el ID interno del lote
+                    dgvdetalle.Columns("id_lote").Visible = False
                 End Using
             End Using
 
@@ -148,7 +236,6 @@ Public Class fromcompras
             MessageBox.Show("Error al cargar los ítems: " & ex.Message)
         End Try
     End Sub
-
 
     Sub PintarVencimientos(dgv As DataGridView)
         For Each fila As DataGridViewRow In dgv.Rows
@@ -208,8 +295,8 @@ Public Class fromcompras
 
         'estiliza el group 
         EstilizarGroupBox(gbcompras)
+        EstilizarGroupBox(gbdetallecompra)
 
-        'estiliza los botones 
         'estiliza los botones 
         EstilizarBoton(btnregistrar, ColorMenu)
         EstilizarBoton(btnmodificar, Color.FromArgb(210, 85, 95))
@@ -220,51 +307,79 @@ Public Class fromcompras
         dgvdetalle.MultiSelect = False
         dgvdetalle.AllowUserToAddRows = False
         dgvdetalle.ReadOnly = True
+
+        ' Permisos
+
+        Dim puede As Boolean = Permisos.PuedeRegistrarCompras()
+        btnregistrar.Visible = puede
+        btnmodificar.Visible = puede
+        pnlotes.Visible = puede      ' incluye btnagregaritem y los controles del lote
+
     End Sub
 
 
 
     Private Sub btnregistrar_Click(sender As Object, e As EventArgs) Handles btnregistrar.Click
-        ' Si hay una fila seleccionada, estarías duplicando una compra existente
+        If Not Permisos.PuedeRegistrarCompras() Then
+            MessageBox.Show("Tu rol no tiene permiso para registrar compras")
+            Exit Sub
+        End If
+
         If idSeleccionado <> 0 Then
-            MessageBox.Show("Hay una compra seleccionada. ")
+            MessageBox.Show("Hay una compra seleccionada. Usá Limpiar campos para cargar una nueva.")
             Exit Sub
         End If
 
-        If Not validarDatos() Then Exit Sub   ' si falta algo, corto acá
+        If Not validarDatos() Then Exit Sub
+        If Not validarLote() Then Exit Sub
 
-        If cbusuario.SelectedIndex = -1 Then  ' en el alta, el usuario también es obligatorio
-            MessageBox.Show("Elegí el usuario que registra la compra")
-            Exit Sub
-        End If
+        Dim idNuevo As Long = 0
 
         Try
             Using cn As New MySqlConnection(CADENA)
                 cn.Open()
-                ' Los @algo son parámetros: se completan abajo. Evitan errores y la inyección SQL
-                Dim consulta As String = "INSERT INTO compras (fecha_compra, numero_factura, id_usuario, id_proveedor)" &
-                                     " VALUES (@fecha, @factura, @usuario, @proveedor)"
-                Using cmd As New MySqlCommand(consulta, cn)
-                    cmd.Parameters.AddWithValue("@fecha", dtpfecha.Value.Date)                    ' la fecha del calendario, sin hora
-                    cmd.Parameters.AddWithValue("@factura", txtfactura.Text.Trim)
-                    cmd.Parameters.AddWithValue("@usuario", CInt(cbusuario.SelectedValue))        ' el id del usuario elegido
-                    cmd.Parameters.AddWithValue("@proveedor", CInt(cbproveedor.SelectedValue))    ' el id del proveedor elegido
-                    cmd.ExecuteNonQuery()                                                         ' ejecuta el INSERT
+                Using tx As MySqlTransaction = cn.BeginTransaction()
+                    Try
+                        ' 1) La compra
+                        Dim sqlCompra As String = "INSERT INTO compras (fecha_compra, numero_factura, id_usuario, id_proveedor)" &
+                                                  " VALUES (@fecha, @factura, @usuario, @proveedor)"
+                        Using cmd As New MySqlCommand(sqlCompra, cn, tx)
+                            cmd.Parameters.AddWithValue("@fecha", dtpfecha.Value.Date)
+                            cmd.Parameters.AddWithValue("@factura", txtfactura.Text.Trim)
+                            cmd.Parameters.AddWithValue("@usuario", sesion.idUsuario)
+                            cmd.Parameters.AddWithValue("@proveedor", CInt(cbproveedor.SelectedValue))
+                            cmd.ExecuteNonQuery()
+                            idNuevo = cmd.LastInsertedId
+                        End Using
+
+                        ' 2) Su primer lote y el detalle
+                        InsertarItem(cn, tx, idNuevo)
+
+                        tx.Commit()      ' se guardan los tres registros juntos
+                    Catch
+                        tx.Rollback()    ' si algo falla, no queda nada a medias
+                        Throw
+                    End Try
                 End Using
             End Using
 
-            MessageBox.Show("Compra registrada correctamente")
-            CargarCompras()   ' recarga la grilla para ver la compra nueva
-            limpiar()         ' deja el formulario listo para otra
-
         Catch ex As MySqlException
-            If ex.Number = 1062 Then   ' 1062 = valor duplicado 
-                MessageBox.Show("Ya existe una compra con ese número de factura para ese proveedor")
+            If ex.Number = 1062 Then
+                If ex.Message.Contains("'codigo'") Then
+                    MessageBox.Show("Ya existe un lote con ese código")
+                Else
+                    MessageBox.Show("Ya existe una compra con ese número de factura para ese proveedor")
+                End If
             Else
                 MessageBox.Show("Error al registrar: " & ex.Message)
             End If
+            Exit Sub
         End Try
 
+        CargarCompras()                    ' la grilla ya muestra el código del lote
+        SeleccionarCompra(CInt(idNuevo))   ' la compra queda seleccionada
+        LimpiarItem()                      ' campos del lote listos para un segundo lote
+        MessageBox.Show("Compra registrada con su lote")
     End Sub
 
     Private Sub btnmodificar_Click(sender As Object, e As EventArgs) Handles btnmodificar.Click
@@ -313,7 +428,7 @@ Public Class fromcompras
 
     Private Sub btnagregaritem_Click(sender As Object, e As EventArgs) Handles btnagregaritem.Click
         ' Permiso por rol
-        If Not seccion.PuedeRegistrarCompras() Then
+        If Not Permisos.PuedeRegistrarCompras() Then
             MessageBox.Show("Tu rol no tiene permiso para registrar compras")
             Exit Sub
         End If
@@ -391,8 +506,8 @@ Public Class fromcompras
             cbmedicamentos.SelectedIndex = -1
             txtcodigolote.Text = ""
             dtpvencimiento.Value = Date.Today
-            nudcantidad.Value = 1
-            nudprecio.Value = 0
+            nudcantidad.Value = nudcantidad.Minimum
+            nudprecio.Value = nudprecio.Minimum
 
         Catch ex As MySqlException
             If ex.Number = 1062 Then
@@ -414,7 +529,7 @@ Public Class fromcompras
         idLoteSeleccionado = CInt(fila.Cells("id_lote").Value)
 
 
-        Dim consulta As String = "SELECT d.id_lote, l.codigo AS lote, m.nombre AS medicamento," &
+        Dim consulta As String = "SELECT d.id_lote, l.codigo AS Lote, m.nombre AS medicamento," &
                          " l.fecha_vencimiento, d.cantidad, d.precio_unit" &
                          " FROM detalle_compra AS d" &
                          " INNER JOIN lote AS l ON d.id_lote = l.id_lote" &
@@ -425,5 +540,124 @@ Public Class fromcompras
         dgvdetalle.DataSource =
         dgvdetalle.Columns("id_lote").Visible = False
         PintarVencimientos(dgvdetalle)
+    End Sub
+
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+
+    End Sub
+
+    Private Sub btnimprimirre_Click(sender As Object, e As EventArgs) Handles btnimprimirre.Click
+        PrintDocument1.DocumentName = "Remito de compra"
+
+        PrintPreviewDialog1.Document = PrintDocument1
+        PrintPreviewDialog1.WindowState = FormWindowState.Maximized
+        PrintPreviewDialog1.ShowDialog()
+    End Sub
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        Dim g As Graphics = e.Graphics
+        Dim margen As Integer = 50
+        Dim y As Integer = 40
+
+
+
+        Dim titulo As New Font("Segoe UI", 20, FontStyle.Bold)
+        Dim subtitulo As New Font("Segoe UI", 12, FontStyle.Bold)
+        Dim texto As New Font("Segoe UI", 10)
+        Dim negrita As New Font("Segoe UI", 10, FontStyle.Bold)
+
+        Dim verde As Color = Color.FromArgb(23, 107, 91)
+        Dim pincelVerde As New SolidBrush(verde)
+        Dim pincelBlanco As New SolidBrush(Color.White)
+        Dim pincelNegro As Brush = Brushes.Black
+
+        ' Encabezado
+        g.FillRectangle(pincelVerde, margen, y, 740, 65)
+        g.DrawString("FARMACIA", titulo, pincelBlanco, margen + 15, y + 5)
+        g.DrawString("GESTIÓN DE STOCK", texto, pincelBlanco, margen + 18, y + 38)
+
+        g.DrawString("REMITO DE COMPRA", subtitulo, pincelNegro, margen, y + 80)
+        y += 115
+
+        ' Datos de la compra
+        g.DrawString("N° de compra: " & txtidcompras.Text, texto, pincelNegro, margen, y)
+        g.DrawString("Factura: " & txtfactura.Text, texto, pincelNegro, margen + 300, y)
+        y += 25
+
+        g.DrawString("Fecha: " & dtpfecha.Value.ToString("dd/MM/yyyy"),
+                     texto, pincelNegro, margen, y)
+        y += 30
+
+        g.DrawString("Proveedor: " & cbproveedor.Text,
+             texto, Brushes.Black, margen, y)
+        y += 40
+
+        ' Encabezado de la tabla
+        g.FillRectangle(pincelVerde, margen, y, 740, 30)
+        g.DrawString("Medicamento", negrita, pincelBlanco, margen + 8, y + 7)
+        g.DrawString("Lote", negrita, pincelBlanco, margen + 350, y + 7)
+        g.DrawString("Cantidad", negrita, pincelBlanco, margen + 490, y + 7)
+        g.DrawString("Precio", negrita, pincelBlanco, margen + 600, y + 7)
+
+        y += 30
+
+
+        For Each fila As DataGridViewRow In dgvdetalle.Rows
+
+            If fila.IsNewRow Then Continue For
+
+            Dim medicamento As String =
+        Convert.ToString(fila.Cells("medicamento").Value)
+
+            Dim lote As String = ""
+
+            If dgvdetalle.Columns.Contains("Lote") Then
+                lote = Convert.ToString(fila.Cells("Lote").Value)
+            End If
+
+            Dim cantidad As String =
+        Convert.ToString(fila.Cells("cantidad").Value)
+
+            Dim precio As Decimal = 0D
+
+            If fila.Cells("precio_unit").Value IsNot Nothing Then
+                Decimal.TryParse(
+            fila.Cells("precio_unit").Value.ToString(),
+            precio
+        )
+            End If
+
+            g.DrawString(medicamento, texto, Brushes.Black,
+                 margen + 8, y + 5)
+
+            g.DrawString(lote, texto, Brushes.Black,
+                 margen + 350, y + 5)
+
+            g.DrawString(cantidad, texto, Brushes.Black,
+                 margen + 490, y + 5)
+
+            g.DrawString(precio.ToString("N2"), texto, Brushes.Black,
+                 margen + 600, y + 5)
+
+            g.DrawLine(Pens.LightGray, margen, y + 27,
+               margen + 740, y + 27)
+
+            y += 30
+
+        Next
+
+        y += 25
+        g.DrawString("Observaciones: __________________________________________",
+                     texto, pincelNegro, margen, y)
+        y += 80
+
+        g.DrawLine(Pens.Black, margen, y, margen + 220, y)
+        g.DrawLine(Pens.Black, margen + 430, y, margen + 650, y)
+
+        g.DrawString("Entregado por", texto, pincelNegro, margen + 55, y + 8)
+        g.DrawString("Recibido por", texto, pincelNegro, margen + 485, y + 8)
+
+        e.HasMorePages = False
+
     End Sub
 End Class
