@@ -361,3 +361,11 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# archivo de configuracion local con credenciales
+conexion.ini
+*.ini
+
+#carpeta de salida de compilacion
+bin/
+obj/

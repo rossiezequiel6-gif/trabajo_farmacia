@@ -22,30 +22,22 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        btnconectar = New Button()
         btnmedicamentos = New Button()
         btnproveedores = New Button()
         btncompras = New Button()
         pnlmenu = New Panel()
+        btndashboard = New Button()
         btnformusuarios = New Button()
         pnltitulo = New Panel()
+        lblbienvenida = New Label()
+        picfotousuario = New PictureBox()
+        btncerrarapp = New Button()
         lbltitulo = New Label()
         pnlcontenedor = New Panel()
-        btndashboard = New Button()
         pnlmenu.SuspendLayout()
         pnltitulo.SuspendLayout()
+        CType(picfotousuario, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
-        ' 
-        ' btnconectar
-        ' 
-        btnconectar.BackColor = Color.SeaGreen
-        btnconectar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnconectar.Location = New Point(31, 108)
-        btnconectar.Name = "btnconectar"
-        btnconectar.Size = New Size(157, 61)
-        btnconectar.TabIndex = 1
-        btnconectar.Text = "CONECTAR CON LA BASE DE DATOS"
-        btnconectar.UseVisualStyleBackColor = False
         ' 
         ' btnmedicamentos
         ' 
@@ -87,7 +79,6 @@ Partial Class Form1
         pnlmenu.Controls.Add(btndashboard)
         pnlmenu.Controls.Add(btnformusuarios)
         pnlmenu.Controls.Add(btncompras)
-        pnlmenu.Controls.Add(btnconectar)
         pnlmenu.Controls.Add(btnproveedores)
         pnlmenu.Controls.Add(btnmedicamentos)
         pnlmenu.Dock = DockStyle.Left
@@ -97,6 +88,18 @@ Partial Class Form1
         pnlmenu.Name = "pnlmenu"
         pnlmenu.Size = New Size(229, 723)
         pnlmenu.TabIndex = 5
+        ' 
+        ' btndashboard
+        ' 
+        btndashboard.BackColor = Color.SeaGreen
+        btndashboard.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btndashboard.Location = New Point(31, 586)
+        btndashboard.Margin = New Padding(3, 4, 3, 4)
+        btndashboard.Name = "btndashboard"
+        btndashboard.Size = New Size(157, 57)
+        btndashboard.TabIndex = 6
+        btndashboard.Text = "DASHBOARD"
+        btndashboard.UseVisualStyleBackColor = False
         ' 
         ' btnformusuarios
         ' 
@@ -113,14 +116,47 @@ Partial Class Form1
         ' pnltitulo
         ' 
         pnltitulo.BackColor = SystemColors.ActiveBorder
+        pnltitulo.Controls.Add(lblbienvenida)
+        pnltitulo.Controls.Add(picfotousuario)
+        pnltitulo.Controls.Add(btncerrarapp)
         pnltitulo.Controls.Add(lbltitulo)
         pnltitulo.Dock = DockStyle.Top
         pnltitulo.Location = New Point(229, 0)
         pnltitulo.Margin = New Padding(3, 4, 3, 4)
         pnltitulo.Name = "pnltitulo"
         pnltitulo.Padding = New Padding(23, 0, 0, 0)
-        pnltitulo.Size = New Size(931, 80)
+        pnltitulo.Size = New Size(1530, 80)
         pnltitulo.TabIndex = 6
+        ' 
+        ' lblbienvenida
+        ' 
+        lblbienvenida.AutoSize = True
+        lblbienvenida.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblbienvenida.Location = New Point(1154, 27)
+        lblbienvenida.Name = "lblbienvenida"
+        lblbienvenida.Size = New Size(0, 23)
+        lblbienvenida.TabIndex = 7
+        ' 
+        ' picfotousuario
+        ' 
+        picfotousuario.Location = New Point(1060, 3)
+        picfotousuario.Name = "picfotousuario"
+        picfotousuario.Size = New Size(75, 74)
+        picfotousuario.SizeMode = PictureBoxSizeMode.Zoom
+        picfotousuario.TabIndex = 7
+        picfotousuario.TabStop = False
+        ' 
+        ' btncerrarapp
+        ' 
+        btncerrarapp.BackColor = Color.DarkRed
+        btncerrarapp.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btncerrarapp.ForeColor = Color.White
+        btncerrarapp.Location = New Point(1439, 12)
+        btncerrarapp.Name = "btncerrarapp"
+        btncerrarapp.Size = New Size(79, 50)
+        btncerrarapp.TabIndex = 7
+        btncerrarapp.Text = "CERRAR"
+        btncerrarapp.UseVisualStyleBackColor = False
         ' 
         ' lbltitulo
         ' 
@@ -130,7 +166,7 @@ Partial Class Form1
         lbltitulo.Font = New Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lbltitulo.Location = New Point(23, 0)
         lbltitulo.Name = "lbltitulo"
-        lbltitulo.Size = New Size(908, 80)
+        lbltitulo.Size = New Size(1507, 80)
         lbltitulo.TabIndex = 0
         lbltitulo.Text = "Inicio"
         lbltitulo.TextAlign = ContentAlignment.MiddleLeft
@@ -142,27 +178,15 @@ Partial Class Form1
         pnlcontenedor.Location = New Point(229, 80)
         pnlcontenedor.Margin = New Padding(3, 4, 3, 4)
         pnlcontenedor.Name = "pnlcontenedor"
-        pnlcontenedor.Size = New Size(931, 643)
+        pnlcontenedor.Size = New Size(1530, 643)
         pnlcontenedor.TabIndex = 7
-        ' 
-        ' btndashboard
-        ' 
-        btndashboard.BackColor = Color.SeaGreen
-        btndashboard.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btndashboard.Location = New Point(31, 586)
-        btndashboard.Margin = New Padding(3, 4, 3, 4)
-        btndashboard.Name = "btndashboard"
-        btndashboard.Size = New Size(157, 57)
-        btndashboard.TabIndex = 6
-        btndashboard.Text = "DASHBOARD"
-        btndashboard.UseVisualStyleBackColor = False
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ButtonHighlight
-        ClientSize = New Size(1160, 723)
+        ClientSize = New Size(1759, 723)
         Controls.Add(pnlcontenedor)
         Controls.Add(pnltitulo)
         Controls.Add(pnlmenu)
@@ -170,9 +194,10 @@ Partial Class Form1
         Text = "Form_principal"
         pnlmenu.ResumeLayout(False)
         pnltitulo.ResumeLayout(False)
+        pnltitulo.PerformLayout()
+        CType(picfotousuario, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
-    Friend WithEvents btnconectar As Button
     Friend WithEvents btnmedicamentos As Button
     Friend WithEvents btnproveedores As Button
     Friend WithEvents btncompras As Button
@@ -182,5 +207,8 @@ Partial Class Form1
     Friend WithEvents pnlcontenedor As Panel
     Friend WithEvents btnformusuarios As Button
     Friend WithEvents btndashboard As Button
+    Friend WithEvents btncerrarapp As Button
+    Friend WithEvents picfotousuario As PictureBox
+    Friend WithEvents lblbienvenida As Label
 
 End Class
