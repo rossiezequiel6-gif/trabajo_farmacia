@@ -375,7 +375,7 @@ Partial Class dashboard
         ' 
         ' btnlistado
         ' 
-        btnlistado.Location = New Point(1203, 157)
+        btnlistado.Location = New Point(1207, 149)
         btnlistado.Name = "btnlistado"
         btnlistado.Size = New Size(113, 23)
         btnlistado.TabIndex = 5

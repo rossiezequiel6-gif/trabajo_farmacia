@@ -15,6 +15,8 @@ Public Class dashboard
         Estilos.EstilizarGrilla(dgvvencimientos)
         'cargar dona de vencimientos
         CargarGraficoVencimientos()
+
+        EstilizarBoton(btnlistado, ColorActivo)
     End Sub
 
     Private Sub cargarkpis()
