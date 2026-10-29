@@ -59,10 +59,9 @@ Partial Class Formusuarios
         ' 
         Panel1.BackColor = Color.DarkSeaGreen
         Panel1.Controls.Add(Label1)
-        Panel1.Location = New Point(20, 17)
-        Panel1.Margin = New Padding(3, 2, 3, 2)
+        Panel1.Location = New Point(23, 23)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(1314, 86)
+        Panel1.Size = New Size(1502, 115)
         Panel1.TabIndex = 0
         ' 
         ' Label1
@@ -70,9 +69,9 @@ Partial Class Formusuarios
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = SystemColors.Control
-        Label1.Location = New Point(270, 22)
+        Label1.Location = New Point(309, 29)
         Label1.Name = "Label1"
-        Label1.Size = New Size(704, 41)
+        Label1.Size = New Size(864, 50)
         Label1.TabIndex = 0
         Label1.Text = "GESTION DE USUARIOS Y PERMISOS DE ACCESO"
         ' 
@@ -96,44 +95,47 @@ Partial Class Formusuarios
         Panel2.Controls.Add(btnmodifusu)
         Panel2.Controls.Add(cbrol)
         Panel2.Controls.Add(Label5)
-        Panel2.Location = New Point(20, 125)
-        Panel2.Margin = New Padding(3, 2, 3, 2)
+        Panel2.Location = New Point(23, 167)
         Panel2.Name = "Panel2"
-        Panel2.Size = New Size(652, 621)
+        Panel2.Size = New Size(745, 828)
         Panel2.TabIndex = 1
         ' 
         ' btnqitar
         ' 
-        btnqitar.Location = New Point(461, 162)
+        btnqitar.Location = New Point(414, 201)
+        btnqitar.Margin = New Padding(3, 4, 3, 4)
         btnqitar.Name = "btnqitar"
-        btnqitar.Size = New Size(89, 40)
+        btnqitar.Size = New Size(102, 53)
         btnqitar.TabIndex = 17
         btnqitar.Text = "Quitar"
         btnqitar.UseVisualStyleBackColor = True
         ' 
         ' btnagregar
         ' 
-        btnagregar.Location = New Point(462, 89)
+        btnagregar.Location = New Point(415, 104)
+        btnagregar.Margin = New Padding(3, 4, 3, 4)
         btnagregar.Name = "btnagregar"
-        btnagregar.Size = New Size(89, 40)
+        btnagregar.Size = New Size(102, 53)
         btnagregar.TabIndex = 16
         btnagregar.Text = "Agregar"
         btnagregar.UseVisualStyleBackColor = True
         ' 
         ' btnbuscar
         ' 
-        btnbuscar.Location = New Point(461, 26)
+        btnbuscar.Location = New Point(414, 20)
+        btnbuscar.Margin = New Padding(3, 4, 3, 4)
         btnbuscar.Name = "btnbuscar"
-        btnbuscar.Size = New Size(90, 34)
+        btnbuscar.Size = New Size(103, 45)
         btnbuscar.TabIndex = 15
         btnbuscar.Text = "Buscar"
         btnbuscar.UseVisualStyleBackColor = True
         ' 
         ' pbusuarios
         ' 
-        pbusuarios.Location = New Point(14, 14)
+        pbusuarios.Location = New Point(95, 20)
+        pbusuarios.Margin = New Padding(3, 4, 3, 4)
         pbusuarios.Name = "pbusuarios"
-        pbusuarios.Size = New Size(229, 188)
+        pbusuarios.Size = New Size(262, 251)
         pbusuarios.TabIndex = 14
         pbusuarios.TabStop = False
         ' 
@@ -141,9 +143,9 @@ Partial Class Formusuarios
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(95, 326)
+        Label2.Location = New Point(109, 435)
         Label2.Name = "Label2"
-        Label2.Size = New Size(79, 19)
+        Label2.Size = New Size(95, 23)
         Label2.TabIndex = 0
         Label2.Text = "USUARIO :"
         ' 
@@ -151,10 +153,9 @@ Partial Class Formusuarios
         ' 
         Panel5.BackColor = Color.DarkSeaGreen
         Panel5.Controls.Add(Label7)
-        Panel5.Location = New Point(0, 226)
-        Panel5.Margin = New Padding(3, 2, 3, 2)
+        Panel5.Location = New Point(0, 301)
         Panel5.Name = "Panel5"
-        Panel5.Size = New Size(652, 50)
+        Panel5.Size = New Size(745, 67)
         Panel5.TabIndex = 13
         ' 
         ' Label7
@@ -162,28 +163,26 @@ Partial Class Formusuarios
         Label7.AutoSize = True
         Label7.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label7.ForeColor = SystemColors.Control
-        Label7.Location = New Point(173, 8)
+        Label7.Location = New Point(198, 11)
         Label7.Name = "Label7"
-        Label7.Size = New Size(253, 32)
+        Label7.Size = New Size(319, 41)
         Label7.TabIndex = 2
         Label7.Text = "DATOS DEL USUARIO"
         ' 
         ' btnlimpiarusu
         ' 
-        btnlimpiarusu.Location = New Point(492, 386)
-        btnlimpiarusu.Margin = New Padding(3, 2, 3, 2)
+        btnlimpiarusu.Location = New Point(562, 515)
         btnlimpiarusu.Name = "btnlimpiarusu"
-        btnlimpiarusu.Size = New Size(98, 50)
+        btnlimpiarusu.Size = New Size(112, 67)
         btnlimpiarusu.TabIndex = 11
         btnlimpiarusu.Text = "LIMPIAR CAMPOS"
         btnlimpiarusu.UseVisualStyleBackColor = True
         ' 
         ' btnguardarusu
         ' 
-        btnguardarusu.Location = New Point(492, 311)
-        btnguardarusu.Margin = New Padding(3, 2, 3, 2)
+        btnguardarusu.Location = New Point(562, 415)
         btnguardarusu.Name = "btnguardarusu"
-        btnguardarusu.Size = New Size(98, 49)
+        btnguardarusu.Size = New Size(112, 65)
         btnguardarusu.TabIndex = 8
         btnguardarusu.Text = "GUARDAR"
         btnguardarusu.UseVisualStyleBackColor = True
@@ -192,62 +191,57 @@ Partial Class Formusuarios
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(14, 402)
+        Label3.Location = New Point(16, 536)
         Label3.Name = "Label3"
-        Label3.Size = New Size(155, 19)
+        Label3.Size = New Size(188, 23)
         Label3.TabIndex = 1
         Label3.Text = "NOMBRE COMPLETO :"
         ' 
         ' txtnombrecomp
         ' 
-        txtnombrecomp.Location = New Point(184, 402)
-        txtnombrecomp.Margin = New Padding(3, 2, 3, 2)
+        txtnombrecomp.Location = New Point(210, 536)
         txtnombrecomp.Name = "txtnombrecomp"
-        txtnombrecomp.Size = New Size(218, 23)
+        txtnombrecomp.Size = New Size(249, 27)
         txtnombrecomp.TabIndex = 6
         ' 
         ' btneliminar
         ' 
-        btneliminar.Location = New Point(492, 462)
-        btneliminar.Margin = New Padding(3, 2, 3, 2)
+        btneliminar.Location = New Point(562, 616)
         btneliminar.Name = "btneliminar"
-        btneliminar.Size = New Size(98, 49)
+        btneliminar.Size = New Size(112, 65)
         btneliminar.TabIndex = 10
         btneliminar.Text = "ELIMINAR"
         btneliminar.UseVisualStyleBackColor = True
         ' 
         ' txtusuario
         ' 
-        txtusuario.Location = New Point(184, 326)
-        txtusuario.Margin = New Padding(3, 2, 3, 2)
+        txtusuario.Location = New Point(210, 435)
         txtusuario.Name = "txtusuario"
-        txtusuario.Size = New Size(218, 23)
+        txtusuario.Size = New Size(249, 27)
         txtusuario.TabIndex = 5
         ' 
         ' Label4
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(116, 477)
+        Label4.Location = New Point(133, 636)
         Label4.Name = "Label4"
-        Label4.Size = New Size(58, 19)
+        Label4.Size = New Size(71, 23)
         Label4.TabIndex = 2
         Label4.Text = "CLAVE :"
         ' 
         ' txtclave
         ' 
-        txtclave.Location = New Point(184, 477)
-        txtclave.Margin = New Padding(3, 2, 3, 2)
+        txtclave.Location = New Point(210, 636)
         txtclave.Name = "txtclave"
-        txtclave.Size = New Size(218, 23)
+        txtclave.Size = New Size(249, 27)
         txtclave.TabIndex = 7
         ' 
         ' btnmodifusu
         ' 
-        btnmodifusu.Location = New Point(492, 534)
-        btnmodifusu.Margin = New Padding(3, 2, 3, 2)
+        btnmodifusu.Location = New Point(562, 712)
         btnmodifusu.Name = "btnmodifusu"
-        btnmodifusu.Size = New Size(98, 50)
+        btnmodifusu.Size = New Size(112, 67)
         btnmodifusu.TabIndex = 9
         btnmodifusu.Text = "MODIFICAR"
         btnmodifusu.UseVisualStyleBackColor = True
@@ -255,19 +249,18 @@ Partial Class Formusuarios
         ' cbrol
         ' 
         cbrol.FormattingEnabled = True
-        cbrol.Location = New Point(184, 550)
-        cbrol.Margin = New Padding(3, 2, 3, 2)
+        cbrol.Location = New Point(210, 733)
         cbrol.Name = "cbrol"
-        cbrol.Size = New Size(218, 23)
+        cbrol.Size = New Size(249, 28)
         cbrol.TabIndex = 4
         ' 
         ' Label5
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(132, 550)
+        Label5.Location = New Point(151, 733)
         Label5.Name = "Label5"
-        Label5.Size = New Size(44, 19)
+        Label5.Size = New Size(53, 23)
         Label5.TabIndex = 3
         Label5.Text = "ROL :"
         ' 
@@ -277,51 +270,47 @@ Partial Class Formusuarios
         Panel3.Controls.Add(dgvusuarios)
         Panel3.Controls.Add(txtbuscarusuario)
         Panel3.Controls.Add(Label6)
-        Panel3.Location = New Point(680, 125)
-        Panel3.Margin = New Padding(3, 2, 3, 2)
+        Panel3.Location = New Point(777, 167)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(654, 621)
+        Panel3.Size = New Size(747, 828)
         Panel3.TabIndex = 2
         ' 
         ' dgvusuarios
         ' 
         dgvusuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvusuarios.Location = New Point(0, 47)
-        dgvusuarios.Margin = New Padding(3, 2, 3, 2)
+        dgvusuarios.Location = New Point(0, 63)
         dgvusuarios.Name = "dgvusuarios"
         dgvusuarios.RowHeadersWidth = 51
-        dgvusuarios.Size = New Size(654, 574)
+        dgvusuarios.Size = New Size(747, 765)
         dgvusuarios.TabIndex = 7
         ' 
         ' txtbuscarusuario
         ' 
-        txtbuscarusuario.Location = New Point(89, 14)
-        txtbuscarusuario.Margin = New Padding(3, 2, 3, 2)
+        txtbuscarusuario.Location = New Point(102, 19)
         txtbuscarusuario.Name = "txtbuscarusuario"
-        txtbuscarusuario.Size = New Size(219, 23)
+        txtbuscarusuario.Size = New Size(250, 27)
         txtbuscarusuario.TabIndex = 6
         ' 
         ' Label6
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(12, 15)
+        Label6.Location = New Point(14, 20)
         Label6.Name = "Label6"
-        Label6.Size = New Size(68, 19)
+        Label6.Size = New Size(82, 23)
         Label6.TabIndex = 1
         Label6.Text = "BUSCAR:"
         ' 
         ' Formusuarios
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         AutoScroll = True
         BackColor = SystemColors.Control
-        ClientSize = New Size(1327, 562)
+        ClientSize = New Size(1555, 1001)
         Controls.Add(Panel3)
         Controls.Add(Panel2)
         Controls.Add(Panel1)
-        Margin = New Padding(3, 2, 3, 2)
         Name = "Formusuarios"
         Text = "Formusuarios"
         Panel1.ResumeLayout(False)

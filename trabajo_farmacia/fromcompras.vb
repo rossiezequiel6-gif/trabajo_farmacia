@@ -688,4 +688,5 @@ Public Class fromcompras
         e.CellStyle.SelectionBackColor = fondo        ' conserva el color aunque la fila esté seleccionada
         e.CellStyle.SelectionForeColor = letra
     End Sub
+
 End Class

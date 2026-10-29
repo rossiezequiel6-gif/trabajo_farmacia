@@ -285,6 +285,11 @@ Public Class medicamentos
         moduloauxiliares.cargarComboDroga(cbabmdroga)
         moduloauxiliares.cargarComboDroga(cbdroga)
 
+        'ubico bien los numericupdown
+        nudstockmin.Location = New Point(172, 35)
+        nudstockmax.Location = New Point(172, 102)
+        nudpedido.Location = New Point(172, 168)
+
     End Sub
 
     Private Sub dgvmedicamento_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvmedicamento.CellClick
@@ -1102,7 +1107,4 @@ Public Class medicamentos
 
     End Sub
 
-    Private Sub pbmedicamentos_Click(sender As Object, e As EventArgs) Handles pbmedicamentos.Click
-
-    End Sub
 End Class
