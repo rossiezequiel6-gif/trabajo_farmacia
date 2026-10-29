@@ -52,6 +52,8 @@ Partial Class dashboard
         dgvvencimientos = New DataGridView()
         Label14 = New Label()
         Panel8 = New Panel()
+        btnlistado = New Button()
+        documento = New Printing.PrintDocument()
         Panel1.SuspendLayout()
         Panel11.SuspendLayout()
         Panel2.SuspendLayout()
@@ -71,27 +73,29 @@ Partial Class dashboard
         Panel1.Controls.Add(lblvencimiento)
         Panel1.Controls.Add(Label7)
         Panel1.Controls.Add(Label2)
-        Panel1.Location = New Point(536, 34)
+        Panel1.Location = New Point(469, 26)
+        Panel1.Margin = New Padding(3, 2, 3, 2)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(465, 157)
+        Panel1.Size = New Size(407, 118)
         Panel1.TabIndex = 0
         ' 
         ' Panel11
         ' 
         Panel11.BackColor = Color.OrangeRed
         Panel11.Controls.Add(Label12)
-        Panel11.Location = New Point(12, 13)
+        Panel11.Location = New Point(10, 10)
+        Panel11.Margin = New Padding(3, 2, 3, 2)
         Panel11.Name = "Panel11"
-        Panel11.Size = New Size(119, 125)
+        Panel11.Size = New Size(104, 94)
         Panel11.TabIndex = 4
         ' 
         ' Label12
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Segoe MDL2 Assets", 36F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label12.Location = New Point(18, 33)
+        Label12.Location = New Point(16, 25)
         Label12.Name = "Label12"
-        Label12.Size = New Size(85, 60)
+        Label12.Size = New Size(68, 48)
         Label12.TabIndex = 2
         Label12.Text = ""
         ' 
@@ -99,9 +103,9 @@ Partial Class dashboard
         ' 
         lblvencimiento.AutoSize = True
         lblvencimiento.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblvencimiento.Location = New Point(147, 68)
+        lblvencimiento.Location = New Point(129, 51)
         lblvencimiento.Name = "lblvencimiento"
-        lblvencimiento.Size = New Size(0, 38)
+        lblvencimiento.Size = New Size(0, 30)
         lblvencimiento.TabIndex = 3
         ' 
         ' Label7
@@ -109,9 +113,9 @@ Partial Class dashboard
         Label7.AutoSize = True
         Label7.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label7.ForeColor = SystemColors.GrayText
-        Label7.Location = New Point(137, 118)
+        Label7.Location = New Point(120, 88)
         Label7.Name = "Label7"
-        Label7.Size = New Size(180, 20)
+        Label7.Size = New Size(143, 15)
         Label7.TabIndex = 2
         Label7.Text = "Lotes Proximos a Vencer"
         ' 
@@ -119,9 +123,9 @@ Partial Class dashboard
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(137, 13)
+        Label2.Location = New Point(120, 10)
         Label2.Name = "Label2"
-        Label2.Size = New Size(255, 28)
+        Label2.Size = New Size(204, 21)
         Label2.TabIndex = 1
         Label2.Text = "VENCIMIENTOS (30 DIAS)"
         ' 
@@ -133,45 +137,48 @@ Partial Class dashboard
         Panel2.Controls.Add(lbltotalmedicamentos)
         Panel2.Controls.Add(Label8)
         Panel2.Controls.Add(Label3)
-        Panel2.Location = New Point(1044, 34)
+        Panel2.Location = New Point(914, 26)
+        Panel2.Margin = New Padding(3, 2, 3, 2)
         Panel2.Name = "Panel2"
-        Panel2.Size = New Size(465, 157)
+        Panel2.Size = New Size(407, 118)
         Panel2.TabIndex = 1
         ' 
         ' Panel12
         ' 
         Panel12.BackColor = Color.Blue
         Panel12.Controls.Add(Label13)
-        Panel12.Location = New Point(12, 13)
+        Panel12.Location = New Point(10, 10)
+        Panel12.Margin = New Padding(3, 2, 3, 2)
         Panel12.Name = "Panel12"
-        Panel12.Size = New Size(115, 125)
+        Panel12.Size = New Size(101, 94)
         Panel12.TabIndex = 3
         ' 
         ' Label13
         ' 
         Label13.AutoSize = True
         Label13.Font = New Font("Segoe MDL2 Assets", 36F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label13.Location = New Point(16, 33)
+        Label13.Location = New Point(14, 25)
         Label13.Name = "Label13"
-        Label13.Size = New Size(85, 60)
+        Label13.Size = New Size(68, 48)
         Label13.TabIndex = 2
         Label13.Text = ""
         ' 
         ' Panel9
         ' 
         Panel9.BackColor = Color.Blue
-        Panel9.Location = New Point(0, 145)
+        Panel9.Location = New Point(0, 109)
+        Panel9.Margin = New Padding(3, 2, 3, 2)
         Panel9.Name = "Panel9"
-        Panel9.Size = New Size(465, 12)
+        Panel9.Size = New Size(407, 9)
         Panel9.TabIndex = 4
         ' 
         ' lbltotalmedicamentos
         ' 
         lbltotalmedicamentos.AutoSize = True
         lbltotalmedicamentos.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lbltotalmedicamentos.Location = New Point(159, 68)
+        lbltotalmedicamentos.Location = New Point(139, 51)
         lbltotalmedicamentos.Name = "lbltotalmedicamentos"
-        lbltotalmedicamentos.Size = New Size(0, 38)
+        lbltotalmedicamentos.Size = New Size(0, 30)
         lbltotalmedicamentos.TabIndex = 3
         ' 
         ' Label8
@@ -179,9 +186,9 @@ Partial Class dashboard
         Label8.AutoSize = True
         Label8.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label8.ForeColor = SystemColors.GrayText
-        Label8.Location = New Point(133, 118)
+        Label8.Location = New Point(116, 88)
         Label8.Name = "Label8"
-        Label8.Size = New Size(171, 20)
+        Label8.Size = New Size(136, 15)
         Label8.TabIndex = 2
         Label8.Text = "Unidades en Inventario"
         ' 
@@ -189,9 +196,9 @@ Partial Class dashboard
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(133, 13)
+        Label3.Location = New Point(116, 10)
         Label3.Name = "Label3"
-        Label3.Size = New Size(202, 28)
+        Label3.Size = New Size(160, 21)
         Label3.TabIndex = 1
         Label3.Text = "TOTAL DE INSUMOS"
         ' 
@@ -203,45 +210,48 @@ Partial Class dashboard
         Panel3.Controls.Add(lblstockcritico)
         Panel3.Controls.Add(Label6)
         Panel3.Controls.Add(Label1)
-        Panel3.Location = New Point(23, 34)
+        Panel3.Location = New Point(20, 26)
+        Panel3.Margin = New Padding(3, 2, 3, 2)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(468, 157)
+        Panel3.Size = New Size(410, 118)
         Panel3.TabIndex = 1
         ' 
         ' Panel10
         ' 
         Panel10.BackColor = Color.DarkRed
         Panel10.Controls.Add(Label9)
-        Panel10.Location = New Point(13, 13)
+        Panel10.Location = New Point(11, 10)
+        Panel10.Margin = New Padding(3, 2, 3, 2)
         Panel10.Name = "Panel10"
-        Panel10.Size = New Size(119, 125)
+        Panel10.Size = New Size(104, 94)
         Panel10.TabIndex = 2
         ' 
         ' Label9
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Segoe MDL2 Assets", 36F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label9.Location = New Point(18, 33)
+        Label9.Location = New Point(16, 25)
         Label9.Name = "Label9"
-        Label9.Size = New Size(85, 60)
+        Label9.Size = New Size(68, 48)
         Label9.TabIndex = 2
         Label9.Text = ""
         ' 
         ' Panel7
         ' 
         Panel7.BackColor = Color.DarkRed
-        Panel7.Location = New Point(0, 145)
+        Panel7.Location = New Point(0, 109)
+        Panel7.Margin = New Padding(3, 2, 3, 2)
         Panel7.Name = "Panel7"
-        Panel7.Size = New Size(468, 12)
+        Panel7.Size = New Size(410, 9)
         Panel7.TabIndex = 3
         ' 
         ' lblstockcritico
         ' 
         lblstockcritico.AutoSize = True
         lblstockcritico.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblstockcritico.Location = New Point(168, 68)
+        lblstockcritico.Location = New Point(147, 51)
         lblstockcritico.Name = "lblstockcritico"
-        lblstockcritico.Size = New Size(0, 38)
+        lblstockcritico.Size = New Size(0, 30)
         lblstockcritico.TabIndex = 2
         ' 
         ' Label6
@@ -249,9 +259,9 @@ Partial Class dashboard
         Label6.AutoSize = True
         Label6.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label6.ForeColor = SystemColors.GrayText
-        Label6.Location = New Point(147, 118)
+        Label6.Location = New Point(129, 88)
         Label6.Name = "Label6"
-        Label6.Size = New Size(176, 20)
+        Label6.Size = New Size(140, 15)
         Label6.TabIndex = 1
         Label6.Text = "Ítems Debajo del Crítico"
         ' 
@@ -259,9 +269,9 @@ Partial Class dashboard
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(147, 13)
+        Label1.Location = New Point(129, 10)
         Label1.Name = "Label1"
-        Label1.Size = New Size(167, 28)
+        Label1.Size = New Size(133, 21)
         Label1.TabIndex = 0
         Label1.Text = "ESTOCK CRÍTICO"
         ' 
@@ -269,16 +279,18 @@ Partial Class dashboard
         ' 
         Panel4.Controls.Add(FormsPlot1)
         Panel4.Controls.Add(Label4)
-        Panel4.Location = New Point(23, 236)
+        Panel4.Location = New Point(20, 177)
+        Panel4.Margin = New Padding(3, 2, 3, 2)
         Panel4.Name = "Panel4"
-        Panel4.Size = New Size(978, 399)
+        Panel4.Size = New Size(856, 299)
         Panel4.TabIndex = 2
         ' 
         ' FormsPlot1
         ' 
-        FormsPlot1.Location = New Point(0, 43)
+        FormsPlot1.Location = New Point(0, 32)
+        FormsPlot1.Margin = New Padding(3, 2, 3, 2)
         FormsPlot1.Name = "FormsPlot1"
-        FormsPlot1.Size = New Size(978, 356)
+        FormsPlot1.Size = New Size(856, 267)
         FormsPlot1.TabIndex = 2
         ' 
         ' Label4
@@ -286,9 +298,9 @@ Partial Class dashboard
         Label4.AutoSize = True
         Label4.BackColor = SystemColors.ActiveBorder
         Label4.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(103, 0)
+        Label4.Location = New Point(90, 0)
         Label4.Name = "Label4"
-        Label4.Size = New Size(495, 28)
+        Label4.Size = New Size(397, 21)
         Label4.TabIndex = 1
         Label4.Text = "Medicamentos en stock crítico vs. Punto de pedido"
         ' 
@@ -296,16 +308,18 @@ Partial Class dashboard
         ' 
         Panel5.Controls.Add(FormsPlot2)
         Panel5.Controls.Add(Label5)
-        Panel5.Location = New Point(1044, 236)
+        Panel5.Location = New Point(914, 177)
+        Panel5.Margin = New Padding(3, 2, 3, 2)
         Panel5.Name = "Panel5"
-        Panel5.Size = New Size(465, 399)
+        Panel5.Size = New Size(407, 299)
         Panel5.TabIndex = 3
         ' 
         ' FormsPlot2
         ' 
-        FormsPlot2.Location = New Point(0, 43)
+        FormsPlot2.Location = New Point(0, 32)
+        FormsPlot2.Margin = New Padding(3, 2, 3, 2)
         FormsPlot2.Name = "FormsPlot2"
-        FormsPlot2.Size = New Size(465, 356)
+        FormsPlot2.Size = New Size(407, 267)
         FormsPlot2.TabIndex = 3
         ' 
         ' Label5
@@ -313,9 +327,9 @@ Partial Class dashboard
         Label5.AutoSize = True
         Label5.BackColor = SystemColors.ActiveBorder
         Label5.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(121, 0)
+        Label5.Location = New Point(106, 0)
         Label5.Name = "Label5"
-        Label5.Size = New Size(232, 28)
+        Label5.Size = New Size(189, 21)
         Label5.TabIndex = 1
         Label5.Text = "Próximos vencimientos"
         ' 
@@ -323,18 +337,20 @@ Partial Class dashboard
         ' 
         Panel6.Controls.Add(dgvvencimientos)
         Panel6.Controls.Add(Label14)
-        Panel6.Location = New Point(23, 661)
+        Panel6.Location = New Point(20, 496)
+        Panel6.Margin = New Padding(3, 2, 3, 2)
         Panel6.Name = "Panel6"
-        Panel6.Size = New Size(1486, 333)
+        Panel6.Size = New Size(1300, 250)
         Panel6.TabIndex = 4
         ' 
         ' dgvvencimientos
         ' 
         dgvvencimientos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvvencimientos.Location = New Point(13, 42)
+        dgvvencimientos.Location = New Point(11, 32)
+        dgvvencimientos.Margin = New Padding(3, 2, 3, 2)
         dgvvencimientos.Name = "dgvvencimientos"
         dgvvencimientos.RowHeadersWidth = 51
-        dgvvencimientos.Size = New Size(1456, 288)
+        dgvvencimientos.Size = New Size(1274, 216)
         dgvvencimientos.TabIndex = 3
         ' 
         ' Label14
@@ -342,26 +358,38 @@ Partial Class dashboard
         Label14.AutoSize = True
         Label14.BackColor = SystemColors.ActiveBorder
         Label14.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label14.Location = New Point(31, 0)
+        Label14.Location = New Point(27, 0)
         Label14.Name = "Label14"
-        Label14.Size = New Size(194, 28)
+        Label14.Size = New Size(154, 21)
         Label14.TabIndex = 2
         Label14.Text = "Alertas de Reorden"
         ' 
         ' Panel8
         ' 
         Panel8.BackColor = Color.OrangeRed
-        Panel8.Location = New Point(536, 179)
+        Panel8.Location = New Point(469, 134)
+        Panel8.Margin = New Padding(3, 2, 3, 2)
         Panel8.Name = "Panel8"
-        Panel8.Size = New Size(465, 12)
+        Panel8.Size = New Size(407, 9)
         Panel8.TabIndex = 4
+        ' 
+        ' btnlistado
+        ' 
+        btnlistado.Location = New Point(1207, 149)
+        btnlistado.Name = "btnlistado"
+        btnlistado.Size = New Size(113, 23)
+        btnlistado.TabIndex = 5
+        btnlistado.Text = "Imprimir  listado"
+        btnlistado.UseVisualStyleBackColor = True
         ' 
         ' dashboard
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
+        AutoScroll = True
         BackColor = Color.White
-        ClientSize = New Size(1533, 1007)
+        ClientSize = New Size(1366, 562)
+        Controls.Add(btnlistado)
         Controls.Add(Panel8)
         Controls.Add(Panel6)
         Controls.Add(Panel5)
@@ -369,6 +397,7 @@ Partial Class dashboard
         Controls.Add(Panel3)
         Controls.Add(Panel2)
         Controls.Add(Panel1)
+        Margin = New Padding(3, 2, 3, 2)
         Name = "dashboard"
         Text = "dashboard"
         Panel1.ResumeLayout(False)
@@ -423,4 +452,6 @@ Partial Class dashboard
     Friend WithEvents Label14 As Label
     Friend WithEvents FormsPlot1 As ScottPlot.WinForms.FormsPlot
     Friend WithEvents FormsPlot2 As ScottPlot.WinForms.FormsPlot
+    Friend WithEvents btnlistado As Button
+    Friend WithEvents documento As Printing.PrintDocument
 End Class

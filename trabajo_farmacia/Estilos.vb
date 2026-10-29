@@ -78,5 +78,20 @@
     End Sub
 
 
+    ' Panel del título principal
+    Public Sub EstilizarPanelTitulo(panel As Panel)
+
+        panel.BackColor = Color.FromArgb(15, 118, 110)
+        panel.BorderStyle = BorderStyle.None
+
+    End Sub
+
+    ' Panel del subtítulo
+    Public Sub EstilizarPanelSubtitulo(panel As Panel)
+
+        panel.BackColor = Color.FromArgb(230, 242, 240)
+        panel.BorderStyle = BorderStyle.None
+    End Sub
+
 
 End Module
