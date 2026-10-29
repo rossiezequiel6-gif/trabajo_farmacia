@@ -1,36 +1,42 @@
-﻿Imports System.IO
+Imports System.IO
 Imports MySqlConnector
+Imports System.Windows.Forms
 
 Module conexionbd
 
     Public CADENA As String = ""
 
-        Public Sub ObtenerDatosConexion()
-            Try
-                Dim rutaArchivo As String =
-                Path.Combine(AppContext.BaseDirectory, "conexion.ini")
+    Public Sub ObtenerDatosConexion()
+        Try
+            Dim rutaArchivo As String =
+                System.IO.Path.Combine(
+                    AppContext.BaseDirectory,
+                    "conexion.ini"
+                )
 
-                If Not File.Exists(rutaArchivo) Then
-                    Throw New FileNotFoundException(
-                    "No se encontró el archivo de configuración.")
-                End If
+            If Not System.IO.File.Exists(rutaArchivo) Then
+                Throw New System.IO.FileNotFoundException(
+                    "No se encontró el archivo de configuración."
+                )
+            End If
 
-                CADENA = File.ReadAllText(rutaArchivo).Trim()
+            CADENA = System.IO.File.ReadAllText(rutaArchivo).Trim()
 
-                If String.IsNullOrWhiteSpace(CADENA) Then
-                    Throw New Exception(
-                    "El archivo de conexión está vacío.")
-                End If
+            If String.IsNullOrWhiteSpace(CADENA) Then
+                Throw New Exception(
+                    "El archivo de conexión está vacío."
+                )
+            End If
 
-            Catch ex As Exception
-                CADENA = ""
-                MessageBox.Show(
-                "No se pudo configurar la conexión a la base de datos.",
+        Catch ex As Exception
+            CADENA = ""
+            MessageBox.Show(
+                "No se pudo configurar la conexión: " & ex.Message,
                 "Error de conexión",
                 MessageBoxButtons.OK,
-                MessageBoxIcon.Error)
-            End Try
-        End Sub
+                MessageBoxIcon.Error
+            )
+        End Try
+    End Sub
 
-    End Module
-
+End Module

@@ -31,6 +31,7 @@ Partial Class Form1
         pnltitulo = New Panel()
         lbltitulo = New Label()
         pnlcontenedor = New Panel()
+        btndashboard = New Button()
         pnlmenu.SuspendLayout()
         pnltitulo.SuspendLayout()
         SuspendLayout()
@@ -83,6 +84,7 @@ Partial Class Form1
         ' pnlmenu
         ' 
         pnlmenu.BackColor = Color.MediumAquamarine
+        pnlmenu.Controls.Add(btndashboard)
         pnlmenu.Controls.Add(btnformusuarios)
         pnlmenu.Controls.Add(btncompras)
         pnlmenu.Controls.Add(btnconectar)
@@ -143,6 +145,18 @@ Partial Class Form1
         pnlcontenedor.Size = New Size(931, 643)
         pnlcontenedor.TabIndex = 7
         ' 
+        ' btndashboard
+        ' 
+        btndashboard.BackColor = Color.SeaGreen
+        btndashboard.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btndashboard.Location = New Point(31, 586)
+        btndashboard.Margin = New Padding(3, 4, 3, 4)
+        btndashboard.Name = "btndashboard"
+        btndashboard.Size = New Size(157, 57)
+        btndashboard.TabIndex = 6
+        btndashboard.Text = "DASHBOARD"
+        btndashboard.UseVisualStyleBackColor = False
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -167,5 +181,6 @@ Partial Class Form1
     Friend WithEvents lbltitulo As Label
     Friend WithEvents pnlcontenedor As Panel
     Friend WithEvents btnformusuarios As Button
+    Friend WithEvents btndashboard As Button
 
 End Class

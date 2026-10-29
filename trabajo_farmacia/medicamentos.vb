@@ -65,51 +65,68 @@ Public Class medicamentos
         End Try
 
     End Sub
-
-
     Sub Cargarmedicamentos()
-        'creo subrutina para cargar grilla
+        ' Creo subrutina para cargar grilla con el stock actual acumulado de lotes
         Try
-            'voy a conectar a la bd para cargar la grilla
+            ' Voy a conectar a la BD para cargar la grilla
             Using cn As New MySqlConnection(CADENA)
                 cn.Open()
-                'armo mi consulta sql
-                Dim consulta As String = "SELECT m.id_medicamento, m.codigo, m.nombre AS medicamento, m.stock_min, m.stock_max, m.punto_pedido, m.requiere_receta, m.id_droga, d.nombre AS droga, 
-                                            m.id_laboratorio, l.nombre AS laboratorio, m.id_accion, a.nombre AS accion_terapeutica, 
-                                            m.id_presentacion, p.descripcion AS presentacion FROM medicamento m INNER JOIN droga d ON m.id_droga = d.id_droga 
-                                            INNER JOIN laboratorio l ON m.id_laboratorio = l.id_laboratorio INNER JOIN accion_terapeutica a ON m.id_accion = a.id_accion 
-                                            INNER JOIN presentacion p ON m.id_presentacion = p.id_presentacion ORDER BY m.id_medicamento;"
+
+                ' Armo mi consulta SQL con la suma de lotes y agrupamiento
+                Dim consulta As String = "SELECT m.id_medicamento, m.codigo, m.nombre AS medicamento, " &
+                                     "IFNULL(SUM(lo.cantidad_actual), 0) AS stock_actual, " &
+                                     "m.stock_min, m.stock_max, m.punto_pedido, m.requiere_receta, " &
+                                     "m.id_droga, d.nombre AS droga, " &
+                                     "m.id_laboratorio, l.nombre AS laboratorio, " &
+                                     "m.id_accion, a.nombre AS accion_terapeutica, " &
+                                     "m.id_presentacion, p.descripcion AS presentacion " &
+                                     "FROM medicamento m " &
+                                     "LEFT JOIN lote lo ON m.id_medicamento = lo.id_medicamento " &
+                                     "INNER JOIN droga d ON m.id_droga = d.id_droga " &
+                                     "INNER JOIN laboratorio l ON m.id_laboratorio = l.id_laboratorio " &
+                                     "INNER JOIN accion_terapeutica a ON m.id_accion = a.id_accion " &
+                                     "INNER JOIN presentacion p ON m.id_presentacion = p.id_presentacion " &
+                                     "GROUP BY m.id_medicamento, m.codigo, m.nombre, m.stock_min, m.stock_max, m.punto_pedido, m.requiere_receta, " &
+                                     "m.id_droga, d.nombre, m.id_laboratorio, l.nombre, m.id_accion, a.nombre, m.id_presentacion, p.descripcion " &
+                                     "ORDER BY m.id_medicamento;"
 
                 Using cmd As New MySqlCommand(consulta, cn)
-                    'uso datatable para guardar un select 
-                    Dim tabla As New DataTable
-                    Using lector As MySqlDataReader = cmd.ExecuteReader
+                    ' Uso DataTable para guardar un SELECT
+                    Dim tabla As New DataTable()
+
+                    Using lector As MySqlDataReader = cmd.ExecuteReader()
                         tabla.Load(lector)
                     End Using
-                    'cargar la tabla en la grilla
+
+                    ' Cargar la tabla en la grilla
                     dgvmedicamento.DataSource = tabla
-                    'ocultamos los IDs númericos pero los mantenemos en memoria
+
+                    ' Ocultamos los IDs numéricos, pero los mantenemos en memoria
                     If dgvmedicamento.Columns.Contains("id_medicamento") Then
                         dgvmedicamento.Columns("id_medicamento").Visible = False
-                        If dgvmedicamento.Columns.Contains("id_droga") Then
-                            dgvmedicamento.Columns("id_droga").Visible = False
-                        End If
-                        If dgvmedicamento.Columns.Contains("id_laboratorio") Then
-                            dgvmedicamento.Columns("id_laboratorio").Visible = False
-                        End If
-                        If dgvmedicamento.Columns.Contains("id_accion") Then
-                            dgvmedicamento.Columns("id_accion").Visible = False
-                        End If
-                        If dgvmedicamento.Columns.Contains("id_presentacion") Then
-                            dgvmedicamento.Columns("id_presentacion").Visible = False
-                        End If
+                    End If
+
+                    If dgvmedicamento.Columns.Contains("id_droga") Then
+                        dgvmedicamento.Columns("id_droga").Visible = False
+                    End If
+
+                    If dgvmedicamento.Columns.Contains("id_laboratorio") Then
+                        dgvmedicamento.Columns("id_laboratorio").Visible = False
+                    End If
+
+                    If dgvmedicamento.Columns.Contains("id_accion") Then
+                        dgvmedicamento.Columns("id_accion").Visible = False
+                    End If
+
+                    If dgvmedicamento.Columns.Contains("id_presentacion") Then
+                        dgvmedicamento.Columns("id_presentacion").Visible = False
                     End If
                 End Using
-
             End Using
+
         Catch ex As Exception
-            'muestro mensaje de error
-            MessageBox.Show("Error al cargar las editoriales: " & ex.Message)
+            ' Muestro mensaje de error
+            MessageBox.Show("Error al cargar los medicamentos: " & ex.Message)
         End Try
     End Sub
     'Private Sub cargarcombos()
@@ -725,8 +742,9 @@ Public Class medicamentos
         If txtabmlab.Text.Trim() = "" Then
             MessageBox.Show("Por favor, ingrese el nombre del laboratorio.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
-            'llamo a la funcion que guarda el laboratorio en la base de datos
-            If moduloauxiliares.guardarlaboratorio(txtabmlab.Text.Trim()) Then
+        End If
+        'llamo a la funcion que guarda el laboratorio en la base de datos
+        If moduloauxiliares.guardarlaboratorio(txtabmlab.Text.Trim()) Then
                 MessageBox.Show("Laboratorio agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 moduloauxiliares.cargarcombolab(cblaboratorio)
                 moduloauxiliares.cargarcombolab(cbabmlab)
@@ -735,7 +753,7 @@ Public Class medicamentos
                 MessageBox.Show("Error al agregar el laboratorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
 
-        End If
+
     End Sub
 
     Private Sub btnagregaraccion_Click(sender As Object, e As EventArgs) Handles btnagregaraccion.Click
@@ -743,8 +761,9 @@ Public Class medicamentos
         If txtabmaccion.Text.Trim() = "" Then
             MessageBox.Show("Por favor, ingrese el nombre de la acción terapéutica.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
-            'llamo a la funcion que guarda la accion terapeutica en la base de datos
-            If moduloauxiliares.guardaraccion(txtabmaccion.Text.Trim()) Then
+        End If
+        'llamo a la funcion que guarda la accion terapeutica en la base de datos
+        If moduloauxiliares.guardaraccion(txtabmaccion.Text.Trim()) Then
                 MessageBox.Show("Acción terapéutica agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 moduloauxiliares.cargarcomboaccion(cbterapeutica)
                 moduloauxiliares.cargarcomboaccion(cbabmaccion)
@@ -752,7 +771,7 @@ Public Class medicamentos
             Else
                 MessageBox.Show("Error al agregar la acción terapéutica.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-        End If
+
     End Sub
 
     Private Sub btnagregardroga_Click(sender As Object, e As EventArgs) Handles btnagregardroga.Click
@@ -760,8 +779,9 @@ Public Class medicamentos
         If txtabmdroga.Text.Trim() = "" Then
             MessageBox.Show("Por favor, ingrese el nombre de la droga.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
-            'llamo a la funcion que guarda la droga en la base de datos
-            If moduloauxiliares.guardarDroga(txtabmdroga.Text.Trim()) Then
+        End If
+        'llamo a la funcion que guarda la droga en la base de datos
+        If moduloauxiliares.guardarDroga(txtabmdroga.Text.Trim()) Then
                 MessageBox.Show("Droga agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 moduloauxiliares.cargarComboDroga(cbdroga)
                 moduloauxiliares.cargarComboDroga(cbabmdroga)
@@ -769,7 +789,7 @@ Public Class medicamentos
             Else
                 MessageBox.Show("Error al agregar la droga.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-        End If
+
     End Sub
 
     Private Sub btnagregarpres_Click(sender As Object, e As EventArgs) Handles btnagregarpres.Click
@@ -777,8 +797,9 @@ Public Class medicamentos
         If txtabmpresentacion.Text.Trim() = "" Then
             MessageBox.Show("Por favor, ingrese el nombre de la presentación.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
-            'llamo a la funcion que guarda la presentacion en la base de datos
-            If moduloauxiliares.guardarPresentacion(txtabmpresentacion.Text.Trim()) Then
+        End If
+        'llamo a la funcion que guarda la presentacion en la base de datos
+        If moduloauxiliares.guardarPresentacion(txtabmpresentacion.Text.Trim()) Then
                 MessageBox.Show("Presentación agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 moduloauxiliares.cargarComboPresentacion(cbpresentacion)
                 moduloauxiliares.cargarComboPresentacion(cbabmpres)
@@ -786,7 +807,7 @@ Public Class medicamentos
             Else
                 MessageBox.Show("Error al agregar la presentación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-        End If
+
     End Sub
 
     Private Sub btnmodificaraccion_Click(sender As Object, e As EventArgs) Handles btnmodificaraccion.Click
