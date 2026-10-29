@@ -1080,4 +1080,8 @@ Public Class medicamentos
         e.HasMorePages = False
 
     End Sub
+
+    Private Sub pbmedicamentos_Click(sender As Object, e As EventArgs) Handles pbmedicamentos.Click
+
+    End Sub
 End Class

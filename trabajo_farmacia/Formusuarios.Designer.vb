@@ -25,6 +25,10 @@ Partial Class Formusuarios
         Panel1 = New Panel()
         Label1 = New Label()
         Panel2 = New Panel()
+        btnqitar = New Button()
+        btnagregar = New Button()
+        btnbuscar = New Button()
+        pbusuarios = New PictureBox()
         Label2 = New Label()
         Panel5 = New Panel()
         Label7 = New Label()
@@ -45,6 +49,7 @@ Partial Class Formusuarios
         Label6 = New Label()
         Panel1.SuspendLayout()
         Panel2.SuspendLayout()
+        CType(pbusuarios, ComponentModel.ISupportInitialize).BeginInit()
         Panel5.SuspendLayout()
         Panel3.SuspendLayout()
         CType(dgvusuarios, ComponentModel.ISupportInitialize).BeginInit()
@@ -74,6 +79,10 @@ Partial Class Formusuarios
         ' Panel2
         ' 
         Panel2.BackColor = Color.Silver
+        Panel2.Controls.Add(btnqitar)
+        Panel2.Controls.Add(btnagregar)
+        Panel2.Controls.Add(btnbuscar)
+        Panel2.Controls.Add(pbusuarios)
         Panel2.Controls.Add(Label2)
         Panel2.Controls.Add(Panel5)
         Panel2.Controls.Add(btnlimpiarusu)
@@ -92,6 +101,41 @@ Partial Class Formusuarios
         Panel2.Name = "Panel2"
         Panel2.Size = New Size(652, 621)
         Panel2.TabIndex = 1
+        ' 
+        ' btnqitar
+        ' 
+        btnqitar.Location = New Point(461, 162)
+        btnqitar.Name = "btnqitar"
+        btnqitar.Size = New Size(89, 40)
+        btnqitar.TabIndex = 17
+        btnqitar.Text = "Quitar"
+        btnqitar.UseVisualStyleBackColor = True
+        ' 
+        ' btnagregar
+        ' 
+        btnagregar.Location = New Point(462, 89)
+        btnagregar.Name = "btnagregar"
+        btnagregar.Size = New Size(89, 40)
+        btnagregar.TabIndex = 16
+        btnagregar.Text = "Agregar"
+        btnagregar.UseVisualStyleBackColor = True
+        ' 
+        ' btnbuscar
+        ' 
+        btnbuscar.Location = New Point(461, 26)
+        btnbuscar.Name = "btnbuscar"
+        btnbuscar.Size = New Size(90, 34)
+        btnbuscar.TabIndex = 15
+        btnbuscar.Text = "Buscar"
+        btnbuscar.UseVisualStyleBackColor = True
+        ' 
+        ' pbusuarios
+        ' 
+        pbusuarios.Location = New Point(14, 14)
+        pbusuarios.Name = "pbusuarios"
+        pbusuarios.Size = New Size(229, 188)
+        pbusuarios.TabIndex = 14
+        pbusuarios.TabStop = False
         ' 
         ' Label2
         ' 
@@ -284,6 +328,7 @@ Partial Class Formusuarios
         Panel1.PerformLayout()
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
+        CType(pbusuarios, ComponentModel.ISupportInitialize).EndInit()
         Panel5.ResumeLayout(False)
         Panel5.PerformLayout()
         Panel3.ResumeLayout(False)
@@ -313,4 +358,8 @@ Partial Class Formusuarios
     Friend WithEvents txtbuscarusuario As TextBox
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Label7 As Label
+    Friend WithEvents pbusuarios As PictureBox
+    Friend WithEvents btnqitar As Button
+    Friend WithEvents btnagregar As Button
+    Friend WithEvents btnbuscar As Button
 End Class
