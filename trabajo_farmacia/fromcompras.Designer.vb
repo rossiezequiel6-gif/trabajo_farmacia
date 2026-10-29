@@ -134,14 +134,14 @@ Partial Class fromcompras
         gbcompras.FlatStyle = FlatStyle.Flat
         gbcompras.Location = New Point(18, 268)
         gbcompras.Name = "gbcompras"
-        gbcompras.Size = New Size(637, 266)
+        gbcompras.Size = New Size(624, 266)
         gbcompras.TabIndex = 6
         gbcompras.TabStop = False
         gbcompras.Text = "Datos Compras"
         ' 
         ' btnimprimirre
         ' 
-        btnimprimirre.Location = New Point(530, 181)
+        btnimprimirre.Location = New Point(519, 184)
         btnimprimirre.Name = "btnimprimirre"
         btnimprimirre.Size = New Size(94, 40)
         btnimprimirre.TabIndex = 20
@@ -166,16 +166,16 @@ Partial Class fromcompras
         ' 
         ' btnlimpiar
         ' 
-        btnlimpiar.Location = New Point(530, 139)
+        btnlimpiar.Location = New Point(519, 139)
         btnlimpiar.Name = "btnlimpiar"
-        btnlimpiar.Size = New Size(94, 31)
+        btnlimpiar.Size = New Size(94, 36)
         btnlimpiar.TabIndex = 17
         btnlimpiar.Text = "Limpiar"
         btnlimpiar.UseVisualStyleBackColor = True
         ' 
         ' btnmodificar
         ' 
-        btnmodificar.Location = New Point(530, 83)
+        btnmodificar.Location = New Point(519, 83)
         btnmodificar.Name = "btnmodificar"
         btnmodificar.Size = New Size(94, 38)
         btnmodificar.TabIndex = 16
@@ -184,7 +184,7 @@ Partial Class fromcompras
         ' 
         ' btnregistrar
         ' 
-        btnregistrar.Location = New Point(530, 31)
+        btnregistrar.Location = New Point(519, 31)
         btnregistrar.Name = "btnregistrar"
         btnregistrar.Size = New Size(94, 38)
         btnregistrar.TabIndex = 15

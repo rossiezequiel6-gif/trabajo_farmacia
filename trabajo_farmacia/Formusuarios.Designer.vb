@@ -31,7 +31,7 @@ Partial Class Formusuarios
         pbusuarios = New PictureBox()
         Label2 = New Label()
         Panel5 = New Panel()
-        Label7 = New Label()
+        lblsubtitulo = New Label()
         btnlimpiarusu = New Button()
         btnguardarusu = New Button()
         Label3 = New Label()
@@ -104,7 +104,7 @@ Partial Class Formusuarios
         ' 
         ' btnqitar
         ' 
-        btnqitar.Location = New Point(461, 162)
+        btnqitar.Location = New Point(337, 135)
         btnqitar.Name = "btnqitar"
         btnqitar.Size = New Size(89, 40)
         btnqitar.TabIndex = 17
@@ -113,16 +113,16 @@ Partial Class Formusuarios
         ' 
         ' btnagregar
         ' 
-        btnagregar.Location = New Point(462, 89)
+        btnagregar.Location = New Point(337, 69)
         btnagregar.Name = "btnagregar"
         btnagregar.Size = New Size(89, 40)
         btnagregar.TabIndex = 16
-        btnagregar.Text = "Agregar"
+        btnagregar.Text = "Guardar"
         btnagregar.UseVisualStyleBackColor = True
         ' 
         ' btnbuscar
         ' 
-        btnbuscar.Location = New Point(461, 26)
+        btnbuscar.Location = New Point(336, 15)
         btnbuscar.Name = "btnbuscar"
         btnbuscar.Size = New Size(90, 34)
         btnbuscar.TabIndex = 15
@@ -150,23 +150,23 @@ Partial Class Formusuarios
         ' Panel5
         ' 
         Panel5.BackColor = Color.DarkSeaGreen
-        Panel5.Controls.Add(Label7)
+        Panel5.Controls.Add(lblsubtitulo)
         Panel5.Location = New Point(0, 226)
         Panel5.Margin = New Padding(3, 2, 3, 2)
         Panel5.Name = "Panel5"
         Panel5.Size = New Size(652, 50)
         Panel5.TabIndex = 13
         ' 
-        ' Label7
+        ' lblsubtitulo
         ' 
-        Label7.AutoSize = True
-        Label7.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label7.ForeColor = SystemColors.Control
-        Label7.Location = New Point(173, 8)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(253, 32)
-        Label7.TabIndex = 2
-        Label7.Text = "DATOS DEL USUARIO"
+        lblsubtitulo.AutoSize = True
+        lblsubtitulo.Font = New Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblsubtitulo.ForeColor = SystemColors.Control
+        lblsubtitulo.Location = New Point(173, 8)
+        lblsubtitulo.Name = "lblsubtitulo"
+        lblsubtitulo.Size = New Size(265, 32)
+        lblsubtitulo.TabIndex = 2
+        lblsubtitulo.Text = "DATOS DEL USUARIO"
         ' 
         ' btnlimpiarusu
         ' 
@@ -357,7 +357,7 @@ Partial Class Formusuarios
     Friend WithEvents dgvusuarios As DataGridView
     Friend WithEvents txtbuscarusuario As TextBox
     Friend WithEvents Panel5 As Panel
-    Friend WithEvents Label7 As Label
+    Friend WithEvents lblsubtitulo As Label
     Friend WithEvents pbusuarios As PictureBox
     Friend WithEvents btnqitar As Button
     Friend WithEvents btnagregar As Button

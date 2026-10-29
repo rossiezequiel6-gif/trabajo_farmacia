@@ -1,6 +1,10 @@
-﻿Imports MySqlConnector
+﻿Imports System.Drawing.Printing
+Imports System.Reflection.Metadata
+Imports MySqlConnector
 Imports ScottPlot.Colormaps
 Public Class dashboard
+
+    Private filaActual As Integer = 0
     Private Sub dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'cargar los contenedores cuando se abre el form
         cargarkpis()
@@ -137,7 +141,7 @@ Public Class dashboard
                     End Using
 
                     ' Asignamos los datos al DataGridView
-                    dgvVencimientos.DataSource = dt
+                    dgvvencimientos.DataSource = dt
                 End Using
             End Using
 
@@ -272,5 +276,135 @@ Public Class dashboard
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub btnlistado_Click(sender As Object, e As EventArgs) Handles btnlistado.Click
+        If dgvvencimientos.Rows.Count = 0 OrElse
+       (dgvvencimientos.Rows.Count = 1 AndAlso dgvvencimientos.Rows(0).IsNewRow) Then
+
+            MessageBox.Show("No hay medicamentos próximos a vencer para imprimir.")
+            Exit Sub
+        End If
+
+        filaActual = 0
+
+        ' Configuramos la hoja en horizontal
+        documento.DefaultPageSettings.Landscape = True
+
+        ' Mostramos la vista previa
+        Using vistaPrevia As New PrintPreviewDialog()
+            vistaPrevia.Document = documento
+            vistaPrevia.Width = 1000
+            vistaPrevia.Height = 700
+            vistaPrevia.ShowDialog()
+        End Using
+
+    End Sub
+
+
+    Private Sub documento_PrintPage(sender As Object,
+                                e As PrintPageEventArgs) Handles documento.PrintPage
+
+        Dim fuenteTitulo As New Font("Arial", 16, FontStyle.Bold)
+        Dim fuenteNormal As New Font("Arial", 10)
+        Dim fuenteEncabezado As New Font("Arial", 10, FontStyle.Bold)
+
+        Dim x As Integer = e.MarginBounds.Left
+        Dim y As Integer = e.MarginBounds.Top
+        Dim altoFila As Integer = 28
+
+        ' Título del informe
+        e.Graphics.DrawString(
+        "LISTADO DE MEDICAMENTOS PRÓXIMOS A VENCER",
+        fuenteTitulo,
+        Brushes.Black,
+        x, y)
+
+        y += 35
+
+        ' Fecha de impresión
+        e.Graphics.DrawString(
+        "Fecha de impresión: " & Date.Today.ToString("dd/MM/yyyy"),
+        fuenteNormal,
+        Brushes.Black,
+        x, y)
+
+        y += 35
+
+        ' Ancho de las columnas
+        Dim anchos() As Integer = {250, 130, 180, 150}
+        Dim encabezados() As String = {
+        "Medicamento",
+        "N° Lote",
+        "Fecha Vencimiento",
+        "Cant. Restante"
+    }
+
+        ' Dibujar encabezados
+        Dim posX As Integer = x
+
+        For i As Integer = 0 To encabezados.Length - 1
+            e.Graphics.DrawRectangle(
+            Pens.Black, posX, y, anchos(i), altoFila)
+
+            e.Graphics.DrawString(
+            encabezados(i),
+            fuenteEncabezado,
+            Brushes.Black,
+            New RectangleF(posX + 4, y + 4, anchos(i) - 8, altoFila - 4))
+
+            posX += anchos(i)
+        Next
+
+        y += altoFila
+
+        ' Imprimir las filas de la tabla
+        While filaActual < dgvvencimientos.Rows.Count
+
+            Dim fila As DataGridViewRow = dgvvencimientos.Rows(filaActual)
+
+            If Not fila.IsNewRow Then
+
+                ' Si no queda espacio, continuar en otra página
+                If y + altoFila > e.MarginBounds.Bottom Then
+                    e.HasMorePages = True
+                    Exit Sub
+                End If
+
+                posX = x
+
+                For i As Integer = 0 To encabezados.Length - 1
+
+                    Dim valor As String = ""
+
+                    If fila.Cells(i).Value IsNot Nothing Then
+                        valor = fila.Cells(i).Value.ToString()
+                    End If
+
+                    e.Graphics.DrawRectangle(
+                    Pens.Black, posX, y, anchos(i), altoFila)
+
+                    e.Graphics.DrawString(
+                    valor,
+                    fuenteNormal,
+                    Brushes.Black,
+                    New RectangleF(posX + 4, y + 4, anchos(i) - 8, altoFila - 4))
+
+                    posX += anchos(i)
+
+                Next
+
+                y += altoFila
+
+            End If
+
+            filaActual += 1
+
+        End While
+
+        ' Ya se imprimieron todas las filas
+        e.HasMorePages = False
+        filaActual = 0
+
     End Sub
 End Class

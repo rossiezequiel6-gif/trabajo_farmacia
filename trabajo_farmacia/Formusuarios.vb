@@ -77,8 +77,19 @@ Public Class Formusuarios
         EstilizarBoton(btneliminar, Color.FromArgb(210, 85, 95))
         EstilizarBoton(btnmodifusu, ColorActivo)
         EstilizarBoton(btnlimpiarusu, Color.FromArgb(90, 160, 145))
-    End Sub
+        EstilizarBoton(btnbuscar, ColorMenu)
+        EstilizarBoton(btnagregar, ColorActivo)
+        EstilizarBoton(btnqitar, Color.FromArgb(210, 85, 95))
 
+        Estilos.EstilizarPanelTitulo(Panel1)
+        Estilos.EstilizarPanelSubtitulo(Panel5)
+
+        Label1.ForeColor = Color.White
+        lblsubtitulo.Font = New Font("Segoe UI", 16, FontStyle.Bold)
+
+        lblsubtitulo.ForeColor = Color.FromArgb(55, 65, 81)
+        lblsubtitulo.Font = New Font("Segoe UI", 18, FontStyle.Regular)
+    End Sub
     Private Sub limpiarcampos()
         idusuarioseleccionado = 0
         txtclave.Text = ""

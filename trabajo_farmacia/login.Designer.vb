@@ -127,7 +127,7 @@ Partial Class login
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.MediumSeaGreen
+        BackColor = Color.Teal
         ClientSize = New Size(445, 366)
         Controls.Add(Panel2)
         Controls.Add(Panel1)
