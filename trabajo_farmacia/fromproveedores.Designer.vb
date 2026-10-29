@@ -51,11 +51,14 @@ Partial Class fromproveedores
         ' 
         ' dgvprovedores
         ' 
+        dgvprovedores.ColumnHeadersHeight = 29
         dgvprovedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        dgvprovedores.Location = New Point(22, 47)
+        dgvprovedores.Location = New Point(345, 75)
+        dgvprovedores.Margin = New Padding(3, 4, 3, 4)
         dgvprovedores.Name = "dgvprovedores"
+        dgvprovedores.RowHeadersWidth = 51
         dgvprovedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvprovedores.Size = New Size(630, 174)
+        dgvprovedores.Size = New Size(720, 351)
         dgvprovedores.TabIndex = 0
         ' 
         ' gbproveedores
@@ -79,11 +82,9 @@ Partial Class fromproveedores
         gbproveedores.Controls.Add(Label3)
         gbproveedores.Controls.Add(Label2)
         gbproveedores.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        gbproveedores.Location = New Point(22, 226)
-        gbproveedores.Margin = New Padding(3, 2, 3, 2)
+        gbproveedores.Location = New Point(345, 433)
         gbproveedores.Name = "gbproveedores"
-        gbproveedores.Padding = New Padding(3, 2, 3, 2)
-        gbproveedores.Size = New Size(630, 268)
+        gbproveedores.Size = New Size(720, 357)
         gbproveedores.TabIndex = 3
         gbproveedores.TabStop = False
         gbproveedores.Text = "Datos de Proveedores "
@@ -92,27 +93,27 @@ Partial Class fromproveedores
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(289, 26)
+        Label6.Location = New Point(330, 35)
         Label6.Name = "Label6"
-        Label6.Size = New Size(55, 15)
+        Label6.Size = New Size(70, 20)
         Label6.TabIndex = 27
         Label6.Text = "ESTADO:"
         ' 
         ' cbestado
         ' 
         cbestado.FormattingEnabled = True
-        cbestado.Location = New Point(365, 19)
+        cbestado.Location = New Point(417, 25)
+        cbestado.Margin = New Padding(3, 4, 3, 4)
         cbestado.Name = "cbestado"
-        cbestado.Size = New Size(147, 27)
+        cbestado.Size = New Size(167, 31)
         cbestado.TabIndex = 5
         ' 
         ' btnlimpiar
         ' 
         btnlimpiar.BackColor = Color.PaleGreen
-        btnlimpiar.Location = New Point(518, 163)
-        btnlimpiar.Margin = New Padding(3, 2, 3, 2)
+        btnlimpiar.Location = New Point(592, 217)
         btnlimpiar.Name = "btnlimpiar"
-        btnlimpiar.Size = New Size(102, 47)
+        btnlimpiar.Size = New Size(117, 63)
         btnlimpiar.TabIndex = 26
         btnlimpiar.Text = "LIMPIAR CAMPOS"
         btnlimpiar.UseVisualStyleBackColor = False
@@ -120,10 +121,9 @@ Partial Class fromproveedores
         ' btneliminar
         ' 
         btneliminar.BackColor = Color.Crimson
-        btneliminar.Location = New Point(518, 118)
-        btneliminar.Margin = New Padding(3, 2, 3, 2)
+        btneliminar.Location = New Point(592, 157)
         btneliminar.Name = "btneliminar"
-        btneliminar.Size = New Size(102, 35)
+        btneliminar.Size = New Size(117, 47)
         btneliminar.TabIndex = 25
         btneliminar.Text = "ELIMINAR"
         btneliminar.UseVisualStyleBackColor = False
@@ -131,10 +131,9 @@ Partial Class fromproveedores
         ' btnmodificar
         ' 
         btnmodificar.BackColor = SystemColors.ActiveCaption
-        btnmodificar.Location = New Point(518, 74)
-        btnmodificar.Margin = New Padding(3, 2, 3, 2)
+        btnmodificar.Location = New Point(592, 99)
         btnmodificar.Name = "btnmodificar"
-        btnmodificar.Size = New Size(102, 35)
+        btnmodificar.Size = New Size(117, 47)
         btnmodificar.TabIndex = 24
         btnmodificar.Text = "MODIFICAR"
         btnmodificar.UseVisualStyleBackColor = False
@@ -142,62 +141,56 @@ Partial Class fromproveedores
         ' btnguardar
         ' 
         btnguardar.BackColor = SystemColors.ActiveCaption
-        btnguardar.Location = New Point(518, 26)
-        btnguardar.Margin = New Padding(3, 2, 3, 2)
+        btnguardar.Location = New Point(592, 35)
         btnguardar.Name = "btnguardar"
-        btnguardar.Size = New Size(102, 35)
+        btnguardar.Size = New Size(117, 47)
         btnguardar.TabIndex = 23
         btnguardar.Text = "GUARDAR"
         btnguardar.UseVisualStyleBackColor = False
         ' 
         ' txtnombre
         ' 
-        txtnombre.Location = New Point(131, 107)
-        txtnombre.Margin = New Padding(3, 2, 3, 2)
+        txtnombre.Location = New Point(150, 143)
         txtnombre.Name = "txtnombre"
-        txtnombre.Size = New Size(142, 26)
+        txtnombre.Size = New Size(162, 30)
         txtnombre.TabIndex = 16
         ' 
         ' txttelefono
         ' 
-        txttelefono.Location = New Point(131, 201)
-        txttelefono.Margin = New Padding(3, 2, 3, 2)
+        txttelefono.Location = New Point(150, 268)
         txttelefono.Name = "txttelefono"
-        txttelefono.Size = New Size(142, 26)
+        txttelefono.Size = New Size(162, 30)
         txttelefono.TabIndex = 14
         ' 
         ' txtdireccion
         ' 
-        txtdireccion.Location = New Point(131, 163)
-        txtdireccion.Margin = New Padding(3, 2, 3, 2)
+        txtdireccion.Location = New Point(150, 217)
         txtdireccion.Name = "txtdireccion"
-        txtdireccion.Size = New Size(230, 26)
+        txtdireccion.Size = New Size(262, 30)
         txtdireccion.TabIndex = 13
         ' 
         ' txtcuil
         ' 
-        txtcuil.Location = New Point(131, 59)
-        txtcuil.Margin = New Padding(3, 2, 3, 2)
+        txtcuil.Location = New Point(150, 79)
         txtcuil.Name = "txtcuil"
-        txtcuil.Size = New Size(142, 26)
+        txtcuil.Size = New Size(162, 30)
         txtcuil.TabIndex = 12
         ' 
         ' txtidproveedor
         ' 
-        txtidproveedor.Location = New Point(131, 26)
-        txtidproveedor.Margin = New Padding(3, 2, 3, 2)
+        txtidproveedor.Location = New Point(150, 35)
         txtidproveedor.Name = "txtidproveedor"
         txtidproveedor.ReadOnly = True
-        txtidproveedor.Size = New Size(110, 26)
+        txtidproveedor.Size = New Size(125, 30)
         txtidproveedor.TabIndex = 11
         ' 
         ' Label9
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label9.Location = New Point(30, 212)
+        Label9.Location = New Point(34, 283)
         Label9.Name = "Label9"
-        Label9.Size = New Size(68, 15)
+        Label9.Size = New Size(88, 20)
         Label9.TabIndex = 7
         Label9.Text = "TELEFONO:"
         ' 
@@ -205,9 +198,9 @@ Partial Class fromproveedores
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(30, 74)
+        Label5.Location = New Point(34, 99)
         Label5.Name = "Label5"
-        Label5.Size = New Size(36, 15)
+        Label5.Size = New Size(46, 20)
         Label5.TabIndex = 3
         Label5.Text = "CUIL:"
         ' 
@@ -215,9 +208,9 @@ Partial Class fromproveedores
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(30, 174)
+        Label4.Location = New Point(34, 232)
         Label4.Name = "Label4"
-        Label4.Size = New Size(73, 15)
+        Label4.Size = New Size(93, 20)
         Label4.TabIndex = 2
         Label4.Text = "DIRECCIÓN:"
         ' 
@@ -225,9 +218,9 @@ Partial Class fromproveedores
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(30, 118)
+        Label3.Location = New Point(34, 157)
         Label3.Name = "Label3"
-        Label3.Size = New Size(61, 15)
+        Label3.Size = New Size(78, 20)
         Label3.TabIndex = 1
         Label3.Text = "NOMBRE:"
         ' 
@@ -235,9 +228,9 @@ Partial Class fromproveedores
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(30, 31)
+        Label2.Location = New Point(34, 41)
         Label2.Name = "Label2"
-        Label2.Size = New Size(23, 15)
+        Label2.Size = New Size(29, 20)
         Label2.TabIndex = 0
         Label2.Text = "ID:"
         ' 
@@ -245,17 +238,18 @@ Partial Class fromproveedores
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(6, 18)
+        Label1.Location = New Point(7, 24)
         Label1.Name = "Label1"
-        Label1.Size = New Size(90, 15)
+        Label1.Size = New Size(113, 20)
         Label1.TabIndex = 4
         Label1.Text = "PROVEEDORES"
         ' 
         ' txtbuscarprov
         ' 
-        txtbuscarprov.Location = New Point(174, 10)
+        txtbuscarprov.Location = New Point(199, 13)
+        txtbuscarprov.Margin = New Padding(3, 4, 3, 4)
         txtbuscarprov.Name = "txtbuscarprov"
-        txtbuscarprov.Size = New Size(316, 23)
+        txtbuscarprov.Size = New Size(361, 27)
         txtbuscarprov.TabIndex = 5
         ' 
         ' GroupBox1
@@ -263,22 +257,25 @@ Partial Class fromproveedores
         GroupBox1.BackColor = Color.DarkSeaGreen
         GroupBox1.Controls.Add(txtbuscarprov)
         GroupBox1.Controls.Add(Label1)
-        GroupBox1.Location = New Point(22, 1)
+        GroupBox1.Location = New Point(345, 13)
+        GroupBox1.Margin = New Padding(3, 4, 3, 4)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(611, 40)
+        GroupBox1.Padding = New Padding(3, 4, 3, 4)
+        GroupBox1.Size = New Size(720, 53)
         GroupBox1.TabIndex = 6
         GroupBox1.TabStop = False
         GroupBox1.Text = "Buscar"
         ' 
         ' fromproveedores
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ButtonHighlight
-        ClientSize = New Size(979, 499)
+        ClientSize = New Size(1119, 802)
         Controls.Add(GroupBox1)
         Controls.Add(gbproveedores)
         Controls.Add(dgvprovedores)
+        Margin = New Padding(3, 4, 3, 4)
         Name = "fromproveedores"
         Text = "fromproveedores"
         CType(dgvprovedores, ComponentModel.ISupportInitialize).EndInit()
