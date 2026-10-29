@@ -63,6 +63,7 @@ Public Class Form1
         Estilos.EstilizarBotonMenu(btnmedicamentos, pnlmenu.Width)
         Estilos.EstilizarBotonMenu(btnproveedores, pnlmenu.Width)
         Estilos.EstilizarBotonMenu(btncompras, pnlmenu.Width)
+        Estilos.EstilizarBotonMenu(btndashboard, pnlmenu.Width)
 
         configurarmenusegunrol()
 
@@ -88,6 +89,11 @@ Public Class Form1
             MessageBox.Show("No tenés permisos para acceder a la gestión de usuarios.", "Acceso Restringido", MessageBoxButtons.OK, MessageBoxIcon.Stop)
             Exit Sub
         End If
-        AbrirFormulario(New Formusuarios(), "Usuarios")
+        AbrirFormulario(New Formusuarios, "Usuarios")
+    End Sub
+
+    Private Sub btndashboard_Click(sender As Object, e As EventArgs) Handles btndashboard.Click
+        AbrirFormulario(New dashboard, "Panel de Control y Métricas")
+        MarcarActivo(btndashboard)
     End Sub
 End Class

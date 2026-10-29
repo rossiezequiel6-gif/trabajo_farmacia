@@ -79,7 +79,7 @@ Module moduloauxiliares
         Try
             Using cn As New MySqlConnection(CADENA)
                 cn.Open()
-                Dim sql As String = "INSERT INTO presentacion (nombre) VALUES (@nombre);"
+                Dim sql As String = "INSERT INTO presentacion (descripcion) VALUES (@nombre);"
                 Using cmd As New MySqlCommand(sql, cn)
                     cmd.Parameters.AddWithValue("@nombre", nombre)
                     cmd.ExecuteNonQuery()
@@ -96,7 +96,7 @@ Module moduloauxiliares
         Try
             Using cn As New MySqlConnection(CADENA)
                 cn.Open()
-                Dim sql As String = "UPDATE presentacion SET nombre = @nombre WHERE id_presentacion = @id;"
+                Dim sql As String = "UPDATE presentacion SET descripcion = @nombre WHERE id_presentacion = @id;"
                 Using cmd As New MySqlCommand(sql, cn)
                     cmd.Parameters.AddWithValue("@id", id)
                     cmd.Parameters.AddWithValue("@nombre", nombre)
