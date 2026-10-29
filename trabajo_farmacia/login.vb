@@ -78,4 +78,8 @@ Public Class login
             btnverclave.Text = ""
         End If
     End Sub
+
+    Private Sub login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ObtenerDatosConexion()
+    End Sub
 End Class

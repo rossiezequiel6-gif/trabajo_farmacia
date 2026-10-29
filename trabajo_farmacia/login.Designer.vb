@@ -38,9 +38,10 @@ Partial Class login
         ' 
         btningresar.BackColor = Color.SeaGreen
         btningresar.Font = New Font("Calibri", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btningresar.Location = New Point(160, 315)
+        btningresar.Location = New Point(140, 236)
+        btningresar.Margin = New Padding(3, 2, 3, 2)
         btningresar.Name = "btningresar"
-        btningresar.Size = New Size(161, 50)
+        btningresar.Size = New Size(141, 38)
         btningresar.TabIndex = 0
         btningresar.Text = "Ingresar"
         btningresar.UseVisualStyleBackColor = False
@@ -48,18 +49,20 @@ Partial Class login
         ' txtclave
         ' 
         txtclave.BorderStyle = BorderStyle.None
-        txtclave.Location = New Point(34, 3)
+        txtclave.Location = New Point(30, 2)
+        txtclave.Margin = New Padding(3, 2, 3, 2)
         txtclave.Name = "txtclave"
-        txtclave.Size = New Size(191, 20)
+        txtclave.Size = New Size(167, 16)
         txtclave.TabIndex = 1
         txtclave.UseSystemPasswordChar = True
         ' 
         ' txtusuario
         ' 
         txtusuario.BorderStyle = BorderStyle.None
-        txtusuario.Location = New Point(34, 4)
+        txtusuario.Location = New Point(30, 3)
+        txtusuario.Margin = New Padding(3, 2, 3, 2)
         txtusuario.Name = "txtusuario"
-        txtusuario.Size = New Size(229, 20)
+        txtusuario.Size = New Size(200, 16)
         txtusuario.TabIndex = 2
         ' 
         ' Panel1
@@ -68,9 +71,10 @@ Partial Class login
         Panel1.BorderStyle = BorderStyle.FixedSingle
         Panel1.Controls.Add(Label1)
         Panel1.Controls.Add(txtusuario)
-        Panel1.Location = New Point(114, 216)
+        Panel1.Location = New Point(100, 162)
+        Panel1.Margin = New Padding(3, 2, 3, 2)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(266, 27)
+        Panel1.Size = New Size(233, 21)
         Panel1.TabIndex = 3
         ' 
         ' Label1
@@ -80,7 +84,7 @@ Partial Class login
         Label1.Font = New Font("Segoe MDL2 Assets", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label1.Location = New Point(3, 0)
         Label1.Name = "Label1"
-        Label1.Size = New Size(29, 20)
+        Label1.Size = New Size(23, 16)
         Label1.TabIndex = 4
         Label1.Text = ""
         ' 
@@ -89,9 +93,9 @@ Partial Class login
         Label2.AutoSize = True
         Label2.BackColor = SystemColors.ButtonHighlight
         Label2.Font = New Font("Segoe MDL2 Assets", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(3, 3)
+        Label2.Location = New Point(3, 2)
         Label2.Name = "Label2"
-        Label2.Size = New Size(29, 20)
+        Label2.Size = New Size(23, 16)
         Label2.TabIndex = 4
         Label2.Text = ""
         ' 
@@ -102,30 +106,33 @@ Partial Class login
         Panel2.Controls.Add(btnverclave)
         Panel2.Controls.Add(txtclave)
         Panel2.Controls.Add(Label2)
-        Panel2.Location = New Point(114, 260)
+        Panel2.Location = New Point(100, 195)
+        Panel2.Margin = New Padding(3, 2, 3, 2)
         Panel2.Name = "Panel2"
-        Panel2.Size = New Size(263, 28)
+        Panel2.Size = New Size(230, 22)
         Panel2.TabIndex = 5
         ' 
         ' btnverclave
         ' 
         btnverclave.Font = New Font("Segoe MDL2 Assets", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnverclave.Location = New Point(231, -1)
+        btnverclave.Location = New Point(202, -1)
+        btnverclave.Margin = New Padding(3, 2, 3, 2)
         btnverclave.Name = "btnverclave"
-        btnverclave.Size = New Size(31, 27)
+        btnverclave.Size = New Size(27, 20)
         btnverclave.TabIndex = 6
         btnverclave.Text = ""
         btnverclave.UseVisualStyleBackColor = True
         ' 
         ' login
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.MediumSeaGreen
-        ClientSize = New Size(509, 488)
+        ClientSize = New Size(445, 366)
         Controls.Add(Panel2)
         Controls.Add(Panel1)
         Controls.Add(btningresar)
+        Margin = New Padding(3, 2, 3, 2)
         Name = "login"
         Text = "login"
         Panel1.ResumeLayout(False)

@@ -71,6 +71,7 @@ Public Class Form1
 
         btncompras.Visible = Permisos.PuedeRegistrarCompras()
         btnformusuarios.Visible = Permisos.EsAdmin()
+
     End Sub
 
     Private Sub configurarmenusegunrol()

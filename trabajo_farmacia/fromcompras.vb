@@ -2,6 +2,8 @@
 Public Class fromcompras
     Dim idSeleccionado As Integer = 0
     Dim idLoteSeleccionado As Integer = 0
+
+    Const DIAS_AVISO As Integer = 30
     Sub CargarCompras()
         'creo subrutina para cargar grilla
         Try
@@ -206,46 +208,48 @@ Public Class fromcompras
             Using cn As New MySqlConnection(CADENA)
                 cn.Open()
 
-                Dim consulta As String =
-                "SELECT l.id_lote, l.codigo AS Lote, " &
-                "m.nombre AS medicamento, l.fecha_vencimiento, " &
-                "d.cantidad, d.precio_unit " &
-                "FROM detalle_compra AS d " &
-                "INNER JOIN lote AS l ON d.id_lote = l.id_lote " &
-                "INNER JOIN medicamento AS m ON l.id_medicamento = m.id_medicamento " &
-                "WHERE d.id_compra = @id " &
-                "ORDER BY l.codigo"
+                Dim consulta As String = "SELECT d.id_lote, l.codigo AS lote, m.nombre AS medicamento," &
+                " l.fecha_vencimiento, d.cantidad, d.precio_unit," &
+                " CASE" &
+                " WHEN l.fecha_vencimiento < CURDATE() THEN 'Vencido'" &
+                " WHEN l.fecha_vencimiento = CURDATE() THEN 'Vence hoy'" &
+                " WHEN l.fecha_vencimiento = DATE_ADD(CURDATE(), INTERVAL 1 DAY) THEN 'Vence mañana'" &
+                " WHEN l.fecha_vencimiento <= DATE_ADD(CURDATE(), INTERVAL @dias DAY)" &
+                " THEN CONCAT('Vence en ', DATEDIFF(l.fecha_vencimiento, CURDATE()), ' días')" &
+                " ELSE 'Vigente' END AS aviso" &
+                " FROM detalle_compra AS d" &
+                " INNER JOIN lote AS l ON d.id_lote = l.id_lote" &
+                " INNER JOIN medicamento AS m ON l.id_medicamento = m.id_medicamento" &
+                " WHERE d.id_compra = @id" &
+                " ORDER BY l.fecha_vencimiento"
 
                 Using cmd As New MySqlCommand(consulta, cn)
                     cmd.Parameters.AddWithValue("@id", idCompra)
+                    cmd.Parameters.AddWithValue("@dias", DIAS_AVISO)
 
                     Dim tabla As New DataTable
-
                     Using lector As MySqlDataReader = cmd.ExecuteReader()
                         tabla.Load(lector)
                     End Using
 
                     dgvdetalle.DataSource = tabla
-
-                    ' Ocultar el ID interno del lote
-                    dgvdetalle.Columns("id_lote").Visible = False
                 End Using
             End Using
+
+            ' Presentación de las columnas
+            dgvdetalle.Columns("id_lote").Visible = False
+            dgvdetalle.Columns("lote").HeaderText = "Lote"
+            dgvdetalle.Columns("medicamento").HeaderText = "Medicamento"
+            dgvdetalle.Columns("fecha_vencimiento").HeaderText = "Vence"
+            dgvdetalle.Columns("fecha_vencimiento").DefaultCellStyle.Format = "dd/MM/yyyy"
+            dgvdetalle.Columns("cantidad").HeaderText = "Cant."
+            dgvdetalle.Columns("precio_unit").HeaderText = "Precio"
+            dgvdetalle.Columns("precio_unit").DefaultCellStyle.Format = "C2"
+            dgvdetalle.Columns("aviso").HeaderText = "Aviso"
 
         Catch ex As Exception
             MessageBox.Show("Error al cargar los ítems: " & ex.Message)
         End Try
-    End Sub
-
-    Sub PintarVencimientos(dgv As DataGridView)
-        For Each fila As DataGridViewRow In dgv.Rows
-            Dim venc As Date = CDate(fila.Cells("fecha_vencimiento").Value)
-            If venc < Date.Today Then
-                fila.DefaultCellStyle.BackColor = Color.FromArgb(248, 215, 218)    ' vencido: rojo claro
-            ElseIf venc <= Date.Today.AddDays(30) Then
-                fila.DefaultCellStyle.BackColor = Color.FromArgb(255, 243, 205)    ' vence en 30 días: amarillo claro
-            End If
-        Next
     End Sub
 
     Private Sub dgvcompras_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvcompras.CellContentClick
@@ -539,7 +543,6 @@ Public Class fromcompras
 
         dgvdetalle.DataSource =
         dgvdetalle.Columns("id_lote").Visible = False
-        PintarVencimientos(dgvdetalle)
     End Sub
 
     Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
@@ -659,5 +662,30 @@ Public Class fromcompras
 
         e.HasMorePages = False
 
+    End Sub
+
+    Private Sub dgvdetalle_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dgvdetalle.CellFormatting
+        If e.RowIndex < 0 OrElse e.Value Is Nothing Then Exit Sub
+        If dgvdetalle.Columns(e.ColumnIndex).Name <> "aviso" Then Exit Sub
+
+        Dim texto As String = e.Value.ToString()
+        Dim fondo As Color
+        Dim letra As Color
+
+        If texto.StartsWith("Vencido") Then
+            fondo = Color.FromArgb(248, 215, 218)     ' rojo claro
+            letra = Color.FromArgb(132, 32, 41)
+        ElseIf texto.StartsWith("Vence") Then
+            fondo = Color.FromArgb(255, 243, 205)     ' ámbar
+            letra = Color.FromArgb(102, 77, 3)
+        Else
+            fondo = Color.FromArgb(209, 231, 221)     ' verde claro
+            letra = Color.FromArgb(15, 81, 50)
+        End If
+
+        e.CellStyle.BackColor = fondo
+        e.CellStyle.ForeColor = letra
+        e.CellStyle.SelectionBackColor = fondo        ' conserva el color aunque la fila esté seleccionada
+        e.CellStyle.SelectionForeColor = letra
     End Sub
 End Class
