@@ -5,6 +5,8 @@ Imports ScottPlot.Colormaps
 Public Class dashboard
 
     Private filaActual As Integer = 0
+    Private numeroPagina As Integer = 0
+
     Private Sub dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'cargar los contenedores cuando se abre el form
         cargarkpis()
@@ -281,132 +283,197 @@ Public Class dashboard
     End Sub
 
     Private Sub btnlistado_Click(sender As Object, e As EventArgs) Handles btnlistado.Click
-        If dgvvencimientos.Rows.Count = 0 OrElse
-       (dgvvencimientos.Rows.Count = 1 AndAlso dgvvencimientos.Rows(0).IsNewRow) Then
+        If dgvvencimientos.Rows.Cast(Of DataGridViewRow)().
+        All(Function(f) f.IsNewRow) Then
 
-            MessageBox.Show("No hay medicamentos próximos a vencer para imprimir.")
+            MessageBox.Show("No hay medicamentos para imprimir.")
             Exit Sub
         End If
 
         filaActual = 0
+        numeroPagina = 0
 
-        ' Configuramos la hoja en horizontal
         documento.DefaultPageSettings.Landscape = True
+        documento.DefaultPageSettings.Margins =
+        New Margins(40, 40, 40, 40)
 
-        ' Mostramos la vista previa
-        Using vistaPrevia As New PrintPreviewDialog()
-            vistaPrevia.Document = documento
-            vistaPrevia.Width = 1000
-            vistaPrevia.Height = 700
-            vistaPrevia.ShowDialog()
+        Using vista As New PrintPreviewDialog()
+            vista.Document = documento
+            vista.Width = 1000
+            vista.Height = 700
+            vista.ShowDialog()
         End Using
 
     End Sub
 
 
-    Private Sub documento_PrintPage(sender As Object,
-                                e As PrintPageEventArgs) Handles documento.PrintPage
+    Private Sub documento_PrintPage(sender As Object, e As PrintPageEventArgs) Handles documento.PrintPage
+        Dim g = e.Graphics
 
-        Dim fuenteTitulo As New Font("Arial", 16, FontStyle.Bold)
-        Dim fuenteNormal As New Font("Arial", 10)
-        Dim fuenteEncabezado As New Font("Arial", 10, FontStyle.Bold)
+        Using titulo As New Font("Segoe UI", 17, FontStyle.Bold),
+              subtitulo As New Font("Segoe UI", 10, FontStyle.Regular),
+              encabezado As New Font("Segoe UI", 9, FontStyle.Bold),
+              normal As New Font("Segoe UI", 9, FontStyle.Regular),
+              negrita As New Font("Segoe UI", 9, FontStyle.Bold)
 
-        Dim x As Integer = e.MarginBounds.Left
-        Dim y As Integer = e.MarginBounds.Top
-        Dim altoFila As Integer = 28
+            Dim verde As Color = Color.FromArgb(15, 118, 110)
+            Dim verdeClaro As Color = Color.FromArgb(230, 242, 240)
+            Dim gris As Color = Color.FromArgb(243, 246, 248)
+            Dim rojo As Color = Color.FromArgb(254, 226, 226)
+            Dim naranja As Color = Color.FromArgb(254, 243, 199)
 
-        ' Título del informe
-        e.Graphics.DrawString(
-        "LISTADO DE MEDICAMENTOS PRÓXIMOS A VENCER",
-        fuenteTitulo,
-        Brushes.Black,
-        x, y)
+            Dim x As Integer = e.MarginBounds.Left
+            Dim y As Integer = e.MarginBounds.Top
+            Dim ancho As Integer = e.MarginBounds.Width
+            Dim altoFila As Integer = 30
 
-        y += 35
+            ' Encabezado verde
+            Using pincel As New SolidBrush(verde)
+                g.FillRectangle(pincel, x, y, ancho, 65)
+            End Using
 
-        ' Fecha de impresión
-        e.Graphics.DrawString(
-        "Fecha de impresión: " & Date.Today.ToString("dd/MM/yyyy"),
-        fuenteNormal,
-        Brushes.Black,
-        x, y)
+            Using blanco As New SolidBrush(Color.White)
+                g.DrawString("FARMACIA", titulo, blanco, x + 18, y + 8)
+                g.DrawString("Sistema de gestión de medicamentos",
+                              subtitulo, blanco, x + 20, y + 39)
+            End Using
 
-        y += 35
+            y += 82
 
-        ' Ancho de las columnas
-        Dim anchos() As Integer = {250, 130, 180, 150}
-        Dim encabezados() As String = {
-        "Medicamento",
-        "N° Lote",
-        "Fecha Vencimiento",
-        "Cant. Restante"
-    }
+            ' Título centrado
+            Dim textoTitulo As String = "LISTADO DE PRÓXIMOS VENCIMIENTOS"
+            Dim medida = g.MeasureString(textoTitulo, titulo)
 
-        ' Dibujar encabezados
-        Dim posX As Integer = x
+            g.DrawString(textoTitulo, titulo, Brushes.Black,
+                         x + (ancho - medida.Width) / 2, y)
 
-        For i As Integer = 0 To encabezados.Length - 1
-            e.Graphics.DrawRectangle(
-            Pens.Black, posX, y, anchos(i), altoFila)
+            y += 35
 
-            e.Graphics.DrawString(
-            encabezados(i),
-            fuenteEncabezado,
-            Brushes.Black,
-            New RectangleF(posX + 4, y + 4, anchos(i) - 8, altoFila - 4))
+            g.DrawString("Fecha de emisión: " &
+                         Date.Today.ToString("dd/MM/yyyy"),
+                         normal, Brushes.DimGray, x, y)
 
-            posX += anchos(i)
-        Next
+            g.DrawString("Período: próximos 60 días",
+                         negrita, Brushes.DimGray, x + 300, y)
 
-        y += altoFila
+            y += 28
 
-        ' Imprimir las filas de la tabla
-        While filaActual < dgvvencimientos.Rows.Count
+            ' Columnas
+            Dim anchos() As Integer = {
+                CInt(ancho * 0.35),
+                CInt(ancho * 0.17),
+                CInt(ancho * 0.28),
+                CInt(ancho * 0.2)
+            }
 
-            Dim fila As DataGridViewRow = dgvvencimientos.Rows(filaActual)
+            Dim nombres() As String = {
+                "Medicamento", "N° Lote",
+                "Vencimiento", "Cant. restante"
+            }
 
-            If Not fila.IsNewRow Then
+            ' Encabezados de tabla
+            Using pincel As New SolidBrush(verdeClaro)
+                g.FillRectangle(pincel, x, y, ancho, altoFila)
+            End Using
 
-                ' Si no queda espacio, continuar en otra página
-                If y + altoFila > e.MarginBounds.Bottom Then
+            Dim posX As Integer = x
+
+            For i As Integer = 0 To nombres.Length - 1
+                g.DrawRectangle(Pens.LightGray, posX, y, anchos(i), altoFila)
+                g.DrawString(nombres(i), encabezado, Brushes.Black,
+                             posX + 5, y + 7)
+                posX += anchos(i)
+            Next
+
+            y += altoFila
+
+            ' Filas de medicamentos
+            While filaActual < dgvvencimientos.Rows.Count
+
+                Dim fila = dgvvencimientos.Rows(filaActual)
+
+                If fila.IsNewRow Then
+                    filaActual += 1
+                    Continue While
+                End If
+
+                ' Salto de página si no queda espacio
+                If y + altoFila > e.MarginBounds.Bottom - 25 Then
                     e.HasMorePages = True
                     Exit Sub
                 End If
 
+                Dim fecha As Date
+                Dim valorFecha As String =
+                    Convert.ToString(fila.Cells("Fecha Vencimiento").Value)
+
+                Dim dias As Integer = 9999
+
+                If Date.TryParse(valorFecha, fecha) Then
+                    dias = (fecha.Date - Date.Today).Days
+                End If
+
+                Dim colorFila As Color = If(
+                    filaActual Mod 2 = 0, Color.White, gris)
+
+                If dias <= 15 Then
+                    colorFila = rojo
+                ElseIf dias <= 30 Then
+                    colorFila = naranja
+                End If
+
+                Using pincel As New SolidBrush(colorFila)
+                    g.FillRectangle(pincel, x, y, ancho, altoFila)
+                End Using
+
                 posX = x
 
-                For i As Integer = 0 To encabezados.Length - 1
+                For i As Integer = 0 To nombres.Length - 1
 
-                    Dim valor As String = ""
+                    Dim valor As String =
+                        Convert.ToString(fila.Cells(i).Value)
 
-                    If fila.Cells(i).Value IsNot Nothing Then
-                        valor = fila.Cells(i).Value.ToString()
+                    g.DrawRectangle(Pens.LightGray,
+                                    posX, y, anchos(i), altoFila)
+
+                    Dim colorTexto As Brush = Brushes.Black
+
+                    If i = 2 AndAlso dias <= 15 Then
+                        colorTexto = Brushes.DarkRed
+                    ElseIf i = 2 AndAlso dias <= 30 Then
+                        colorTexto = Brushes.DarkGoldenrod
                     End If
 
-                    e.Graphics.DrawRectangle(
-                    Pens.Black, posX, y, anchos(i), altoFila)
-
-                    e.Graphics.DrawString(
-                    valor,
-                    fuenteNormal,
-                    Brushes.Black,
-                    New RectangleF(posX + 4, y + 4, anchos(i) - 8, altoFila - 4))
+                    g.DrawString(valor, normal, colorTexto,
+                                 New RectangleF(posX + 5, y + 7,
+                                                anchos(i) - 10, altoFila - 5))
 
                     posX += anchos(i)
 
                 Next
 
                 y += altoFila
+                filaActual += 1
 
-            End If
+            End While
 
-            filaActual += 1
+            ' Pie de página
+            y += 10
 
-        End While
+            g.DrawLine(Pens.LightGray, x, y, x + ancho, y)
 
-        ' Ya se imprimieron todas las filas
-        e.HasMorePages = False
-        filaActual = 0
+            g.DrawString("Informe generado por el sistema de farmacia",
+                         subtitulo, Brushes.DimGray, x, y + 6)
 
+            g.DrawString("Total de lotes: " &
+                         dgvvencimientos.Rows.Cast(Of DataGridViewRow)().
+                         Count(Function(f) Not f.IsNewRow).ToString(),
+                         negrita, Brushes.Black, x + ancho - 160, y + 6)
+
+            e.HasMorePages = False
+            filaActual = 0
+
+        End Using
     End Sub
+
 End Class

@@ -91,6 +91,7 @@ Public Class Form1
             Exit Sub
         End If
         AbrirFormulario(New Formusuarios, "Usuarios")
+        MarcarActivo(btnformusuarios)
     End Sub
 
     Private Sub btndashboard_Click(sender As Object, e As EventArgs) Handles btndashboard.Click

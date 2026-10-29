@@ -197,7 +197,7 @@ Public Class fromcompras
         txtcodigolote.Text = ""
         dtpvencimiento.Value = Date.Today
         nudcantidad.Value = 1
-        nudprecio.Value = 0
+        nudprecio.Value = 1
     End Sub
 
 
