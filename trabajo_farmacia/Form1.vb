@@ -1,5 +1,8 @@
-﻿Imports mysqlconnector
+﻿Imports MySqlConnector
 Public Class Form1
+
+    Dim cerrandoSesion As Boolean = False
+
     'Private Sub btnconectar_Click(sender As Object, e As EventArgs) Handles btnconectar.Click
     '    'boton para probar conexion a BD
     '    'try catch intercepta errores
@@ -65,6 +68,7 @@ Public Class Form1
         Estilos.EstilizarBotonMenu(btncompras, pnlmenu.Width)
         Estilos.EstilizarBotonMenu(btndashboard, pnlmenu.Width)
         Estilos.EstilizarBotonMenu(btnubicacion, pnlmenu.Width)
+        Estilos.EstilizarBotonMenu(btncerrar_sesion, pnlmenu.Width)
 
         configurarmenusegunrol()
 
@@ -168,8 +172,27 @@ Public Class Form1
         End Try
     End Sub
 
+
     Private Sub btnubicacion_Click(sender As Object, e As EventArgs) Handles btnubicacion.Click
         AbrirFormulario(New ubicacion(), "  INFORMACIÓN DE LA UBICACIÓN")
         MarcarActivo(btnubicacion)
+    End Sub
+    Private Sub btncerrar_sesion_Click(sender As Object, e As EventArgs) Handles btncerrar_sesion.Click
+        If MessageBox.Show("¿Querés cerrar la sesión de " & sesion.NombreCompleto & "?", "Cerrar sesión",
+                      MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then Exit Sub
+
+        ' Borro los datos del usuario que estaba usando el sistema
+        sesion.idUsuario = 0
+        sesion.nombreUsuario = ""
+        sesion.rolUsuario = ""
+        sesion.NombreCompleto = ""
+
+        cerrandoSesion = True   ' avisa que esto NO es salir del programa
+        login.Show()            ' primero muestro el login...
+        Me.Close()
+    End Sub
+
+    Private Sub Form1_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        If Not cerrandoSesion Then Application.Exit()   ' la X de la ventana sí cierra todo
     End Sub
 End Class

@@ -26,6 +26,8 @@ Partial Class Form1
         btnproveedores = New Button()
         btncompras = New Button()
         pnlmenu = New Panel()
+        btnubicacion = New Button()
+        btncerrar_sesion = New Button()
         btndashboard = New Button()
         btnformusuarios = New Button()
         pnltitulo = New Panel()
@@ -34,7 +36,6 @@ Partial Class Form1
         btncerrarapp = New Button()
         lbltitulo = New Label()
         pnlcontenedor = New Panel()
-        btnubicacion = New Button()
         pnlmenu.SuspendLayout()
         pnltitulo.SuspendLayout()
         CType(picfotousuario, ComponentModel.ISupportInitialize).BeginInit()
@@ -43,7 +44,7 @@ Partial Class Form1
         ' btnmedicamentos
         ' 
         btnmedicamentos.BackColor = Color.SeaGreen
-        btnmedicamentos.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnmedicamentos.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnmedicamentos.Location = New Point(31, 204)
         btnmedicamentos.Name = "btnmedicamentos"
         btnmedicamentos.Size = New Size(157, 61)
@@ -65,7 +66,7 @@ Partial Class Form1
         ' btncompras
         ' 
         btncompras.BackColor = Color.SeaGreen
-        btncompras.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btncompras.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btncompras.Location = New Point(31, 399)
         btncompras.Margin = New Padding(3, 4, 3, 4)
         btncompras.Name = "btncompras"
@@ -78,6 +79,7 @@ Partial Class Form1
         ' 
         pnlmenu.BackColor = Color.MediumAquamarine
         pnlmenu.Controls.Add(btnubicacion)
+        pnlmenu.Controls.Add(btncerrar_sesion)
         pnlmenu.Controls.Add(btndashboard)
         pnlmenu.Controls.Add(btnformusuarios)
         pnlmenu.Controls.Add(btncompras)
@@ -88,14 +90,36 @@ Partial Class Form1
         pnlmenu.Location = New Point(0, 0)
         pnlmenu.Margin = New Padding(3, 4, 3, 4)
         pnlmenu.Name = "pnlmenu"
-        pnlmenu.Size = New Size(229, 808)
+        pnlmenu.Size = New Size(229, 1055)
         pnlmenu.TabIndex = 5
+        ' 
+        ' btnubicacion
+        ' 
+        btnubicacion.BackColor = Color.SeaGreen
+        btnubicacion.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnubicacion.Location = New Point(31, 682)
+        btnubicacion.Margin = New Padding(3, 5, 3, 5)
+        btnubicacion.Name = "btnubicacion"
+        btnubicacion.Size = New Size(157, 57)
+        btnubicacion.TabIndex = 7
+        btnubicacion.Text = "UBICACIÓN"
+        btnubicacion.UseVisualStyleBackColor = False
+        ' 
+        ' btncerrar_sesion
+        ' 
+        btncerrar_sesion.Location = New Point(31, 989)
+        btncerrar_sesion.Margin = New Padding(3, 4, 3, 4)
+        btncerrar_sesion.Name = "btncerrar_sesion"
+        btncerrar_sesion.Size = New Size(157, 31)
+        btncerrar_sesion.TabIndex = 0
+        btncerrar_sesion.Text = "Cerrar Sesion"
+        btncerrar_sesion.UseVisualStyleBackColor = True
         ' 
         ' btndashboard
         ' 
         btndashboard.BackColor = Color.SeaGreen
-        btndashboard.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btndashboard.Location = New Point(31, 586)
+        btndashboard.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btndashboard.Location = New Point(31, 587)
         btndashboard.Margin = New Padding(3, 4, 3, 4)
         btndashboard.Name = "btndashboard"
         btndashboard.Size = New Size(157, 57)
@@ -106,7 +130,7 @@ Partial Class Form1
         ' btnformusuarios
         ' 
         btnformusuarios.BackColor = Color.SeaGreen
-        btnformusuarios.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnformusuarios.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnformusuarios.Location = New Point(31, 493)
         btnformusuarios.Margin = New Padding(3, 4, 3, 4)
         btnformusuarios.Name = "btnformusuarios"
@@ -127,7 +151,7 @@ Partial Class Form1
         pnltitulo.Margin = New Padding(3, 4, 3, 4)
         pnltitulo.Name = "pnltitulo"
         pnltitulo.Padding = New Padding(23, 0, 0, 0)
-        pnltitulo.Size = New Size(1530, 80)
+        pnltitulo.Size = New Size(1141, 80)
         pnltitulo.TabIndex = 6
         ' 
         ' lblbienvenida
@@ -141,9 +165,9 @@ Partial Class Form1
         ' 
         ' picfotousuario
         ' 
-        picfotousuario.Location = New Point(1060, 3)
+        picfotousuario.Location = New Point(1061, 3)
         picfotousuario.Name = "picfotousuario"
-        picfotousuario.Size = New Size(75, 74)
+        picfotousuario.Size = New Size(75, 75)
         picfotousuario.SizeMode = PictureBoxSizeMode.Zoom
         picfotousuario.TabIndex = 7
         picfotousuario.TabStop = False
@@ -151,11 +175,11 @@ Partial Class Form1
         ' btncerrarapp
         ' 
         btncerrarapp.BackColor = Color.DarkRed
-        btncerrarapp.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btncerrarapp.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btncerrarapp.ForeColor = Color.White
         btncerrarapp.Location = New Point(1439, 12)
         btncerrarapp.Name = "btncerrarapp"
-        btncerrarapp.Size = New Size(79, 50)
+        btncerrarapp.Size = New Size(79, 51)
         btncerrarapp.TabIndex = 7
         btncerrarapp.Text = "CERRAR"
         btncerrarapp.UseVisualStyleBackColor = False
@@ -168,7 +192,7 @@ Partial Class Form1
         lbltitulo.Font = New Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lbltitulo.Location = New Point(23, 0)
         lbltitulo.Name = "lbltitulo"
-        lbltitulo.Size = New Size(1507, 80)
+        lbltitulo.Size = New Size(1118, 80)
         lbltitulo.TabIndex = 0
         lbltitulo.Text = "Inicio"
         lbltitulo.TextAlign = ContentAlignment.MiddleLeft
@@ -180,27 +204,14 @@ Partial Class Form1
         pnlcontenedor.Location = New Point(229, 80)
         pnlcontenedor.Margin = New Padding(3, 4, 3, 4)
         pnlcontenedor.Name = "pnlcontenedor"
-        pnlcontenedor.Size = New Size(1530, 728)
+        pnlcontenedor.Size = New Size(1141, 975)
         pnlcontenedor.TabIndex = 7
-        ' 
-        ' btnubicacion
-        ' 
-        btnubicacion.BackColor = Color.SeaGreen
-        btnubicacion.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnubicacion.Location = New Point(31, 678)
-        btnubicacion.Margin = New Padding(3, 4, 3, 4)
-        btnubicacion.Name = "btnubicacion"
-        btnubicacion.Size = New Size(157, 57)
-        btnubicacion.TabIndex = 7
-        btnubicacion.Text = "UBICACIÓN"
-        btnubicacion.UseVisualStyleBackColor = False
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = SystemColors.ButtonHighlight
-        ClientSize = New Size(1759, 808)
+        ClientSize = New Size(1370, 1055)
         Controls.Add(pnlcontenedor)
         Controls.Add(pnltitulo)
         Controls.Add(pnlmenu)
@@ -225,5 +236,7 @@ Partial Class Form1
     Friend WithEvents picfotousuario As PictureBox
     Friend WithEvents lblbienvenida As Label
     Friend WithEvents btnubicacion As Button
+    Friend WithEvents btncerrar_sesion As Button
+
 
 End Class
