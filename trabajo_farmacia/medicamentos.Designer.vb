@@ -28,6 +28,9 @@ Partial Class medicamentos
         txtbuscar = New TextBox()
         dgvmedicamento = New DataGridView()
         GroupBox2 = New GroupBox()
+        cbubicacion = New ComboBox()
+        Label21 = New Label()
+        btnmasubicacion = New Button()
         btnficha = New Button()
         btnmasdroga = New Button()
         btnmasaccion = New Button()
@@ -65,6 +68,20 @@ Partial Class medicamentos
         btnquitar_ima = New Button()
         Panel1 = New Panel()
         pnlcontenedorabm = New Panel()
+        pnlabmubicacion = New Panel()
+        btncerrarubi = New Button()
+        btnmodificarubicacion = New Button()
+        btneliminarubicacion = New Button()
+        btnagregarubicacion = New Button()
+        Label20 = New Label()
+        Label19 = New Label()
+        Label18 = New Label()
+        Label17 = New Label()
+        txtdetalleubicacion = New TextBox()
+        Label16 = New Label()
+        cbnivelubicacion = New ComboBox()
+        cbestanteubicacion = New ComboBox()
+        cbpasilloubicacion = New ComboBox()
         pnlabmdroga = New Panel()
         cbabmdroga = New ComboBox()
         btncerrardroga = New Button()
@@ -109,6 +126,7 @@ Partial Class medicamentos
         CType(pbmedicamentos, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
         pnlcontenedorabm.SuspendLayout()
+        pnlabmubicacion.SuspendLayout()
         pnlabmdroga.SuspendLayout()
         pnlabmaccion.SuspendLayout()
         pnlpresentacion.SuspendLayout()
@@ -161,6 +179,9 @@ Partial Class medicamentos
         ' 
         GroupBox2.BackColor = Color.DarkSeaGreen
         GroupBox2.BackgroundImageLayout = ImageLayout.None
+        GroupBox2.Controls.Add(cbubicacion)
+        GroupBox2.Controls.Add(Label21)
+        GroupBox2.Controls.Add(btnmasubicacion)
         GroupBox2.Controls.Add(btnficha)
         GroupBox2.Controls.Add(btnmasdroga)
         GroupBox2.Controls.Add(btnmasaccion)
@@ -193,6 +214,35 @@ Partial Class medicamentos
         GroupBox2.TabIndex = 2
         GroupBox2.TabStop = False
         GroupBox2.Text = "Datos de Medicamentos"
+        ' 
+        ' cbubicacion
+        ' 
+        cbubicacion.FormattingEnabled = True
+        cbubicacion.Location = New Point(128, 398)
+        cbubicacion.Name = "cbubicacion"
+        cbubicacion.Size = New Size(281, 31)
+        cbubicacion.TabIndex = 39
+        ' 
+        ' Label21
+        ' 
+        Label21.AutoSize = True
+        Label21.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label21.Location = New Point(21, 403)
+        Label21.Name = "Label21"
+        Label21.Size = New Size(96, 20)
+        Label21.TabIndex = 38
+        Label21.Text = "UBICACIÓN:"
+        ' 
+        ' btnmasubicacion
+        ' 
+        btnmasubicacion.BackColor = Color.OliveDrab
+        btnmasubicacion.Font = New Font("Segoe UI Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnmasubicacion.Location = New Point(425, 390)
+        btnmasubicacion.Name = "btnmasubicacion"
+        btnmasubicacion.Size = New Size(37, 44)
+        btnmasubicacion.TabIndex = 37
+        btnmasubicacion.Text = "+"
+        btnmasubicacion.UseVisualStyleBackColor = False
         ' 
         ' btnficha
         ' 
@@ -513,7 +563,7 @@ Partial Class medicamentos
         ' 
         ' btnguardar_ima
         ' 
-        btnguardar_ima.Location = New Point(112, 339)
+        btnguardar_ima.Location = New Point(112, 338)
         btnguardar_ima.Name = "btnguardar_ima"
         btnguardar_ima.Size = New Size(103, 40)
         btnguardar_ima.TabIndex = 5
@@ -544,6 +594,7 @@ Partial Class medicamentos
         ' pnlcontenedorabm
         ' 
         pnlcontenedorabm.BorderStyle = BorderStyle.FixedSingle
+        pnlcontenedorabm.Controls.Add(pnlabmubicacion)
         pnlcontenedorabm.Controls.Add(pnlabmdroga)
         pnlcontenedorabm.Controls.Add(pnlabmaccion)
         pnlcontenedorabm.Controls.Add(pnlpresentacion)
@@ -553,6 +604,146 @@ Partial Class medicamentos
         pnlcontenedorabm.Size = New Size(333, 461)
         pnlcontenedorabm.TabIndex = 8
         pnlcontenedorabm.Visible = False
+        ' 
+        ' pnlabmubicacion
+        ' 
+        pnlabmubicacion.Controls.Add(btncerrarubi)
+        pnlabmubicacion.Controls.Add(btnmodificarubicacion)
+        pnlabmubicacion.Controls.Add(btneliminarubicacion)
+        pnlabmubicacion.Controls.Add(btnagregarubicacion)
+        pnlabmubicacion.Controls.Add(Label20)
+        pnlabmubicacion.Controls.Add(Label19)
+        pnlabmubicacion.Controls.Add(Label18)
+        pnlabmubicacion.Controls.Add(Label17)
+        pnlabmubicacion.Controls.Add(txtdetalleubicacion)
+        pnlabmubicacion.Controls.Add(Label16)
+        pnlabmubicacion.Controls.Add(cbnivelubicacion)
+        pnlabmubicacion.Controls.Add(cbestanteubicacion)
+        pnlabmubicacion.Controls.Add(cbpasilloubicacion)
+        pnlabmubicacion.Dock = DockStyle.Fill
+        pnlabmubicacion.Location = New Point(0, 0)
+        pnlabmubicacion.Name = "pnlabmubicacion"
+        pnlabmubicacion.Size = New Size(331, 459)
+        pnlabmubicacion.TabIndex = 37
+        ' 
+        ' btncerrarubi
+        ' 
+        btncerrarubi.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btncerrarubi.ForeColor = Color.Red
+        btncerrarubi.Location = New Point(288, 3)
+        btncerrarubi.Name = "btncerrarubi"
+        btncerrarubi.Size = New Size(40, 29)
+        btncerrarubi.TabIndex = 62
+        btncerrarubi.Text = "X"
+        btncerrarubi.UseVisualStyleBackColor = True
+        ' 
+        ' btnmodificarubicacion
+        ' 
+        btnmodificarubicacion.Location = New Point(115, 396)
+        btnmodificarubicacion.Name = "btnmodificarubicacion"
+        btnmodificarubicacion.Size = New Size(102, 49)
+        btnmodificarubicacion.TabIndex = 52
+        btnmodificarubicacion.Text = "MODIFICAR"
+        btnmodificarubicacion.UseVisualStyleBackColor = True
+        ' 
+        ' btneliminarubicacion
+        ' 
+        btneliminarubicacion.Location = New Point(115, 336)
+        btneliminarubicacion.Name = "btneliminarubicacion"
+        btneliminarubicacion.Size = New Size(102, 49)
+        btneliminarubicacion.TabIndex = 52
+        btneliminarubicacion.Text = "ELIMINAR"
+        btneliminarubicacion.UseVisualStyleBackColor = True
+        ' 
+        ' btnagregarubicacion
+        ' 
+        btnagregarubicacion.Location = New Point(115, 277)
+        btnagregarubicacion.Name = "btnagregarubicacion"
+        btnagregarubicacion.Size = New Size(102, 49)
+        btnagregarubicacion.TabIndex = 61
+        btnagregarubicacion.Text = "AGREGAR"
+        btnagregarubicacion.UseVisualStyleBackColor = True
+        ' 
+        ' Label20
+        ' 
+        Label20.AutoSize = True
+        Label20.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label20.Location = New Point(15, 220)
+        Label20.Name = "Label20"
+        Label20.Size = New Size(62, 20)
+        Label20.TabIndex = 60
+        Label20.Text = "Detalle:"
+        ' 
+        ' Label19
+        ' 
+        Label19.AutoSize = True
+        Label19.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label19.Location = New Point(27, 177)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(49, 20)
+        Label19.TabIndex = 59
+        Label19.Text = "Nivel:"
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label18.Location = New Point(18, 131)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(65, 20)
+        Label18.TabIndex = 58
+        Label18.Text = "Estante:"
+        ' 
+        ' Label17
+        ' 
+        Label17.AutoSize = True
+        Label17.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label17.Location = New Point(18, 85)
+        Label17.Name = "Label17"
+        Label17.Size = New Size(58, 20)
+        Label17.TabIndex = 57
+        Label17.Text = "Pasillo:"
+        ' 
+        ' txtdetalleubicacion
+        ' 
+        txtdetalleubicacion.Location = New Point(85, 217)
+        txtdetalleubicacion.Name = "txtdetalleubicacion"
+        txtdetalleubicacion.Size = New Size(220, 27)
+        txtdetalleubicacion.TabIndex = 56
+        ' 
+        ' Label16
+        ' 
+        Label16.AutoSize = True
+        Label16.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label16.Location = New Point(105, 23)
+        Label16.Name = "Label16"
+        Label16.Size = New Size(103, 23)
+        Label16.TabIndex = 55
+        Label16.Text = "UBICACIÓN"
+        ' 
+        ' cbnivelubicacion
+        ' 
+        cbnivelubicacion.FormattingEnabled = True
+        cbnivelubicacion.Location = New Point(85, 174)
+        cbnivelubicacion.Name = "cbnivelubicacion"
+        cbnivelubicacion.Size = New Size(220, 28)
+        cbnivelubicacion.TabIndex = 54
+        ' 
+        ' cbestanteubicacion
+        ' 
+        cbestanteubicacion.FormattingEnabled = True
+        cbestanteubicacion.Location = New Point(85, 128)
+        cbestanteubicacion.Name = "cbestanteubicacion"
+        cbestanteubicacion.Size = New Size(220, 28)
+        cbestanteubicacion.TabIndex = 53
+        ' 
+        ' cbpasilloubicacion
+        ' 
+        cbpasilloubicacion.FormattingEnabled = True
+        cbpasilloubicacion.Location = New Point(85, 82)
+        cbpasilloubicacion.Name = "cbpasilloubicacion"
+        cbpasilloubicacion.Size = New Size(220, 28)
+        cbpasilloubicacion.TabIndex = 52
         ' 
         ' pnlabmdroga
         ' 
@@ -889,7 +1080,7 @@ Partial Class medicamentos
         AutoScaleMode = AutoScaleMode.Font
         AutoScroll = True
         BackColor = SystemColors.InactiveCaption
-        ClientSize = New Size(1370, 999)
+        ClientSize = New Size(1526, 1028)
         Controls.Add(pnlcontenedorabm)
         Controls.Add(Panel1)
         Controls.Add(GroupBox2)
@@ -910,6 +1101,8 @@ Partial Class medicamentos
         CType(pbmedicamentos, ComponentModel.ISupportInitialize).EndInit()
         Panel1.ResumeLayout(False)
         pnlcontenedorabm.ResumeLayout(False)
+        pnlabmubicacion.ResumeLayout(False)
+        pnlabmubicacion.PerformLayout()
         pnlabmdroga.ResumeLayout(False)
         pnlabmdroga.PerformLayout()
         pnlabmaccion.ResumeLayout(False)
@@ -997,4 +1190,21 @@ Partial Class medicamentos
     Friend WithEvents btnficha As Button
     Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
+    Friend WithEvents pnlabmubicacion As Panel
+    Friend WithEvents btneliminarubicacion As Button
+    Friend WithEvents btnagregarubicacion As Button
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents txtdetalleubicacion As TextBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents cbnivelubicacion As ComboBox
+    Friend WithEvents cbestanteubicacion As ComboBox
+    Friend WithEvents cbpasilloubicacion As ComboBox
+    Friend WithEvents btncerrarubi As Button
+    Friend WithEvents btnmodificarubicacion As Button
+    Friend WithEvents Label21 As Label
+    Friend WithEvents btnmasubicacion As Button
+    Friend WithEvents cbubicacion As ComboBox
 End Class

@@ -296,4 +296,132 @@ Module moduloauxiliares
         End Try
     End Sub
 
+    Public Function guardarUbicacion(pasillo As String, estante As String, nivel As String, detalle As String) As Boolean
+        Try
+            Using cn As New MySqlConnection(CADENA)
+                cn.Open()
+
+                Dim sql As String = "INSERT INTO ubicacion (pasillo, estante, nivel, detalle, estado) " &
+                                    "VALUES (@pasillo, @estante, @nivel, @detalle, 1);"
+
+                Using cmd As New MySqlCommand(sql, cn)
+                    cmd.Parameters.AddWithValue("@pasillo", pasillo)
+                    cmd.Parameters.AddWithValue("@estante", estante)
+                    cmd.Parameters.AddWithValue("@nivel", nivel)
+                    cmd.Parameters.AddWithValue("@detalle", detalle)
+
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+
+            Return True
+
+        Catch ex As Exception
+            MessageBox.Show(
+                "Error al guardar ubicación: " & ex.Message,
+                "Error SQL",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+            Return False
+        End Try
+    End Function
+
+
+    Public Function modificarUbicacion(pasillo As String, estante As String, nivel As String, detalle As String) As Boolean
+        Try
+            Using cn As New MySqlConnection(CADENA)
+                cn.Open()
+
+                ' Modifica la observación/detalle de la ubicación especificada
+                Dim sql As String = "UPDATE ubicacion SET detalle = @detalle " &
+                                    "WHERE pasillo = @pasillo AND estante = @estante " &
+                                    "AND nivel = @nivel AND estado = 1;"
+
+                Using cmd As New MySqlCommand(sql, cn)
+                    cmd.Parameters.AddWithValue("@pasillo", pasillo)
+                    cmd.Parameters.AddWithValue("@estante", estante)
+                    cmd.Parameters.AddWithValue("@nivel", nivel)
+                    cmd.Parameters.AddWithValue("@detalle", detalle)
+
+                    Dim filasAfectadas As Integer = cmd.ExecuteNonQuery()
+
+                    Return filasAfectadas > 0
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show(
+                "Error al modificar ubicación: " & ex.Message,
+                "Error SQL",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+            Return False
+        End Try
+    End Function
+
+
+    Public Function eliminarUbicacion(pasillo As String, estante As String, nivel As String) As Boolean
+        Try
+            Using cn As New MySqlConnection(CADENA)
+                cn.Open()
+
+                ' Baja lógica: actualiza estado = 0 para la combinación seleccionada
+                Dim sql As String = "UPDATE ubicacion SET estado = 0 " &
+                                    "WHERE pasillo = @pasillo AND estante = @estante " &
+                                    "AND nivel = @nivel AND estado = 1;"
+
+                Using cmd As New MySqlCommand(sql, cn)
+                    cmd.Parameters.AddWithValue("@pasillo", pasillo)
+                    cmd.Parameters.AddWithValue("@estante", estante)
+                    cmd.Parameters.AddWithValue("@nivel", nivel)
+
+                    Dim filasAfectadas As Integer = cmd.ExecuteNonQuery()
+
+                    Return filasAfectadas > 0
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show(
+                "Error al eliminar ubicación: " & ex.Message,
+                "Error SQL",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+            Return False
+        End Try
+    End Function
+
+    Public Sub cargarComboUbicacion(cbo As ComboBox)
+        Try
+            Dim dt As New DataTable
+
+            Using cn As New MySqlConnection(CADENA)
+                cn.Open()
+
+                ' Concatenamos únicamente pasillo, estante y nivel en la columna 'descripcion'
+                Dim sql As String = "SELECT id_ubicacion, CONCAT(pasillo, ' - ', estante, ' - ', nivel) AS descripcion " &
+                                    "FROM ubicacion WHERE estado = 1 ORDER BY pasillo, estante, nivel;"
+
+                Using cmd As New MySqlCommand(sql, cn)
+                    Using da As New MySqlDataAdapter(cmd)
+                        da.Fill(dt)
+                    End Using
+                End Using
+            End Using
+
+            cbo.DisplayMember = "descripcion"
+            cbo.ValueMember = "id_ubicacion"
+            cbo.DataSource = dt
+
+
+        Catch ex As Exception
+            MessageBox.Show("Error al cargar combo ubicación: " & ex.Message,
+                            "Error SQL",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error)
+        End Try
+    End Sub
 End Module

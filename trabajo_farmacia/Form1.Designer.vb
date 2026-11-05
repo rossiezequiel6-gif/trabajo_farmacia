@@ -34,6 +34,7 @@ Partial Class Form1
         btncerrarapp = New Button()
         lbltitulo = New Label()
         pnlcontenedor = New Panel()
+        btnubicacion = New Button()
         pnlmenu.SuspendLayout()
         pnltitulo.SuspendLayout()
         CType(picfotousuario, ComponentModel.ISupportInitialize).BeginInit()
@@ -76,6 +77,7 @@ Partial Class Form1
         ' pnlmenu
         ' 
         pnlmenu.BackColor = Color.MediumAquamarine
+        pnlmenu.Controls.Add(btnubicacion)
         pnlmenu.Controls.Add(btndashboard)
         pnlmenu.Controls.Add(btnformusuarios)
         pnlmenu.Controls.Add(btncompras)
@@ -86,7 +88,7 @@ Partial Class Form1
         pnlmenu.Location = New Point(0, 0)
         pnlmenu.Margin = New Padding(3, 4, 3, 4)
         pnlmenu.Name = "pnlmenu"
-        pnlmenu.Size = New Size(229, 723)
+        pnlmenu.Size = New Size(229, 808)
         pnlmenu.TabIndex = 5
         ' 
         ' btndashboard
@@ -178,15 +180,27 @@ Partial Class Form1
         pnlcontenedor.Location = New Point(229, 80)
         pnlcontenedor.Margin = New Padding(3, 4, 3, 4)
         pnlcontenedor.Name = "pnlcontenedor"
-        pnlcontenedor.Size = New Size(1530, 643)
+        pnlcontenedor.Size = New Size(1530, 728)
         pnlcontenedor.TabIndex = 7
+        ' 
+        ' btnubicacion
+        ' 
+        btnubicacion.BackColor = Color.SeaGreen
+        btnubicacion.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnubicacion.Location = New Point(31, 678)
+        btnubicacion.Margin = New Padding(3, 4, 3, 4)
+        btnubicacion.Name = "btnubicacion"
+        btnubicacion.Size = New Size(157, 57)
+        btnubicacion.TabIndex = 7
+        btnubicacion.Text = "UBICACIÓN"
+        btnubicacion.UseVisualStyleBackColor = False
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ButtonHighlight
-        ClientSize = New Size(1759, 723)
+        ClientSize = New Size(1759, 808)
         Controls.Add(pnlcontenedor)
         Controls.Add(pnltitulo)
         Controls.Add(pnlmenu)
@@ -210,5 +224,6 @@ Partial Class Form1
     Friend WithEvents btncerrarapp As Button
     Friend WithEvents picfotousuario As PictureBox
     Friend WithEvents lblbienvenida As Label
+    Friend WithEvents btnubicacion As Button
 
 End Class

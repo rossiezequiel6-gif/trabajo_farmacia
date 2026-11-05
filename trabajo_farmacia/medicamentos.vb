@@ -2,6 +2,7 @@
 Imports System.Drawing.Printing
 Imports System.IO
 Imports MySqlConnector
+Imports ScottPlot.Colormaps
 Public Class medicamentos
 
     'funcion para convertir una imagen en un arreglo de bytes
@@ -74,21 +75,20 @@ Public Class medicamentos
 
                 ' Armo mi consulta SQL con la suma de lotes y agrupamiento
                 Dim consulta As String = "SELECT m.id_medicamento, m.codigo, m.nombre AS medicamento, " &
-                                     "IFNULL(SUM(lo.cantidad_actual), 0) AS stock_actual, " &
-                                     "m.stock_min, m.stock_max, m.punto_pedido, m.requiere_receta, " &
-                                     "m.id_droga, d.nombre AS droga, " &
-                                     "m.id_laboratorio, l.nombre AS laboratorio, " &
-                                     "m.id_accion, a.nombre AS accion_terapeutica, " &
-                                     "m.id_presentacion, p.descripcion AS presentacion " &
-                                     "FROM medicamento m " &
-                                     "LEFT JOIN lote lo ON m.id_medicamento = lo.id_medicamento " &
-                                     "INNER JOIN droga d ON m.id_droga = d.id_droga " &
-                                     "INNER JOIN laboratorio l ON m.id_laboratorio = l.id_laboratorio " &
-                                     "INNER JOIN accion_terapeutica a ON m.id_accion = a.id_accion " &
-                                     "INNER JOIN presentacion p ON m.id_presentacion = p.id_presentacion " &
-                                     "GROUP BY m.id_medicamento, m.codigo, m.nombre, m.stock_min, m.stock_max, m.punto_pedido, m.requiere_receta, " &
-                                     "m.id_droga, d.nombre, m.id_laboratorio, l.nombre, m.id_accion, a.nombre, m.id_presentacion, p.descripcion " &
-                                     "ORDER BY m.id_medicamento;"
+                    "IFNULL((SELECT SUM(lo.cantidad_actual) FROM lote lo WHERE lo.id_medicamento = m.id_medicamento), 0) AS stock_actual, " &
+                    "m.stock_min, m.stock_max, m.punto_pedido, m.requiere_receta, " &
+                    "m.id_droga, d.nombre AS droga, " &
+                    "m.id_laboratorio, l.nombre AS laboratorio, " &
+                    "m.id_accion, a.nombre AS accion_terapeutica, " &
+                    "m.id_presentacion, p.descripcion AS presentacion, " &
+                    "m.id_ubicacion, IFNULL(CONCAT(u.pasillo, ' - ', u.estante, ' - ', u.nivel), 'Sin Ubicación') AS ubicacion " &
+                    "FROM medicamento m " &
+                    "INNER JOIN droga d ON m.id_droga = d.id_droga " &
+                    "INNER JOIN laboratorio l ON m.id_laboratorio = l.id_laboratorio " &
+                    "INNER JOIN accion_terapeutica a ON m.id_accion = a.id_accion " &
+                    "INNER JOIN presentacion p ON m.id_presentacion = p.id_presentacion " &
+                    "LEFT JOIN ubicacion u ON m.id_ubicacion = u.id_ubicacion " &
+                    "ORDER BY m.id_medicamento;"
 
                 Using cmd As New MySqlCommand(consulta, cn)
                     ' Uso DataTable para guardar un SELECT
@@ -121,6 +121,11 @@ Public Class medicamentos
                     If dgvmedicamento.Columns.Contains("id_presentacion") Then
                         dgvmedicamento.Columns("id_presentacion").Visible = False
                     End If
+
+                    If dgvmedicamento.Columns.Contains("id_ubicacion") Then
+                        dgvmedicamento.Columns("id_ubicacion").Visible = False
+                    End If
+
                 End Using
             End Using
 
@@ -272,6 +277,10 @@ Public Class medicamentos
         EstilizarBoton(btneliminardroga, Color.FromArgb(210, 85, 95))
         EstilizarBoton(btnmodificardroga, ColorActivo)
 
+        EstilizarBoton(btnagregarubicacion, ColorMenu)
+        EstilizarBoton(btneliminarubicacion, Color.FromArgb(210, 85, 95))
+        EstilizarBoton(btnmodificarubicacion, ColorActivo)
+
         'cargar los combos
         moduloauxiliares.cargarcombolab(cblaboratorio)
         moduloauxiliares.cargarcombolab(cbabmlab)
@@ -284,6 +293,8 @@ Public Class medicamentos
 
         moduloauxiliares.cargarComboDroga(cbabmdroga)
         moduloauxiliares.cargarComboDroga(cbdroga)
+
+        moduloauxiliares.cargarComboUbicacion(cbubicacion)
 
         'ubico bien los numericupdown
         nudstockmin.Location = New Point(172, 35)
@@ -309,6 +320,12 @@ Public Class medicamentos
             nudstockmin.Value = Convert.ToDecimal(dgvmedicamento.Rows(e.RowIndex).Cells("stock_min").Value)
             nudstockmax.Value = Convert.ToDecimal(dgvmedicamento.Rows(e.RowIndex).Cells("stock_max").Value)
             nudpedido.Value = Convert.ToDecimal(dgvmedicamento.Rows(e.RowIndex).Cells("punto_pedido").Value)
+            Dim celdaubicacion = dgvmedicamento.Rows(e.RowIndex).Cells("id_ubicacion").Value
+            If Not IsDBNull(celdaubicacion) AndAlso celdaubicacion IsNot Nothing Then
+                cbubicacion.SelectedValue = Convert.ToInt32(celdaubicacion)
+            Else
+                cbubicacion.SelectedIndex = -1 ' Deselecciona si es DBNull
+            End If
             'obtener el valor de la celda en una variable
             Dim celdareceta = dgvmedicamento.Rows(e.RowIndex).Cells("requiere_receta").Value
 
@@ -345,6 +362,7 @@ Public Class medicamentos
         cblaboratorio.SelectedIndex = -1
         cbterapeutica.SelectedIndex = -1
         cbpresentacion.SelectedIndex = -1
+        cbubicacion.SelectedIndex = -1
 
         'reseteamos los numericupdown a 0
         nudstockmin.Value = 0
@@ -429,6 +447,12 @@ Public Class medicamentos
             Exit Sub
         End If
 
+        If cbubicacion.SelectedIndex = -1 Then
+            MessageBox.Show("Debe seleccionar una ubicación", "atención", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cbubicacion.Focus()
+            Exit Sub
+        End If
+
         'ejecucion del update en mysql
         Try
             Using cn As New MySqlConnection(CADENA)
@@ -445,7 +469,8 @@ Public Class medicamentos
                                          "id_droga=@id_droga, " &
                                          "id_laboratorio=@id_laboratorio, " &
                                          "id_accion=@id_accion, " &
-                                         "id_presentacion=@id_presentacion " &
+                                         "id_presentacion=@id_presentacion, " &
+                                         "id_ubicacion=@id_ubicacion " &
                                          "WHERE id_medicamento=@id_medicamento;"
                 Using cmd As New MySqlCommand(consulta, cn)
                     'parametros de textos y numericos
@@ -461,6 +486,7 @@ Public Class medicamentos
                     cmd.Parameters.AddWithValue("@id_laboratorio", cblaboratorio.SelectedValue)
                     cmd.Parameters.AddWithValue("@id_accion", cbterapeutica.SelectedValue)
                     cmd.Parameters.AddWithValue("@id_presentacion", cbpresentacion.SelectedValue)
+                    cmd.Parameters.AddWithValue("@id_ubicacion", cbubicacion.SelectedValue)
 
                     'parametro para el where
                     cmd.Parameters.AddWithValue("@id_medicamento", txtid.Text.Trim)
@@ -517,12 +543,18 @@ Public Class medicamentos
             Exit Sub
         End If
 
+        If cbubicacion.SelectedIndex = -1 Then
+            MessageBox.Show("Debe seleccionar una ubicación", "atención", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cbubicacion.Focus()
+            Exit Sub
+        End If
+
         'insercion en la base de datos
         Try
             Using cn As New MySqlConnection(CADENA)
                 cn.Open()
-                Dim consulta As String = "INSERT INTO medicamento (codigo, nombre, stock_min, stock_max, punto_pedido, requiere_receta, id_droga, id_laboratorio, id_accion, id_presentacion) " &
-                                         "VALUES (@codigo, @nombre, @stock_min, @stock_max, @punto_pedido, @requiere_receta, @id_droga, @id_laboratorio, @id_accion, @id_presentacion)"
+                Dim consulta As String = "INSERT INTO medicamento (codigo, nombre, stock_min, stock_max, punto_pedido, requiere_receta, id_droga, id_laboratorio, id_accion, id_presentacion, id_ubicacion) " &
+                                         "VALUES (@codigo, @nombre, @stock_min, @stock_max, @punto_pedido, @requiere_receta, @id_droga, @id_laboratorio, @id_accion, @id_presentacion, @id_ubicacion)"
                 Using cmd As New MySqlCommand(consulta, cn)
                     cmd.Parameters.AddWithValue("@codigo", txtcodigo.Text.Trim)
                     cmd.Parameters.AddWithValue("@nombre", txtnombre.Text.Trim)
@@ -534,6 +566,7 @@ Public Class medicamentos
                     cmd.Parameters.AddWithValue("@id_laboratorio", cblaboratorio.SelectedValue)
                     cmd.Parameters.AddWithValue("@id_accion", cbterapeutica.SelectedValue)
                     cmd.Parameters.AddWithValue("@id_presentacion", cbpresentacion.SelectedValue)
+                    cmd.Parameters.AddWithValue("@id_ubicacion", cbubicacion.SelectedValue)
                     Dim resultado As Integer = cmd.ExecuteNonQuery()
                     MessageBox.Show("Registros insertados: " & resultado)
                 End Using
@@ -750,13 +783,13 @@ Public Class medicamentos
         End If
         'llamo a la funcion que guarda el laboratorio en la base de datos
         If moduloauxiliares.guardarlaboratorio(txtabmlab.Text.Trim()) Then
-                MessageBox.Show("Laboratorio agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                moduloauxiliares.cargarcombolab(cblaboratorio)
-                moduloauxiliares.cargarcombolab(cbabmlab)
-                txtabmlab.Clear()
-            Else
-                MessageBox.Show("Error al agregar el laboratorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            MessageBox.Show("Laboratorio agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            moduloauxiliares.cargarcombolab(cblaboratorio)
+            moduloauxiliares.cargarcombolab(cbabmlab)
+            txtabmlab.Clear()
+        Else
+            MessageBox.Show("Error al agregar el laboratorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
 
 
     End Sub
@@ -769,31 +802,31 @@ Public Class medicamentos
         End If
         'llamo a la funcion que guarda la accion terapeutica en la base de datos
         If moduloauxiliares.guardaraccion(txtabmaccion.Text.Trim()) Then
-                MessageBox.Show("Acción terapéutica agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                moduloauxiliares.cargarcomboaccion(cbterapeutica)
-                moduloauxiliares.cargarcomboaccion(cbabmaccion)
-                txtabmaccion.Clear()
-            Else
-                MessageBox.Show("Error al agregar la acción terapéutica.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            MessageBox.Show("Acción terapéutica agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            moduloauxiliares.cargarcomboaccion(cbterapeutica)
+            moduloauxiliares.cargarcomboaccion(cbabmaccion)
+            txtabmaccion.Clear()
+        Else
+            MessageBox.Show("Error al agregar la acción terapéutica.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
 
     End Sub
 
     Private Sub btnagregardroga_Click(sender As Object, e As EventArgs) Handles btnagregardroga.Click
         'verifico que el txt este cargado
-        If txtabmdroga.Text.Trim() = "" Then
+        If txtabmdroga.Text.Trim = "" Then
             MessageBox.Show("Por favor, ingrese el nombre de la droga.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
         'llamo a la funcion que guarda la droga en la base de datos
-        If moduloauxiliares.guardarDroga(txtabmdroga.Text.Trim()) Then
-                MessageBox.Show("Droga agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                moduloauxiliares.cargarComboDroga(cbdroga)
-                moduloauxiliares.cargarComboDroga(cbabmdroga)
-                txtabmdroga.Clear()
-            Else
-                MessageBox.Show("Error al agregar la droga.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+        If guardarDroga(txtabmdroga.Text.Trim) Then
+            MessageBox.Show("Droga agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            cargarComboDroga(cbdroga)
+            cargarComboDroga(cbabmdroga)
+            txtabmdroga.Clear()
+        Else
+            MessageBox.Show("Error al agregar la droga.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
 
     End Sub
 
@@ -805,13 +838,13 @@ Public Class medicamentos
         End If
         'llamo a la funcion que guarda la presentacion en la base de datos
         If moduloauxiliares.guardarPresentacion(txtabmpresentacion.Text.Trim()) Then
-                MessageBox.Show("Presentación agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                moduloauxiliares.cargarComboPresentacion(cbpresentacion)
-                moduloauxiliares.cargarComboPresentacion(cbabmpres)
-                txtabmpresentacion.Clear()
-            Else
-                MessageBox.Show("Error al agregar la presentación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            MessageBox.Show("Presentación agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            moduloauxiliares.cargarComboPresentacion(cbpresentacion)
+            moduloauxiliares.cargarComboPresentacion(cbabmpres)
+            txtabmpresentacion.Clear()
+        Else
+            MessageBox.Show("Error al agregar la presentación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
 
     End Sub
 
@@ -833,15 +866,15 @@ Public Class medicamentos
 
     Private Sub btnmodificardroga_Click(sender As Object, e As EventArgs) Handles btnmodificardroga.Click
         'verifico que el txt este cargado y que haya seleccionado un item del combo
-        If cbabmdroga.SelectedValue Is Nothing OrElse txtabmdroga.Text.Trim() = "" Then
+        If cbabmdroga.SelectedValue Is Nothing OrElse txtabmdroga.Text.Trim = "" Then
             MessageBox.Show("Por favor, seleccione una droga y asegúrese de que el nombre no esté vacío.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
             'llamo a la funcion que modifica la droga en la base de datos
-            Dim id As Integer = Convert.ToInt32(cbabmdroga.SelectedValue)
-            If moduloauxiliares.modificarDroga(id, txtabmdroga.Text.Trim()) Then
+            Dim id = Convert.ToInt32(cbabmdroga.SelectedValue)
+            If modificarDroga(id, txtabmdroga.Text.Trim) Then
                 MessageBox.Show("Droga modificada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                moduloauxiliares.cargarComboDroga(cbabmdroga)
-                moduloauxiliares.cargarComboDroga(cbdroga)
+                cargarComboDroga(cbabmdroga)
+                cargarComboDroga(cbdroga)
                 txtabmdroga.Clear()
             End If
         End If
@@ -896,11 +929,11 @@ Public Class medicamentos
         'verifico que haya seleccionado un item del combo
         If cbabmdroga.SelectedValue Is Nothing Then Exit Sub
         'llamo a la funcion que elimina la droga en la base de datos
-        Dim id As Integer = Convert.ToInt32(cbabmdroga.SelectedValue)
-        If moduloauxiliares.eliminarDroga(id) Then
+        Dim id = Convert.ToInt32(cbabmdroga.SelectedValue)
+        If eliminarDroga(id) Then
             MessageBox.Show("Droga eliminada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            moduloauxiliares.cargarComboDroga(cbabmdroga)
-            moduloauxiliares.cargarComboDroga(cbdroga)
+            cargarComboDroga(cbabmdroga)
+            cargarComboDroga(cbdroga)
             txtabmdroga.Clear()
         End If
     End Sub
@@ -1107,4 +1140,216 @@ Public Class medicamentos
 
     End Sub
 
+
+    Private Sub btnmasubicacion_Click(sender As Object, e As EventArgs) Handles btnmasubicacion.Click
+
+        ' Abrir el panel del ABM auxiliar de ubicación
+        mostrarpanelauxiliar(pnlabmubicacion)
+
+        cargarCombosAbmUbicacion()
+
+        cbpasilloubicacion.SelectedIndex = -1
+        cbestanteubicacion.SelectedIndex = -1
+        cbnivelubicacion.SelectedIndex = -1
+
+        txtdetalleubicacion.Clear()
+
+    End Sub
+
+
+
+    Private Sub btnagregarubicacion_Click(sender As Object, e As EventArgs) Handles btnagregarubicacion.Click
+
+        ' Validamos que se hayan seleccionado los 3 datos principales
+        If cbpasilloubicacion.SelectedIndex = -1 OrElse
+       cbestanteubicacion.SelectedIndex = -1 OrElse
+       cbnivelubicacion.SelectedIndex = -1 Then
+
+            MessageBox.Show(
+            "Por favor, seleccione Pasillo, Estante y Nivel.",
+            "Campo requerido",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        ' Guardamos en MySQL usando la función del módulo
+        If guardarUbicacion(
+        cbpasilloubicacion.Text,
+        cbestanteubicacion.Text,
+        cbnivelubicacion.Text,
+        txtdetalleubicacion.Text.Trim()) Then
+
+            MessageBox.Show(
+            "Ubicación registrada correctamente.",
+            "Éxito",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information)
+
+            ' Limpiamos selección
+            cbpasilloubicacion.SelectedIndex = -1
+            cbestanteubicacion.SelectedIndex = -1
+            cbnivelubicacion.SelectedIndex = -1
+
+            txtdetalleubicacion.Clear()
+
+        Else
+            MessageBox.Show(
+            "Error al registrar la ubicación.",
+            "Error",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Error
+        )
+        End If
+
+        moduloauxiliares.cargarComboUbicacion(cbubicacion)
+
+    End Sub
+
+    Private Sub btnmodificarubicacion_Click(sender As Object, e As EventArgs) Handles btnmodificarubicacion.Click
+
+        ' Verifico que se hayan seleccionado los 3 datos para identificar la ubicación
+        If cbpasilloubicacion.SelectedIndex = -1 OrElse
+       cbestanteubicacion.SelectedIndex = -1 OrElse
+       cbnivelubicacion.SelectedIndex = -1 Then
+
+            MessageBox.Show(
+            "Por favor, seleccione Pasillo, Estante y Nivel para modificar.",
+            "Campo requerido",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        ' Llamo a la función del módulo pasando los datos de los ComboBoxes y el detalle
+        If modificarUbicacion(
+        cbpasilloubicacion.Text,
+        cbestanteubicacion.Text,
+        cbnivelubicacion.Text,
+        txtdetalleubicacion.Text.Trim()) Then
+
+
+            MessageBox.Show(
+            "Ubicación modificada con éxito.",
+            "Éxito",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information)
+
+            ' Limpiamos el panel
+            cbpasilloubicacion.SelectedIndex = -1
+            cbestanteubicacion.SelectedIndex = -1
+            cbnivelubicacion.SelectedIndex = -1
+
+            txtdetalleubicacion.Clear()
+
+        Else
+            MessageBox.Show(
+            "No se encontró esa ubicación activa para modificar.",
+            "Error",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Error)
+        End If
+
+    End Sub
+
+
+    Private Sub btneliminarubicacion_Click(sender As Object, e As EventArgs) Handles btneliminarubicacion.Click
+
+        ' Verifico que se hayan seleccionado los 3 datos de la ubicación a dar de baja
+        If cbpasilloubicacion.SelectedIndex = -1 OrElse
+       cbestanteubicacion.SelectedIndex = -1 OrElse
+       cbnivelubicacion.SelectedIndex = -1 Then
+
+            MessageBox.Show(
+            "Por favor, seleccione Pasillo, Estante y Nivel para eliminar.",
+            "Campo requerido",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Warning
+        )
+            Exit Sub
+        End If
+
+        If MessageBox.Show(
+        "¿Está seguro de dar de baja esta ubicación?",
+        "Confirmar baja",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question
+    ) = DialogResult.Yes Then
+
+            ' Llamo a la función que realiza la baja lógica (estado = 0)
+            If eliminarUbicacion(
+            cbpasilloubicacion.Text,
+            cbestanteubicacion.Text,
+            cbnivelubicacion.Text
+        ) Then
+
+                MessageBox.Show(
+                "Ubicación eliminada con éxito.",
+                "Éxito",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            )
+
+                ' Limpiamos el panel
+                cbpasilloubicacion.SelectedIndex = -1
+                cbestanteubicacion.SelectedIndex = -1
+                cbnivelubicacion.SelectedIndex = -1
+
+                txtdetalleubicacion.Clear()
+
+            Else
+                MessageBox.Show(
+                "No se encontró la ubicación o ya fue dada de baja.",
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+            End If
+
+        End If
+
+    End Sub
+
+    Public Sub cargarCombosAbmUbicacion()
+
+        ' Pasillos (1 al 5)
+        cbpasilloubicacion.Items.Clear()
+        cbpasilloubicacion.Items.AddRange(New Object() {
+        "Pasillo 1",
+        "Pasillo 2",
+        "Pasillo 3",
+        "Pasillo 4",
+        "Pasillo 5"
+    })
+
+        ' Estantes (A y B)
+        cbestanteubicacion.Items.Clear()
+        cbestanteubicacion.Items.AddRange(New Object() {
+        "Estante A1",
+        "Estante A2",
+        "Estante A3",
+        "Estante B1",
+        "Estante B2",
+        "Estante B3"
+    })
+
+        ' Niveles (1, 2 y 3)
+        cbnivelubicacion.Items.Clear()
+        cbnivelubicacion.Items.AddRange(New Object() {
+        "Nivel 1",
+        "Nivel 2",
+        "Nivel 3"
+    })
+
+        ' Deseleccionamos por defecto
+        cbpasilloubicacion.SelectedIndex = -1
+        cbestanteubicacion.SelectedIndex = -1
+        cbnivelubicacion.SelectedIndex = -1
+
+    End Sub
+
+    Private Sub btncerrarubi_Click(sender As Object, e As EventArgs) Handles btncerrarubi.Click
+        pnlcontenedorabm.Visible = False
+        pnlabmubicacion.Visible = False
+    End Sub
 End Class

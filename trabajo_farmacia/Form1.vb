@@ -36,7 +36,7 @@ Public Class Form1
     End Sub
 
     Sub MarcarActivo(btn As Button)
-        For Each b As Button In New Button() {btnmedicamentos, btnproveedores, btncompras}
+        For Each b As Button In New Button() {btnmedicamentos, btnproveedores, btncompras, btndashboard, btnformusuarios, btnubicacion}
             b.BackColor = Estilos.ColorMenu
         Next
         btn.BackColor = Estilos.ColorActivo
@@ -64,6 +64,7 @@ Public Class Form1
         Estilos.EstilizarBotonMenu(btnproveedores, pnlmenu.Width)
         Estilos.EstilizarBotonMenu(btncompras, pnlmenu.Width)
         Estilos.EstilizarBotonMenu(btndashboard, pnlmenu.Width)
+        Estilos.EstilizarBotonMenu(btnubicacion, pnlmenu.Width)
 
         configurarmenusegunrol()
 
@@ -165,5 +166,10 @@ Public Class Form1
         Catch ex As Exception
             MessageBox.Show("Error al cargar perfil: " & ex.Message)
         End Try
+    End Sub
+
+    Private Sub btnubicacion_Click(sender As Object, e As EventArgs) Handles btnubicacion.Click
+        AbrirFormulario(New ubicacion(), "  INFORMACIÓN DE LA UBICACIÓN")
+        MarcarActivo(btnubicacion)
     End Sub
 End Class
