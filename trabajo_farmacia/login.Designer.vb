@@ -22,100 +22,118 @@ Partial Class login
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        btningresar = New Button()
-        txtclave = New TextBox()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(login))
+        picfarmacia = New PictureBox()
+        Panel3 = New Panel()
+        Label3 = New Label()
+        Panel2 = New Panel()
+        Label1 = New Label()
         txtusuario = New TextBox()
         Panel1 = New Panel()
-        Label1 = New Label()
         Label2 = New Label()
-        Panel2 = New Panel()
         btnverclave = New Button()
-        Panel1.SuspendLayout()
+        txtclave = New TextBox()
+        btningresar = New Button()
+        CType(picfarmacia, ComponentModel.ISupportInitialize).BeginInit()
+        Panel3.SuspendLayout()
         Panel2.SuspendLayout()
+        Panel1.SuspendLayout()
         SuspendLayout()
         ' 
-        ' btningresar
+        ' picfarmacia
         ' 
-        btningresar.BackColor = Color.SeaGreen
-        btningresar.Font = New Font("Calibri", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btningresar.Location = New Point(140, 236)
-        btningresar.Margin = New Padding(3, 2, 3, 2)
-        btningresar.Name = "btningresar"
-        btningresar.Size = New Size(141, 38)
-        btningresar.TabIndex = 0
-        btningresar.Text = "Ingresar"
-        btningresar.UseVisualStyleBackColor = False
+        picfarmacia.BackColor = Color.Transparent
+        picfarmacia.Dock = DockStyle.Fill
+        picfarmacia.Image = CType(resources.GetObject("picfarmacia.Image"), Image)
+        picfarmacia.Location = New Point(0, 0)
+        picfarmacia.Name = "picfarmacia"
+        picfarmacia.Size = New Size(636, 339)
+        picfarmacia.SizeMode = PictureBoxSizeMode.Zoom
+        picfarmacia.TabIndex = 7
+        picfarmacia.TabStop = False
         ' 
-        ' txtclave
+        ' Panel3
         ' 
-        txtclave.BorderStyle = BorderStyle.None
-        txtclave.Location = New Point(30, 2)
-        txtclave.Margin = New Padding(3, 2, 3, 2)
-        txtclave.Name = "txtclave"
-        txtclave.Size = New Size(167, 16)
-        txtclave.TabIndex = 1
-        txtclave.UseSystemPasswordChar = True
+        Panel3.BackColor = Color.Transparent
+        Panel3.Controls.Add(Label3)
+        Panel3.Controls.Add(Panel2)
+        Panel3.Controls.Add(Panel1)
+        Panel3.Controls.Add(btningresar)
+        Panel3.Location = New Point(12, 12)
+        Panel3.Name = "Panel3"
+        Panel3.Size = New Size(226, 306)
+        Panel3.TabIndex = 8
         ' 
-        ' txtusuario
+        ' Label3
         ' 
-        txtusuario.BorderStyle = BorderStyle.None
-        txtusuario.Location = New Point(30, 3)
-        txtusuario.Margin = New Padding(3, 2, 3, 2)
-        txtusuario.Name = "txtusuario"
-        txtusuario.Size = New Size(200, 16)
-        txtusuario.TabIndex = 2
+        Label3.AutoSize = True
+        Label3.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.Location = New Point(61, 35)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(110, 21)
+        Label3.TabIndex = 6
+        Label3.Text = "Iniciar sesion"
         ' 
-        ' Panel1
+        ' Panel2
         ' 
-        Panel1.BackColor = SystemColors.ButtonHighlight
-        Panel1.BorderStyle = BorderStyle.FixedSingle
-        Panel1.Controls.Add(Label1)
-        Panel1.Controls.Add(txtusuario)
-        Panel1.Location = New Point(100, 162)
-        Panel1.Margin = New Padding(3, 2, 3, 2)
-        Panel1.Name = "Panel1"
-        Panel1.Size = New Size(233, 21)
-        Panel1.TabIndex = 3
+        Panel2.BackColor = SystemColors.ButtonHighlight
+        Panel2.BorderStyle = BorderStyle.FixedSingle
+        Panel2.Controls.Add(Label1)
+        Panel2.Controls.Add(txtusuario)
+        Panel2.Location = New Point(17, 98)
+        Panel2.Margin = New Padding(3, 2, 3, 2)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New Size(201, 22)
+        Panel2.TabIndex = 5
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
         Label1.BackColor = SystemColors.ButtonHighlight
         Label1.Font = New Font("Segoe MDL2 Assets", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(3, 0)
+        Label1.Location = New Point(3, 4)
         Label1.Name = "Label1"
         Label1.Size = New Size(23, 16)
         Label1.TabIndex = 4
         Label1.Text = ""
+        ' 
+        ' txtusuario
+        ' 
+        txtusuario.BorderStyle = BorderStyle.None
+        txtusuario.Location = New Point(32, 2)
+        txtusuario.Margin = New Padding(3, 2, 3, 2)
+        txtusuario.Name = "txtusuario"
+        txtusuario.Size = New Size(144, 16)
+        txtusuario.TabIndex = 2
+        ' 
+        ' Panel1
+        ' 
+        Panel1.BackColor = SystemColors.ButtonHighlight
+        Panel1.BorderStyle = BorderStyle.FixedSingle
+        Panel1.Controls.Add(Label2)
+        Panel1.Controls.Add(btnverclave)
+        Panel1.Controls.Add(txtclave)
+        Panel1.Location = New Point(15, 153)
+        Panel1.Margin = New Padding(3, 2, 3, 2)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New Size(205, 21)
+        Panel1.TabIndex = 3
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
         Label2.BackColor = SystemColors.ButtonHighlight
         Label2.Font = New Font("Segoe MDL2 Assets", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(3, 2)
+        Label2.Location = New Point(1, 1)
         Label2.Name = "Label2"
         Label2.Size = New Size(23, 16)
         Label2.TabIndex = 4
         Label2.Text = ""
         ' 
-        ' Panel2
-        ' 
-        Panel2.BackColor = SystemColors.ButtonHighlight
-        Panel2.BorderStyle = BorderStyle.FixedSingle
-        Panel2.Controls.Add(btnverclave)
-        Panel2.Controls.Add(txtclave)
-        Panel2.Controls.Add(Label2)
-        Panel2.Location = New Point(100, 195)
-        Panel2.Margin = New Padding(3, 2, 3, 2)
-        Panel2.Name = "Panel2"
-        Panel2.Size = New Size(230, 22)
-        Panel2.TabIndex = 5
-        ' 
         ' btnverclave
         ' 
         btnverclave.Font = New Font("Segoe MDL2 Assets", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnverclave.Location = New Point(202, -1)
+        btnverclave.Location = New Point(173, 0)
         btnverclave.Margin = New Padding(3, 2, 3, 2)
         btnverclave.Name = "btnverclave"
         btnverclave.Size = New Size(27, 20)
@@ -123,31 +141,58 @@ Partial Class login
         btnverclave.Text = ""
         btnverclave.UseVisualStyleBackColor = True
         ' 
+        ' txtclave
+        ' 
+        txtclave.BorderStyle = BorderStyle.None
+        txtclave.Location = New Point(30, 2)
+        txtclave.Margin = New Padding(3, 2, 3, 2)
+        txtclave.Name = "txtclave"
+        txtclave.Size = New Size(142, 16)
+        txtclave.TabIndex = 1
+        txtclave.UseSystemPasswordChar = True
+        ' 
+        ' btningresar
+        ' 
+        btningresar.BackColor = Color.SeaGreen
+        btningresar.Font = New Font("Calibri", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btningresar.Location = New Point(49, 207)
+        btningresar.Margin = New Padding(3, 2, 3, 2)
+        btningresar.Name = "btningresar"
+        btningresar.Size = New Size(141, 38)
+        btningresar.TabIndex = 0
+        btningresar.Text = "Ingresar"
+        btningresar.UseVisualStyleBackColor = False
+        ' 
         ' login
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.Teal
-        ClientSize = New Size(445, 366)
-        Controls.Add(Panel2)
-        Controls.Add(Panel1)
-        Controls.Add(btningresar)
+        BackColor = SystemColors.Control
+        ClientSize = New Size(636, 339)
+        Controls.Add(Panel3)
+        Controls.Add(picfarmacia)
         Margin = New Padding(3, 2, 3, 2)
         Name = "login"
         Text = "login"
-        Panel1.ResumeLayout(False)
-        Panel1.PerformLayout()
+        CType(picfarmacia, ComponentModel.ISupportInitialize).EndInit()
+        Panel3.ResumeLayout(False)
+        Panel3.PerformLayout()
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
+        Panel1.ResumeLayout(False)
+        Panel1.PerformLayout()
         ResumeLayout(False)
     End Sub
 
-    Friend WithEvents btningresar As Button
-    Friend WithEvents txtclave As TextBox
+    Friend WithEvents picfarmacia As PictureBox
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label1 As Label
     Friend WithEvents txtusuario As TextBox
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents Panel2 As Panel
     Friend WithEvents btnverclave As Button
+    Friend WithEvents txtclave As TextBox
+    Friend WithEvents btningresar As Button
 End Class

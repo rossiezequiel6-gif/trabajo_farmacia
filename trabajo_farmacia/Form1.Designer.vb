@@ -34,6 +34,7 @@ Partial Class Form1
         btncerrarapp = New Button()
         lbltitulo = New Label()
         pnlcontenedor = New Panel()
+        btncerrar_sesion = New Button()
         pnlmenu.SuspendLayout()
         pnltitulo.SuspendLayout()
         CType(picfotousuario, ComponentModel.ISupportInitialize).BeginInit()
@@ -43,9 +44,10 @@ Partial Class Form1
         ' 
         btnmedicamentos.BackColor = Color.SeaGreen
         btnmedicamentos.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnmedicamentos.Location = New Point(31, 204)
+        btnmedicamentos.Location = New Point(27, 153)
+        btnmedicamentos.Margin = New Padding(3, 2, 3, 2)
         btnmedicamentos.Name = "btnmedicamentos"
-        btnmedicamentos.Size = New Size(157, 61)
+        btnmedicamentos.Size = New Size(137, 46)
         btnmedicamentos.TabIndex = 2
         btnmedicamentos.Text = "MEDICAMENTOS"
         btnmedicamentos.UseVisualStyleBackColor = False
@@ -54,9 +56,10 @@ Partial Class Form1
         ' 
         btnproveedores.BackColor = Color.SeaGreen
         btnproveedores.Font = New Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnproveedores.Location = New Point(31, 297)
+        btnproveedores.Location = New Point(27, 223)
+        btnproveedores.Margin = New Padding(3, 2, 3, 2)
         btnproveedores.Name = "btnproveedores"
-        btnproveedores.Size = New Size(157, 61)
+        btnproveedores.Size = New Size(137, 46)
         btnproveedores.TabIndex = 3
         btnproveedores.Text = "PROVEEDORES"
         btnproveedores.UseVisualStyleBackColor = False
@@ -65,10 +68,9 @@ Partial Class Form1
         ' 
         btncompras.BackColor = Color.SeaGreen
         btncompras.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btncompras.Location = New Point(31, 399)
-        btncompras.Margin = New Padding(3, 4, 3, 4)
+        btncompras.Location = New Point(27, 299)
         btncompras.Name = "btncompras"
-        btncompras.Size = New Size(157, 57)
+        btncompras.Size = New Size(137, 43)
         btncompras.TabIndex = 4
         btncompras.Text = "COMPRAS"
         btncompras.UseVisualStyleBackColor = False
@@ -76,6 +78,7 @@ Partial Class Form1
         ' pnlmenu
         ' 
         pnlmenu.BackColor = Color.MediumAquamarine
+        pnlmenu.Controls.Add(btncerrar_sesion)
         pnlmenu.Controls.Add(btndashboard)
         pnlmenu.Controls.Add(btnformusuarios)
         pnlmenu.Controls.Add(btncompras)
@@ -84,19 +87,17 @@ Partial Class Form1
         pnlmenu.Dock = DockStyle.Left
         pnlmenu.ImeMode = ImeMode.NoControl
         pnlmenu.Location = New Point(0, 0)
-        pnlmenu.Margin = New Padding(3, 4, 3, 4)
         pnlmenu.Name = "pnlmenu"
-        pnlmenu.Size = New Size(229, 723)
+        pnlmenu.Size = New Size(200, 542)
         pnlmenu.TabIndex = 5
         ' 
         ' btndashboard
         ' 
         btndashboard.BackColor = Color.SeaGreen
         btndashboard.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btndashboard.Location = New Point(31, 586)
-        btndashboard.Margin = New Padding(3, 4, 3, 4)
+        btndashboard.Location = New Point(27, 440)
         btndashboard.Name = "btndashboard"
-        btndashboard.Size = New Size(157, 57)
+        btndashboard.Size = New Size(137, 43)
         btndashboard.TabIndex = 6
         btndashboard.Text = "DASHBOARD"
         btndashboard.UseVisualStyleBackColor = False
@@ -105,10 +106,9 @@ Partial Class Form1
         ' 
         btnformusuarios.BackColor = Color.SeaGreen
         btnformusuarios.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnformusuarios.Location = New Point(31, 493)
-        btnformusuarios.Margin = New Padding(3, 4, 3, 4)
+        btnformusuarios.Location = New Point(27, 370)
         btnformusuarios.Name = "btnformusuarios"
-        btnformusuarios.Size = New Size(157, 57)
+        btnformusuarios.Size = New Size(137, 43)
         btnformusuarios.TabIndex = 5
         btnformusuarios.Text = "USUARIOS"
         btnformusuarios.UseVisualStyleBackColor = False
@@ -121,27 +121,27 @@ Partial Class Form1
         pnltitulo.Controls.Add(btncerrarapp)
         pnltitulo.Controls.Add(lbltitulo)
         pnltitulo.Dock = DockStyle.Top
-        pnltitulo.Location = New Point(229, 0)
-        pnltitulo.Margin = New Padding(3, 4, 3, 4)
+        pnltitulo.Location = New Point(200, 0)
         pnltitulo.Name = "pnltitulo"
-        pnltitulo.Padding = New Padding(23, 0, 0, 0)
-        pnltitulo.Size = New Size(1530, 80)
+        pnltitulo.Padding = New Padding(20, 0, 0, 0)
+        pnltitulo.Size = New Size(999, 60)
         pnltitulo.TabIndex = 6
         ' 
         ' lblbienvenida
         ' 
         lblbienvenida.AutoSize = True
         lblbienvenida.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblbienvenida.Location = New Point(1154, 27)
+        lblbienvenida.Location = New Point(1010, 20)
         lblbienvenida.Name = "lblbienvenida"
-        lblbienvenida.Size = New Size(0, 23)
+        lblbienvenida.Size = New Size(0, 19)
         lblbienvenida.TabIndex = 7
         ' 
         ' picfotousuario
         ' 
-        picfotousuario.Location = New Point(1060, 3)
+        picfotousuario.Location = New Point(928, 2)
+        picfotousuario.Margin = New Padding(3, 2, 3, 2)
         picfotousuario.Name = "picfotousuario"
-        picfotousuario.Size = New Size(75, 74)
+        picfotousuario.Size = New Size(66, 56)
         picfotousuario.SizeMode = PictureBoxSizeMode.Zoom
         picfotousuario.TabIndex = 7
         picfotousuario.TabStop = False
@@ -151,9 +151,10 @@ Partial Class Form1
         btncerrarapp.BackColor = Color.DarkRed
         btncerrarapp.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btncerrarapp.ForeColor = Color.White
-        btncerrarapp.Location = New Point(1439, 12)
+        btncerrarapp.Location = New Point(1259, 9)
+        btncerrarapp.Margin = New Padding(3, 2, 3, 2)
         btncerrarapp.Name = "btncerrarapp"
-        btncerrarapp.Size = New Size(79, 50)
+        btncerrarapp.Size = New Size(69, 38)
         btncerrarapp.TabIndex = 7
         btncerrarapp.Text = "CERRAR"
         btncerrarapp.UseVisualStyleBackColor = False
@@ -164,9 +165,9 @@ Partial Class Form1
         lbltitulo.Dock = DockStyle.Fill
         lbltitulo.Enabled = False
         lbltitulo.Font = New Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lbltitulo.Location = New Point(23, 0)
+        lbltitulo.Location = New Point(20, 0)
         lbltitulo.Name = "lbltitulo"
-        lbltitulo.Size = New Size(1507, 80)
+        lbltitulo.Size = New Size(979, 60)
         lbltitulo.TabIndex = 0
         lbltitulo.Text = "Inicio"
         lbltitulo.TextAlign = ContentAlignment.MiddleLeft
@@ -175,21 +176,30 @@ Partial Class Form1
         ' 
         pnlcontenedor.BackColor = SystemColors.ActiveBorder
         pnlcontenedor.Dock = DockStyle.Fill
-        pnlcontenedor.Location = New Point(229, 80)
-        pnlcontenedor.Margin = New Padding(3, 4, 3, 4)
+        pnlcontenedor.Location = New Point(200, 60)
         pnlcontenedor.Name = "pnlcontenedor"
-        pnlcontenedor.Size = New Size(1530, 643)
+        pnlcontenedor.Size = New Size(999, 482)
         pnlcontenedor.TabIndex = 7
+        ' 
+        ' btncerrar_sesion
+        ' 
+        btncerrar_sesion.Location = New Point(27, 507)
+        btncerrar_sesion.Name = "btncerrar_sesion"
+        btncerrar_sesion.Size = New Size(137, 23)
+        btncerrar_sesion.TabIndex = 0
+        btncerrar_sesion.Text = "Cerrar Sesion"
+        btncerrar_sesion.UseVisualStyleBackColor = True
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ButtonHighlight
-        ClientSize = New Size(1759, 723)
+        ClientSize = New Size(1199, 542)
         Controls.Add(pnlcontenedor)
         Controls.Add(pnltitulo)
         Controls.Add(pnlmenu)
+        Margin = New Padding(3, 2, 3, 2)
         Name = "Form1"
         Text = "Form_principal"
         pnlmenu.ResumeLayout(False)
@@ -210,5 +220,6 @@ Partial Class Form1
     Friend WithEvents btncerrarapp As Button
     Friend WithEvents picfotousuario As PictureBox
     Friend WithEvents lblbienvenida As Label
+    Friend WithEvents btncerrar_sesion As Button
 
 End Class

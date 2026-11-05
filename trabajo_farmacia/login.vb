@@ -1,6 +1,17 @@
 ﻿
+Imports System.Drawing.Drawing2D
 Imports MySqlConnector
+
 Public Class login
+
+    Private Function RegionDerecha(w As Single, h As Single, dTop As Single, dMid As Single, dBot As Single) As GraphicsPath
+        Dim p As New GraphicsPath()
+        p.AddBezier(w * (0.645F - dTop), 0, w * (0.52F - dTop), h * 0.1F, w * (0.46F - dMid), h * 0.32F, w * (0.49F - dMid), h * 0.5F)
+        p.AddBezier(w * (0.49F - dMid), h * 0.5F, w * (0.53F - dMid), h * 0.68F, w * (0.5F - dBot), h * 0.85F, w * (0.51F - dBot), h)
+        p.AddLine(w, h, w, 0)
+        p.CloseFigure()
+        Return p
+    End Function
 
 
     Private Sub btningresar_Click(sender As Object, e As EventArgs) Handles btningresar.Click
@@ -81,5 +92,65 @@ Public Class login
 
     Private Sub login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ObtenerDatosConexion()
+        btningresar.BackColor = Color.FromArgb(0, 128, 118)
+        btningresar.ForeColor = Color.White
+
+        picfarmacia.Dock = DockStyle.Fill
+
+        For Each c As Control In Panel3.Controls.Cast(Of Control).ToList()
+            Dim pos = picfarmacia.PointToClient(c.PointToScreen(Point.Empty))
+            c.Parent = picfarmacia
+            c.Location = pos
+        Next
+        Panel3.Visible = False
+    End Sub
+
+
+    Private Sub login_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+        If Me.Visible Then
+            txtusuario.Clear()
+            txtclave.Clear()
+            txtclave.UseSystemPasswordChar = True
+            txtusuario.Focus()
+        End If
+
+
+    End Sub
+
+    Private Sub picfarmacia_Click(sender As Object, e As EventArgs) Handles picfarmacia.Click
+
+    End Sub
+
+
+    Private Sub picfarmacia_Paint(sender As Object, e As PaintEventArgs) Handles picfarmacia.Paint
+
+        Dim g = e.Graphics
+        g.SmoothingMode = SmoothingMode.AntiAlias
+        Dim w As Single = picfarmacia.Width
+        Dim h As Single = picfarmacia.Height
+
+        Using fondo As New LinearGradientBrush(picfarmacia.ClientRectangle, Color.White, Color.FromArgb(220, 246, 243), LinearGradientMode.Horizontal)
+            g.FillRectangle(fondo, picfarmacia.ClientRectangle)
+        End Using
+
+        Using p = RegionDerecha(w, h, 0.17F, 0.05F, 0.2F),
+          b As New LinearGradientBrush(p.GetBounds(), Color.FromArgb(200, 112, 224, 211), Color.FromArgb(255, 112, 224, 211), LinearGradientMode.Horizontal)
+            g.FillPath(b, p)
+        End Using
+
+        Using p = RegionDerecha(w, h, 0.115F, 0.03F, 0.08F), b As New SolidBrush(Color.FromArgb(255, 22, 177, 164))
+            g.FillPath(b, p)
+        End Using
+
+        Using p = RegionDerecha(w, h, 0, 0, 0)
+            g.SetClip(p)
+            g.DrawImage(picfarmacia.Image, 0, 0, w, h)
+            g.ResetClip()
+        End Using
+
+    End Sub
+
+    Private Sub picfarmacia_Resize(sender As Object, e As EventArgs) Handles picfarmacia.Resize
+        picfarmacia.Invalidate()
     End Sub
 End Class
